@@ -257,22 +257,27 @@ globalkeys = gears.table.join(
     ),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+    -- swap order
+    awful.key({ modkey, "Control"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+    awful.key({ modkey, "Control"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
+    -- change master width              
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
+    -- change number of masters          
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
+    -- change number of slave columns
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
+    -- cycle tile layouts
     awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1)                end,
               {description = "select next layout", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1)                end,
@@ -347,7 +352,7 @@ clientkeys = gears.table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
     --close
-    awful.key({ modkey, "Control"   }, "c",      function (c) c:kill()                         end,
+    awful.key({ modkey,           }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     --toggle float
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
@@ -356,10 +361,6 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"})
 
-    --awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-    --          {description = "move to screen", group = "client"}),
-    --awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-    --          {description = "toggle keep on top", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -412,6 +413,7 @@ for i = 1, 9 do
     )
 end
 
+-- Mouse buttons
 clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})

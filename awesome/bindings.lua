@@ -1,7 +1,7 @@
 local gears = require("gears")
 local awful = require("awful")
 
-terminal = "alacritty"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
@@ -83,7 +83,7 @@ bindings.globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "space", function () awful.spawn.with_shell("rofi -show run") end,
               {description = "run rofi", group = "launcher"}),
-    awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
+    awful.key({ modkey,           }, "b", function () awful.spawn("chromium") end,
               {description = "open browser", group = "launcher"}),
     awful.key({ modkey,           }, "r", function () awful.spawn(terminal.." -e ranger") end,
               {description = "run ranger", group = "launcher"})

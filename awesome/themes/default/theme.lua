@@ -5,6 +5,7 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local beautiful = require("beautiful")
 
 local gfs = require("gears.filesystem")
 local themes_path = "~/.config/awesome/themes/"
@@ -38,6 +39,7 @@ theme.border_width  = dpi(1)
 
 
 theme.border_normal = "#000000"
+--theme.border_normal = black
 --theme.border_focus  = "#535d6c"
 theme.border_focus  = lightblack 
 --theme.border_marked = "#91231c"
@@ -57,13 +59,21 @@ theme.border_marked = lightblack
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
+--local taglist_square_size = dpi(12)
+--theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+--    taglist_square_size, theme.fg_normal
+--)
+--theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+--    taglist_square_size, theme.fg_normal
+--)
+local green = "#98c379"
+local blue = "#61AFEF"
+local purple = "#c678dd"
+theme.taglist_fg_focus = purple 
+theme.taglist_fg_empty = green 
+theme.taglist_fg_occupied = blue 
+
+theme.taglist_font = "sans 8 14"
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -86,22 +96,22 @@ theme.menu_width  = dpi(100)
 -- Define the image to load
 --theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
 --theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
-theme.titlebar_close_button_normal = themes_path.."default/titlebar/close.png"
-theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close.png"
+theme.titlebar_close_button_normal = themes_path.."default/titlebar/close275.png"
+theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close275.png"
 
 --theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/minimize_normal.png"
 --theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/minimize_focus.png"
-theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/min.png"
-theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/min.png"
+theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/min275.png"
+theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/min275.png"
 
 --theme.titlebar_maximized_button_normal_inactive = themes_path.."default/titlebar/maximized_normal_inactive.png"
 --theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar/maximized_focus_inactive.png"
 --theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 --theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
-theme.titlebar_maximized_button_normal_inactive = themes_path.."default/titlebar/max.png"
-theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar/max.png"
-theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/max.png"
-theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/max.png"
+theme.titlebar_maximized_button_normal_inactive = themes_path.."default/titlebar/max275.png"
+theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar/max275.png"
+theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/max275.png"
+theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/max275.png"
 
 
 -- You can use your own layout icons like this:
@@ -122,10 +132,6 @@ theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
--- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

@@ -7,7 +7,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 
-
+local dir = "~/.config/awesome/themes/default/"
 
 mytextclock = wibox.widget.textclock()
 
@@ -18,35 +18,42 @@ local taglist_buttons = gears.table.join(
 )
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end)))
+
+
+    -- Each screen has its own tag table.
+    awful.tag({ "◉", "◉", "◉", "◉", "◉", "◉", "◉", "◉", "◉" }, s, awful.layout.layouts[1])
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        style = {
+            spacing = 5
+        },
+        --widget_template = {
+        --        image  = "/home/dylan/.config/awesome/themes/default/taglist/filledtag.png",
+        --        resize = true,
+        --        widget = wibox.widget.imagebox
+        --}
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    local black = "#282c34"
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = black,height=25 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
-            s.mypromptbox,
         },
 	--nothing in the middle
 	null,

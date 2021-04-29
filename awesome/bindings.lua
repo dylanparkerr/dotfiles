@@ -1,7 +1,7 @@
 local gears = require("gears")
 local awful = require("awful")
 
-terminal = "kitty"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"

@@ -27,16 +27,16 @@ awful.screen.connect_for_each_screen(function(s)
 
 
     -- Each screen has its own tag table.
-    awful.tag({ "◉", "◉", "◉", "◉", "◉", "◉", "◉", "◉", "◉" }, s, awful.layout.layouts[1])
+    awful.tag({ "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫" }, s, awful.layout.layouts[1])
 
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
-        style = {
-            spacing = 5
-        },
+        --style = {
+        --    spacing = 5
+        --},
         --widget_template = {
         --        image  = "/home/dylan/.config/awesome/themes/default/taglist/filledtag.png",
         --        resize = true,
@@ -46,7 +46,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     local black = "#282c34"
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = black,height=25 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg_normal = black,})
 
     -- Add widgets to the wibox
     s.mywibox:setup {

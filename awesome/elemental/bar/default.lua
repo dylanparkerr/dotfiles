@@ -28,6 +28,10 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫" }, s, awful.layout.layouts[1])
+    --awful.tag({ "･", "･", "･", "･", "･", "･", "･", "･", "･" }, s, awful.layout.layouts[1])
+    --awful.tag({ "·", "·", "·", "·", "·", "·", "·", "·", "·" }, s, awful.layout.layouts[1])
+    --awful.tag({ "⸰", "⸰", "⸰", "⸰", "⸰", "⸰", "⸰", "⸰", "⸰" }, s, awful.layout.layouts[1]) size:24
+    --awful.tag({ "∘", "∘", "∘", "∘", "∘", "∘", "∘", "∘", "∘" }, s, awful.layout.layouts[1])
 
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {

@@ -51,9 +51,9 @@ bindings.globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
     -- cycle tile layouts
-    awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1) end,
               {description = "select next layout", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1) end,
               {description = "select previous layout", group = "layout"}),
 
     --awesome controls
@@ -61,7 +61,7 @@ bindings.globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Control"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    -- awful.key({ modkey, "Control"   }, "s",      hotkeys_popup.show_help,
+    --awful.key({ modkey, "Control"   }, "s",      hotkeys_popup.show_help,
     --           {description="show help", group="awesome"}),
 
     --unminimize
@@ -78,12 +78,25 @@ bindings.globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
+    --media keys
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-volume 0 +5%") end),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.spawn.with_shell("pactl set-sink-volume 0 -5%") end),
+    awful.key({}, "XF86AudioMute", function() awful.spawn.with_shell("pactl set-sink-mute 0 toggle") end),
+    awful.key({}, "XF86AudioMicMute", function() awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
+    awful.key({}, "XF86MonBrightnessDown", function() awful.spawn.with_shell("brightnessctl set 5-") end),
+    awful.key({}, "XF86MonBrightnessUp", function() awful.spawn.with_shell("brightnessctl set +5") end),
+
+
     -- Standard programs
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "space", function () awful.spawn.with_shell("rofi -show run") end,
               {description = "run rofi", group = "launcher"}),
-    awful.key({ modkey,           }, "b", function () awful.spawn("chromium") end,
+    awful.key({ modkey,           }, "b", function () awful.spawn("brave") end,
+              {description = "open browser", group = "launcher"}),
+    --awful.key({ modkey,           }, "v", function () awful.spawn(terminal.." -e nvim") end,
+    --          {description = "open browser", group = "launcher"}),
+    awful.key({ modkey,           }, "v", function () awful.spawn(terminal..[[ -e sleep 1 && nvim]]) end,
               {description = "open browser", group = "launcher"}),
     awful.key({ modkey,           }, "r", function () awful.spawn(terminal.." -e ranger") end,
               {description = "run ranger", group = "launcher"})

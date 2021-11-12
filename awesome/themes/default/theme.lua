@@ -14,7 +14,7 @@ local theme = {}
 
 theme.wallpaper = "~/.config/awesome/themes/default/arch.png"
 
-theme.font          = "sans 8"
+theme.font = "sans 8"
 
 local background = "#282c34"
 local black = "#4b5263"
@@ -31,10 +31,12 @@ theme.bg_urgent     = background
 theme.bg_minimize   = background
 theme.bg_systray    = theme.bg_normal
 
+--idk if these matter
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
+--these
 
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
@@ -42,11 +44,11 @@ theme.border_focus  = lightblack
 theme.border_marked = white 
 
 
-theme.taglist_fg_focus = purple 
-theme.taglist_fg_empty = green 
-theme.taglist_fg_occupied = blue 
-
-theme.taglist_font = "sans 8 20"
+--color of the taglist icons, bullet point unicode
+theme.taglist_fg_focus = green 
+theme.taglist_fg_empty = blue 
+theme.taglist_fg_occupied = purple 
+theme.taglist_font = "sans 10"
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -98,4 +100,3 @@ theme.icon_theme = nil
 
 return theme
 
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

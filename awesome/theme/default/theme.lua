@@ -61,8 +61,8 @@ theme.taglist_font = "sans 14"
 theme.titlebar_close_button_normal = gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.red)
 theme.titlebar_close_button_focus = gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.red)
 -- min
-theme.titlebar_minimize_button_normal =gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.yellow)
-theme.titlebar_minimize_button_focus  =gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.yellow)
+theme.titlebar_minimize_button_normal =gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.purple)
+theme.titlebar_minimize_button_focus  =gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.purple)
 -- max
 theme.titlebar_maximized_button_normal_inactive = gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.green)
 theme.titlebar_maximized_button_focus_inactive  =gears.color.recolor_image(themepath.."assets/titlebar/circle.png",colors.green)

@@ -1,8 +1,85 @@
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
+local lain = require("lain")
+local markup = lain.util.markup
 
---available layouts
+local icondir = os.getenv("HOME").."/.config/awesome/theme/default/assets/icons/"
+local background = "#282c34"
+local statusfont = sans
+local sep = wibox.widget.textbox(' | ')
+
+
+
+-- clock widget
+mytextclock = wibox.widget.textclock("%a %b %d, %I:%M ")
+
+-- cpu icon and percentage
+local cpuicon = wibox.widget.imagebox(icondir.."cpu.png")
+local cpu = lain.widget.cpu({
+    settings = function()
+        widget:set_markup(markup.font(statusfont, "" .. cpu_now.usage .. "%  "))
+    end
+})
+
+-- memory icon and usage
+local memicon = wibox.widget.imagebox(icondir.."mem.png")
+local mem = lain.widget.mem({
+    settings = function()
+        widget:set_markup(markup.font(statusfont, " " .. mem_now.used .. "MB "))
+    end
+})
+
+-- temp icon and reading
+local tempicon = wibox.widget.imagebox(icondir.."temp.png")
+local temp = lain.widget.temp({
+    settings = function()
+        widget:set_markup(markup.font(statusfont, " " .. coretemp_now .. "°C "))
+    end
+})
+
+-- battery icon and percentage 
+local baticon = wibox.widget.imagebox(icondir.."battery.png")
+local bat = lain.widget.bat({
+    settings = function()
+        if bat_now.status and bat_now.status ~= "N/A" then
+            if bat_now.ac_status == 1 then
+                baticon:set_image(icondir.."ac.png")
+            elseif not bat_now.perc and tonumber(bat_now.perc) <= 10 then
+                baticon:set_image(icondir.."battery_empty.png")
+            elseif not bat_now.perc and tonumber(bat_now.perc) <= 25 then
+                baticon:set_image(icondir.."battery_low.png")
+            else
+                baticon:set_image(icondir.."battery.png")
+            end
+            widget:set_markup(markup.font(sans, " " .. bat_now.perc .. "% "))
+        else
+            widget:set_markup(markup.font(sans, " NA "))
+            baticon:set_image(icondir.."ac.png")
+        end
+    end
+})
+
+-- TODO fix this 
+-- volume icon and level
+local volicon = wibox.widget.imagebox(icondir.."vol.png")
+local vol = lain.widget.alsa({
+    settings = function()
+        if volume_now.status == "off" then
+            volicon:set_image(icondir.."vol_mute.png")
+        elseif tonumber(volume_now.level) == 0 then
+            volicon:set_image(icondir.."vol_no.png")
+        elseif tonumber(volume_now.level) <= 50 then
+            volicon:set_image(icondir.."vol_low.png")
+        else
+            volicon:set_image(icondir.."vol.png")
+        end
+
+        widget:set_markup(markup.font(statusfont, " " .. volume_now.level .. "% "))
+    end
+})
+
+-- available layouts
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
@@ -27,19 +104,17 @@ local taglist_buttons = gears.table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
+-- add the status bar to every screen
 awful.screen.connect_for_each_screen(function(s)
-
     -- Each screen has its own tag table.
     -- i think this is the actually settings, not the visuals
-    --awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
     awful.tag({ "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫", "⚫" }, s, awful.layout.layouts[1])
 
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
+    -- mouse button actions on the layout icon
     s.mylayoutbox:buttons(gears.table.join(
         awful.button({ }, 1, function () awful.layout.inc( 1) end),
         awful.button({ }, 3, function () awful.layout.inc(-1) end),
@@ -68,6 +143,24 @@ awful.screen.connect_for_each_screen(function(s)
         nil,-- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            --way to set a different background color
+            --wibox.container.background(wibox.widget.imagebox(icondir.."cpu.png"), background),
+            --wibox.container.background(cpu.widget, background),
+            volicon,
+            vol,
+            sep,
+            tempicon,
+            temp,
+            sep,
+            cpuicon,
+            cpu.widget,
+            sep,
+            memicon,
+            mem.widget,
+            sep,
+            baticon,
+            bat.widget,
+            sep,
             mytextclock,
             s.mylayoutbox,
         },

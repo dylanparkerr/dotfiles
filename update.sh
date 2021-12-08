@@ -1,14 +1,14 @@
 #!/bin/bash
+echo "========================================================================"
 
 # set config folder based on OS
 if [ "$OSTYPE" == "linux-gnu" ]; then
     config="$HOME/.config"
 elif [ "$OSTYPE" == "darwin" ]; then
-    config="mac"
+    config="{mac config location}"
 else
     config="C:\\Users\\Dylan\\AppData\\Local"
 fi
-echo "config folder: $config"
 
 
 update_nvim(){
@@ -20,5 +20,18 @@ update_nvim(){
 }
 
 
-update_nvim
+#call updates based on os
+if [ "$OSTYPE" == "linux-gnu" ]; then
+    echo "os: linux"
+    echo "config folder: $config"
+    update_nvim
+    #next calls
+elif [ "$OSTYPE" == "darwin" ]; then
+    echo "os: Mac"
+else
+    echo "os: windows"
+    echo "config folder: $config"
+    update_nvim
+fi
 
+echo "========================================================================"

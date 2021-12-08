@@ -27,7 +27,7 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
     update_nvim
     #next calls
 elif [ "$OSTYPE" == "darwin" ]; then
-    echo "os: Mac"
+    echo "os: mac"
 else
     echo "os: windows"
     echo "config folder: $config"

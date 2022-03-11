@@ -26,7 +26,6 @@ cmp.setup({
     },
     formatting = {
         format = lspkind.cmp_format({
-            with_text = true, --show text alongside icons
             menu={
                 buffer = '[buf]',
                 nvim_lsp = '[lsp]',
@@ -66,5 +65,5 @@ cmp.setup({
 })
 
 --highlights
-vim.cmd('highlight! CmpItemKindDefault guibg=NONE guifg=#c678dd')
-vim.cmd('highlight! CmpItemAbbrDeprecatedDefault guibg=NONE guifg=#e86671')
+--vim.cmd('highlight! CmpItemKindDefault guibg=NONE guifg=#c678dd')
+--vim.cmd('highlight! CmpItemAbbrDeprecatedDefault guibg=NONE guifg=#e86671')

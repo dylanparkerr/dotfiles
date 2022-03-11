@@ -30,7 +30,7 @@ set.shiftwidth=4                        -- Change the number of space characters
 set.smarttab=true                       -- Makes tabbing smarter will realize you have 2 vs 4
 set.expandtab=true                      -- Converts tabs to spaces
 set.smartindent=true                    -- Makes indenting smart
-set.autoindent=true                     -- New lines inherit the indent of prev line 
+set.autoindent=true                     -- New lines inherit the indent of prev line
 set.shiftround=true                     -- When shifting lines, round the indentation to the nearest multiple of shiftwidth
 
 --lines

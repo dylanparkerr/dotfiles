@@ -47,7 +47,8 @@ packer.startup(function()
 end)
 
 -- plugin configs
-require('onedark').setup() --has to be called before lualine
+require('onedark').load() --has to be called before lualine
+--require('onedark').setup() --has to be called before lualine
 
 require('lualine').setup{options = {theme = 'onedark'}}
 
@@ -64,3 +65,5 @@ require('configs/treesitter')
 require('configs/cmp') --autocomplete config in its own file
 
 require('lsps/sumneko') --lua lsp server config that i placed in its own file
+
+require('lsps/pyright') --lua lsp server config for pyright

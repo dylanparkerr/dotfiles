@@ -60,25 +60,6 @@ local bat = lain.widget.bat({
     end
 })
 
--- TODO fix this 
--- volume icon and level
-local volicon = wibox.widget.imagebox(icondir.."vol.png")
-local vol = lain.widget.alsa({
-    settings = function()
-        if volume_now.status == "off" then
-            volicon:set_image(icondir.."vol_mute.png")
-        elseif tonumber(volume_now.level) == 0 then
-            volicon:set_image(icondir.."vol_no.png")
-        elseif tonumber(volume_now.level) <= 50 then
-            volicon:set_image(icondir.."vol_low.png")
-        else
-            volicon:set_image(icondir.."vol.png")
-        end
-
-        widget:set_markup(markup.font(statusfont, " " .. volume_now.level .. "% "))
-    end
-})
-
 -- available layouts
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -86,7 +67,7 @@ awful.layout.layouts = {
     awful.layout.suit.max,
 }
 
---todo move to bindings 
+--todo move to bindings
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, function(t)
@@ -146,8 +127,6 @@ awful.screen.connect_for_each_screen(function(s)
             --way to set a different background color
             --wibox.container.background(wibox.widget.imagebox(icondir.."cpu.png"), background),
             --wibox.container.background(cpu.widget, background),
-            volicon,
-            vol,
             sep,
             tempicon,
             temp,

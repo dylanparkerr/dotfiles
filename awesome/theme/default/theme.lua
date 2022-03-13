@@ -51,9 +51,9 @@ theme.border_normal = colors.black
 theme.border_focus  = colors.grey
 
 --color of the taglist text
-theme.taglist_fg_focus = colors.green 
-theme.taglist_fg_empty = colors.blue 
-theme.taglist_fg_occupied = colors.purple 
+theme.taglist_fg_focus = colors.green
+theme.taglist_fg_empty = colors.blue
+theme.taglist_fg_occupied = colors.purple
 theme.taglist_font = "sans 14"
 
 -- titlebar buttons

@@ -3,8 +3,7 @@ local packer = require('packer')
 -- packer config
 packer.init{
     display = {
-        open_fn = require('packer.util').float,
-        prompt_border = 'single' --this is not working
+        open_fn = require('packer.util').float
     }
 }
 
@@ -32,23 +31,23 @@ packer.startup(function()
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
     use 'williamboman/nvim-lsp-installer' --lsp server installer
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --better code parsing
-    use 'onsails/lspkind-nvim' --autocomplete menu formatting
 
     --auto complete and sources
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/nvim-cmp'  -- completetion engine
+    use 'hrsh7th/cmp-nvim-lsp'  -- completion sources
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'onsails/lspkind-nvim' --autocomplete menu formatting
 
     --snipets
-    use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip' --luasnip and cmp integration
+    use 'L3MON4D3/LuaSnip' -- snippet engine
+    use 'rafamadriz/friendly-snippets' -- a bunch of snippets
 
 end)
 
 -- plugin configs
 require('onedark').load() --has to be called before lualine
---require('onedark').setup() --has to be called before lualine
 
 require('lualine').setup{options = {theme = 'onedark'}}
 

@@ -3,7 +3,8 @@ local gears = require("gears")
 local awful = require("awful")
 local user = require("core/logic/user-settings")
 local modkey = user.modkey
-
+local delay_nvim = "/home/dylan/.config/awesome/core/bindings/delay-nvim.sh"
+local bluetooth_volume = "/home/dylan/.config/awesome/core/bindings/bluetooth-volume.sh"
 -- format for setting keys: awful.key( {mod keys}, key, function, {desc} )
 
 -- GLOBAL GLOBAL GLOABL
@@ -16,7 +17,7 @@ globalkeys = gears.table.join(
     -- change position of focused client
     awful.key({ modkey, "Shift"   }, "j", function() awful.client.swap.byidx(  1) end,{}),
     awful.key({ modkey, "Shift"   }, "k", function() awful.client.swap.byidx( -1) end,{}),
- 
+
     -- change width of master client
     awful.key({ modkey,           }, "h", function () awful.tag.incmwfact(-0.05) end,{}),
     awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.05) end,{}),
@@ -28,7 +29,7 @@ globalkeys = gears.table.join(
     -- change number of columns of slave clients
     awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1, nil, true) end,{}),
     awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1, nil, true) end,{}),
-    
+
     -- toggle layout
     awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1) end,{}),
     awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1) end,{}),
@@ -37,15 +38,19 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-volume 0 +5%") end),
     awful.key({}, "XF86AudioLowerVolume", function() awful.spawn.with_shell("pactl set-sink-volume 0 -5%") end),
     awful.key({}, "XF86AudioMute", function() awful.spawn.with_shell("pactl set-sink-mute 0 toggle") end),
-    awful.key({}, "XF86AudioMicMute", function() awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),
+    awful.key({"Shift"}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell(bluetooth_volume.." increase") end),
+    awful.key({"Shift"}, "XF86AudioLowerVolume", function() awful.spawn.with_shell(bluetooth_volume.." decrease") end),
+    awful.key({"Shift"}, "XF86AudioMute", function() awful.spawn.with_shell(bluetooth_volume.." mute") end),
+    awful.key({}, "XF86AudioMicMute", function() awful.spawn.with_shell("pactl set-source-mute 1 toggle") end),  -- need to make this dynamic
     awful.key({}, "XF86MonBrightnessDown", function() awful.spawn.with_shell("brightnessctl set 5-") end),
     awful.key({}, "XF86MonBrightnessUp", function() awful.spawn.with_shell("brightnessctl set +5") end),
 
-    -- launch programs 
+    -- launch programs
     awful.key({ modkey,           }, "Return", function() awful.spawn(user.terminal) end,{}),
     awful.key({ modkey,           }, "space", function() awful.spawn.with_shell("rofi -show run") end,{}),
     awful.key({ modkey,           }, "b", function() awful.spawn(user.browser) end,{}),
     awful.key({ modkey,           }, "r", function() awful.spawn(user.terminal.." -e ranger") end,{}),
+    awful.key({ modkey,           }, "v", function() awful.spawn.with_shell(user.terminal.." -e "..delay_nvim) end,{}),
 
     -- infrequently used
     -- change screens, i never really use this

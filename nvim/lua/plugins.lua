@@ -12,14 +12,15 @@ local use = packer.use
 packer.reset()
 packer.startup(function()
 
-    --plugin manager
+    -- so that packer can manage itself
     use 'wbthomason/packer.nvim' --packer plugin manager
 
     --aesthetics
-    use 'kyazdani42/nvim-web-devicons' --fancy icons
+    use 'kyazdani42/nvim-web-devicons' --fancy icons - requires a patched font
     use 'navarasu/onedark.nvim' --theme
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}} --status bar at the bottom
     use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'} --text buffers as tabs
+    use 'lukas-reineke/indent-blankline.nvim' --indent guidelines
 
     --functional
     use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
@@ -34,7 +35,7 @@ packer.startup(function()
 
     --auto complete and sources
     use 'hrsh7th/nvim-cmp'  -- completetion engine
-    use 'hrsh7th/cmp-nvim-lsp'  -- completion sources
+    use 'hrsh7th/cmp-nvim-lsp'  -- completion source
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'onsails/lspkind-nvim' --autocomplete menu formatting
@@ -61,8 +62,11 @@ require('configs/toggleterm')
 
 require('configs/treesitter')
 
-require('configs/cmp') --autocomplete config in its own file
+require('configs/cmp')
 
+require('configs/indent-blankline')
+
+-- language servers
 require('lsps/sumneko') --lua lsp server config that i placed in its own file
 
 require('lsps/pyright') --lua lsp server config for pyright

@@ -1,13 +1,13 @@
 local set = vim.opt
 
 --general
-set.hidden=true                         -- Required to keep multiple buffers open multiple buffers
+set.hidden=true                         -- Required to keep multiple buffers open
 set.mouse='a'                           -- Enable your mouse
 set.splitbelow=true                     -- Horizontal splits will automatically be below
 set.splitright=true                     -- Vertical splits will automatically be to the right
 set.conceallevel=0                      -- So that I can see `` in markdown files
 set.background='dark'                   -- tell vim what the background color looks like
-set.showtabline=2                       -- Always sshow tabs
+set.showtabline=2                       -- Always show tabs
 set.backup=false                        -- Do not save backup
 set.swapfile=false                      -- Do not make swap file
 set.clipboard:append('unnamedplus')     -- Copy paste between vim and everything else
@@ -25,10 +25,10 @@ set.incsearch=true                      -- Incremental search that shows partial
 set.smartcase=true                      -- Automatically switch search to case-sensitive when search query contains an uppercase letter
 
 -- tabs
+set.expandtab=true                      -- Converts tabs to spaces
 set.tabstop=4                           -- Insert 4 spaces for a tab
 set.shiftwidth=4                        -- Change the number of space characters inserted for indentation
 set.smarttab=true                       -- Makes tabbing smarter will realize you have 2 vs 4
-set.expandtab=true                      -- Converts tabs to spaces
 set.smartindent=true                    -- Makes indenting smart
 set.autoindent=true                     -- New lines inherit the indent of prev line
 set.shiftround=true                     -- When shifting lines, round the indentation to the nearest multiple of shiftwidth
@@ -39,5 +39,5 @@ set.numberwidth=4                       -- columns used for the line number
 set.scrolloff=10                        -- start scrolling when 10 lines from top or bottom
 set.wrap=false                          -- Display long lines as just one line
 
-set.formatoptions:remove('c','o')       -- Better comment properties
-vim.cmd('autocmd FileType * set formatoptions-=cro')
+-- set.formatoptions:remove('c','o')       -- Better comment properties
+-- vim.cmd('autocmd FileType * set formatoptions-=cro')

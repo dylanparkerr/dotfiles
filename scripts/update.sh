@@ -15,8 +15,9 @@ update_nvim(){
     if [ -d "$config/nvim" ]; then
         rm -rf $config/nvim
     fi
+    mkdir $config/nvim
     echo "updating nvim folder: $config/nvim"
-    cp -r nvim/ $config/nvim/
+    cp -r nvim/ $config/
 }
 
 

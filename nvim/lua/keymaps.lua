@@ -21,16 +21,16 @@ keymap('n','<C-l>','<C-w>l',opts)
 -- Alternate ways to exit
 keymap('i','jk','<Esc>',opts)
 keymap('i','kj','<Esc>',opts)
-keymap('v','jk','<Esc>',opts)
-keymap('v','kj','<Esc>',opts)
+-- keymap('v','jk','<Esc>',opts) -- this causes visual line mode to lag
+-- keymap('v','kj','<Esc>',opts)
 
 -- Faster scrolling
-keymap('n','<S-j>','10j',opts)
-keymap('n','<S-k>','10k',opts)
+-- keymap('n','<S-j>','10j',opts) -- i dont think this is good practice
+-- keymap('n','<S-k>','10k',opts)
 
 -- Jump to beginning and end of line
-keymap('n','<S-w>','$',opts)
-keymap('n','<S-b>','0',opts)
+-- keymap('n','<S-w>','$',opts) -- i dont think this is good practice
+-- keymap('n','<S-b>','0',opts)
 
 -- Ways to cycle between open buffers
 keymap('n','<S-l>',':bnext<CR>',opts)
@@ -41,15 +41,16 @@ keymap('n','<C-s>',':w<CR>',opts)
 keymap('n','<C-q>',':q!<CR>',opts)
 keymap('n','<C-x>',':wq<CR>',opts)
 
--- Better tabbing
-keymap('v','<','<gv',opts)
-keymap('v','>','>gv',opts)
-
 -- Move visual lines with Alt+j and Alt+k
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+keymap('n', '<A-j>', ':move .+1<CR>==', opts)
+keymap('n', '<A-k>', ':move .-2<CR>==', opts)
+keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', opts)
+keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', opts)
+keymap("v", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("v", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- Better tabbing
+keymap('v','<A-h>','<gv',opts)
+keymap('v','<A-l>','>gv',opts)
 
 -- Hold on to yanked word after pasting over highlighted word
 keymap("v", "p", '"_dP', opts)

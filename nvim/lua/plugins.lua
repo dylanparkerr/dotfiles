@@ -29,7 +29,8 @@ packer.startup(function()
 
     --telescope
     use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
     --lsp
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers

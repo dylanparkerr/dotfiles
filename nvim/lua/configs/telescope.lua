@@ -2,6 +2,13 @@ require('telescope').setup{
     defaults = {
         -- Default configuration for telescope goes here:
         -- config_key = value,
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+            horizontal = {
+                prompt_position = "top",
+            },
+        },
         mappings = {
             i = {
                 -- map actions.which_key to <C-h> (default: <C-/>)
@@ -30,3 +37,11 @@ require('telescope').setup{
     }
 }
 require('telescope').load_extension('fzf')
+
+-- TODO: get this to work
+local mappings = {}
+mappings.grep_current_buff = function ()
+    require("telescope.builtin").current_buffer_fuzzy_find()
+end
+
+return mappings

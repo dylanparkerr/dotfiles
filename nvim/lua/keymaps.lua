@@ -1,6 +1,5 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
---keymap('','','',opts)
 
 --leader key for my own commands
 keymap('','<Space>','<Nop>',opts)
@@ -21,16 +20,6 @@ keymap('n','<C-l>','<C-w>l',opts)
 -- Alternate ways to exit
 keymap('i','jk','<Esc>',opts)
 keymap('i','kj','<Esc>',opts)
--- keymap('v','jk','<Esc>',opts) -- this causes visual line mode to lag
--- keymap('v','kj','<Esc>',opts)
-
--- Faster scrolling
--- keymap('n','<S-j>','10j',opts) -- i dont think this is good practice
--- keymap('n','<S-k>','10k',opts)
-
--- Jump to beginning and end of line
--- keymap('n','<S-w>','$',opts) -- i dont think this is good practice
--- keymap('n','<S-b>','0',opts)
 
 -- Ways to cycle between open buffers
 keymap('n','<S-l>',':bnext<CR>',opts)
@@ -61,4 +50,6 @@ keymap('n','<leader>hs',':split<CR>',opts)  -- horizontal split
 keymap('n','<leader>cs','<C-w>c',opts)  -- close current split
 
 -- telescope
-keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts)
+keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
+keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --find in current buffer
+keymap('n','<leader>fb','<cmd>Telescope buffers<cr>',opts) --find in open buffers

@@ -23,10 +23,13 @@ packer.startup(function()
     use 'lukas-reineke/indent-blankline.nvim' --indent guidelines
 
     --functional
-    use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'} --file tree viewer
     use 'akinsho/toggleterm.nvim' --integrated terminal
     use 'terrortylor/nvim-comment' --easier comments
+
+    --telescope
+    use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
     --lsp
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
@@ -65,6 +68,8 @@ require('configs/treesitter')
 require('configs/cmp')
 
 require('configs/indent-blankline')
+
+require("configs/telescope")
 
 -- language servers
 require('lsps/sumneko') --lua lsp server config that i placed in its own file

@@ -22,11 +22,13 @@ cmp.setup({
             and not context.in_syntax_group("Comment")
         end
     end,
+
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         end
     },
+
     mapping = {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -62,12 +64,14 @@ cmp.setup({
             end
         end, {"i", "s"}),
     }, --end mappings
+
     sources = cmp.config.sources{
-        { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'buffer', keyword_length=5 },
     },
+
     formatting = {
         format = lspkind.cmp_format({
             menu={
@@ -105,6 +109,7 @@ cmp.setup({
             },
         })
     },
+
     window = {
         documentation = cmp.config.window.bordered(),
         completion = cmp.config.window.bordered()

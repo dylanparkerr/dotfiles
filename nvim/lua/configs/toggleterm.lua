@@ -11,5 +11,6 @@ require('toggleterm').setup{
     persist_size = false,
     direction = 'horizontal',
     close_on_exit = true, -- close the terminal window when the process exits
-    shell = vim.o.shell, -- change the default shell
+    shell = 'bash' -- change the default shell
+    -- shell = 'git-bash' -- change the default shell
 }

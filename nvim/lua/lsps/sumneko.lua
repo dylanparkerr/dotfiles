@@ -1,7 +1,8 @@
 require'lspconfig'.sumneko_lua.setup {
     -- TODO make the path to the binary dynamic
     -- this assumes language server is install with lspinstall
-    cmd = {'/home/dylan/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server'},
+    -- cmd = {'/home/dylan/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server'},
+    cmd = {'C:\\Users\\Dylan\\AppData\\Local\\nvim-data\\lsp_servers\\sumneko_lua\\extension\\server\\bin\\lua-language-server.exe'},
     settings = {
         Lua = {
             runtime = {

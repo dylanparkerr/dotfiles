@@ -15,7 +15,7 @@ set.ruler=true                          -- Always display cursor
 set.cmdheight=1                         -- More space for displaying messages
 set.visualbell=true                     -- Use visual bell instead of beeping when doing something wrong
 set.confirm=true                        -- Ask to save changes instead of failing command because of unsaved changes
-set.laststatus=2                        -- Always display the status bar
+set.laststatus=3                        -- Set on universal status line isntead of one for every open split
 set.showcmd=true                        -- Show commands including <leader>
 
 --search
@@ -38,6 +38,3 @@ set.number=true                         -- Line numbers
 set.numberwidth=4                       -- columns used for the line number
 set.scrolloff=10                        -- start scrolling when 10 lines from top or bottom
 set.wrap=false                          -- Display long lines as just one line
-
--- set.formatoptions:remove('c','o')       -- Better comment properties
--- vim.cmd('autocmd FileType * set formatoptions-=cro')

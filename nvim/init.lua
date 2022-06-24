@@ -7,16 +7,8 @@
 Neovim init file
 --]]
 
-
-
-
 require('settings')
 require('keymaps')
 require('plugins')
-
-
-
-
-
-
+require('configs')
 

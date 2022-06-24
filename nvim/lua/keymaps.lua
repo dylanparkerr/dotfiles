@@ -53,3 +53,6 @@ keymap('n','<leader>cs','<C-w>c',opts)  -- close current split
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
 keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --find in current buffer
 keymap('n','<leader>fb','<cmd>Telescope buffers<cr>',opts) --find in open buffers
+
+-- nvim tree
+keymap('n','<leader>ee','<cmd>NvimTreeToggle<CR>',opts)

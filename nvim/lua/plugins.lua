@@ -45,34 +45,11 @@ packer.startup(function()
     use 'onsails/lspkind-nvim' --autocomplete menu formatting
 
     --snipets
-    use 'saadparwaiz1/cmp_luasnip' --luasnip and cmp integration
     use 'L3MON4D3/LuaSnip' -- snippet engine
+    use 'saadparwaiz1/cmp_luasnip' --luasnip and cmp integration
     use 'rafamadriz/friendly-snippets' -- a bunch of snippets
 
+    --git
+    use {'lewis6991/gitsigns.nvim'}
 end)
-
--- plugin configs
-require('onedark').load() --has to be called before lualine
-
-require('lualine').setup{options = {theme = 'onedark'}}
-
-require("bufferline").setup()
-
-require('nvim_comment').setup({line_mapping = "<leader>cc", operator_mapping = "<leader>c"})
-
-require('configs/nvim-tree')
-
-require('configs/toggleterm')
-
-require('configs/treesitter')
-
-require('configs/cmp')
-
-require('configs/indent-blankline')
-
-require("configs/telescope")
-
--- language servers
-require('lsps/sumneko') --lua lsp server config that i placed in its own file
-
-require('lsps/pyright') --lua lsp server config for pyright
+require('gitsigns').setup()

@@ -1,38 +1,28 @@
 #!/bin/bash
+direction=$1
 echo "========================================================================"
 
 # set config folder based on OS
 if [ "$OSTYPE" == "linux-gnu" ]; then
     config="$HOME/.config"
 elif [ "$OSTYPE" == "darwin" ]; then
-    config="{mac config location}"
+    echo "todo add mac os"
 else
-    config="C:\\Users\\Dylan\\AppData\\Local"
+    config="$HOME\\AppData\\Local"
 fi
 
-
-update_nvim(){
-    if [ -d "$config/nvim" ]; then
-        rm -rf $config/nvim
-    fi
-    mkdir $config/nvim
-    echo "updating nvim folder: $config/nvim"
-    cp -r nvim/ $config/
-}
+echo "config folder: $config"
 
 
 #call updates based on os
-if [ "$OSTYPE" == "linux-gnu" ]; then
-    echo "os: linux"
-    echo "config folder: $config"
-    update_nvim
-    #next calls
-elif [ "$OSTYPE" == "darwin" ]; then
-    echo "os: mac"
+if [ $direction == "toconfig" ]; then
+    echo "copying from git repo to local config"
+    cp -r ../nvim $config/
+elif [ $direction == "togit" ]; then
+    echo "copying from local config to git repo"
+    cp -r $config/nvim ../
 else
-    echo "os: windows"
-    echo "config folder: $config"
-    update_nvim
+    echo "invalid direction"
 fi
 
 echo "========================================================================"

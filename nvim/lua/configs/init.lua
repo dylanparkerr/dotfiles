@@ -9,5 +9,6 @@ require('configs/treesitter')
 require('configs/cmp')
 require("configs/indent-blankline")
 require("configs/telescope")
+require("configs/gitsigns")
 require("configs/lsps")
 

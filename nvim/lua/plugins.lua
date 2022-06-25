@@ -52,4 +52,4 @@ packer.startup(function()
     --git
     use {'lewis6991/gitsigns.nvim'}
 end)
-require('gitsigns').setup()
+-- require('gitsigns').setup()

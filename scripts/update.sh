@@ -15,10 +15,10 @@ echo "config folder: $config"
 
 
 #call updates based on os
-if [ $direction == "toconfig" ]; then
+if [ $direction == "fromrepotolocal" ]; then
     echo "copying from git repo to local config"
     cp -r ../nvim $config/
-elif [ $direction == "togit" ]; then
+elif [ $direction == "fromlocaltorepo" ]; then
     echo "copying from local config to git repo"
     cp -r $config/nvim ../
 else

@@ -1,6 +1,8 @@
 vim.lsp.set_log_level("debug")
 -- this assumes language server is install with lspinstall
 -- these paths can be definitly be better be referencing user local data with some env var
+-- looks into vim.fn.expand('~')
+-- or vim.fn.stdpath("data")
 local sumneko_bin = ''
 local pyright_bin = ''
 if vim.fn.has("unix") == 1 then
@@ -15,11 +17,11 @@ end
 
 local on_attach = function (client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=0 }
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts) -- handled by telescope
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts) -- dont really need
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)-- handled by telescope
+    -- vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)-- handled by telescope
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts) -- handeled by telescope
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)

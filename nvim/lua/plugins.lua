@@ -18,17 +18,16 @@ packer.startup(function()
     --aesthetics
     use 'kyazdani42/nvim-web-devicons' --fancy icons - requires a patched font
     use 'navarasu/onedark.nvim' --theme
-    -- use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}} --status bar at the bottom
+    use 'p00f/nvim-ts-rainbow' --alternating paren and bracket colors
     use 'nvim-lualine/lualine.nvim'--status bar at the bottom
-    -- use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'} --text buffers as tabs
     use 'akinsho/bufferline.nvim'--text buffers as tabs
     use 'lukas-reineke/indent-blankline.nvim' --indent guidelines
 
     --functional
-    -- use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'} --file tree viewer
     use 'kyazdani42/nvim-tree.lua'--file tree viewer
     use 'akinsho/toggleterm.nvim' --integrated terminal
     use 'terrortylor/nvim-comment' --easier comments
+    use 'ahmedkhalf/project.nvim' --git project switcher
 
     --telescope
     use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
@@ -55,4 +54,3 @@ packer.startup(function()
     --git
     use 'lewis6991/gitsigns.nvim'
 end)
--- require('gitsigns').setup()

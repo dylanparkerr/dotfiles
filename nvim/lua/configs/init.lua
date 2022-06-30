@@ -1,5 +1,4 @@
--- plugin configs
-require('onedark').load() -- pretty sure this needs to be called before others
+require('configs/onedark') -- has to be loaded first
 require('configs/lualine')
 require('configs/bufferline')
 require('configs/nvim-comment')
@@ -11,4 +10,4 @@ require("configs/indent-blankline")
 require("configs/telescope")
 require("configs/gitsigns")
 require("configs/lsps")
-
+require("configs/project")

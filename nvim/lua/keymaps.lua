@@ -52,9 +52,16 @@ keymap('n','<leader>bd',':bd<CR>',opts)  -- close current split
 
 -- telescope
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
-keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --find in current buffer
-keymap('n','<leader>fb','<cmd>Telescope buffers<cr>',opts) --find in open buffers
 keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts) --find in open buffers
+keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --find in current buffer
+keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts) --find in current buffer
+keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts) --find in current buffer
+keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --find in open buffers
+keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --find in open buffers
+keymap('n','gi','<cmd>Telescope lsp_implementations<cr>',opts) --find in open buffers
+keymap('n','gt','<cmd>Telescope lsp_type_definitions<cr>',opts) --find in open buffers
+keymap('n','gs','<cmd>Telescope lsp_document_symbols<cr>',opts) --find in open buffers
+
 
 -- nvim tree
 keymap('n','<leader>ee','<cmd>NvimTreeToggle<CR>',opts)

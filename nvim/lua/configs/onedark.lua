@@ -11,18 +11,19 @@ require('onedark').setup({
 		red = "#e86671",
     },
     highlights = {
-        -- rainbowcol1 = {fg = '$fg'},
-        rainbowcol1 = {fg = '$yellow'},
-        rainbowcol2 = {fg = '$purple'},
-        rainbowcol3 = {fg = '$blue'},
-        rainbowcol4 = {fg = '$yellow'},
-        rainbowcol5 = {fg = '$purple'},
-        rainbowcol6 = {fg = '$blue'},
-        rainbowcol7 = {fg = '$fg'},
+        rainbowcol1 = {fg = '$orange'},
+        -- rainbowcol2 = {fg = '$purple'},
+        -- rainbowcol3 = {fg = '$blue'},
         -- rainbowcol4 = {fg = '$orange'},
-        -- rainbowcol5 = {fg = '$cyan'},
-        -- rainbowcol6 = {fg = '$red'},
-        -- rainbowcol7 = {fg = '$green'},
+        -- rainbowcol5 = {fg = '$purple'},
+        -- rainbowcol6 = {fg = '$blue'},
+        rainbowcol7 = {fg = '$fg'},
+        rainbowcol2 = {fg = '$purple'},
+        rainbowcol3 = {fg = '$orange'},
+        rainbowcol4 = {fg = '$purple'},
+        rainbowcol5 = {fg = '$orange'},
+        rainbowcol6 = {fg = '$purple'},
+        TSOperator = {fg = '$purple'}
     }
 })
 

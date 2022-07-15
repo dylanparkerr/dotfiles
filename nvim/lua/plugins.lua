@@ -7,7 +7,6 @@ packer.init{
     }
 }
 
--- call plugins
 local use = packer.use
 packer.reset()
 packer.startup(function()
@@ -19,9 +18,10 @@ packer.startup(function()
     use 'kyazdani42/nvim-web-devicons' --fancy icons - requires a patched font
     use 'navarasu/onedark.nvim' --theme
     use 'p00f/nvim-ts-rainbow' --alternating paren and bracket colors
-    use 'nvim-lualine/lualine.nvim'--status bar at the bottom
-    use 'akinsho/bufferline.nvim'--text buffers as tabs
-    use 'lukas-reineke/indent-blankline.nvim' --indent guidelines
+    use 'nvim-lualine/lualine.nvim'  --status bar at the bottom
+    use 'akinsho/bufferline.nvim'  --text buffers as tabs
+    use 'lukas-reineke/indent-blankline.nvim'  --indent guidelines
+    use 'j-hui/fidget.nvim'  --lsp loading indicator
 
     --functional
     use 'kyazdani42/nvim-tree.lua'--file tree viewer
@@ -38,6 +38,7 @@ packer.startup(function()
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
     use 'williamboman/nvim-lsp-installer' --lsp server installer
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --better code parsing
+    use 'RRethy/vim-illuminate' --highlight symbol under cursor
 
     --auto complete and sources
     use 'hrsh7th/nvim-cmp'  -- completetion engine
@@ -52,5 +53,6 @@ packer.startup(function()
     use 'rafamadriz/friendly-snippets' -- a bunch of snippets
 
     --git
-    use 'lewis6991/gitsigns.nvim'
+    use 'lewis6991/gitsigns.nvim'  -- visual git change indicators in gutters
+    use 'sindrets/diffview.nvim'  -- tabgroup for viewing git changes
 end)

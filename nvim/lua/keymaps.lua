@@ -19,7 +19,7 @@ keymap('n','<C-l>','<C-w>l',opts)
 
 -- Alternate ways to exit
 keymap('i','jk','<Esc>',opts)
-keymap('i','kj','<Esc>',opts)
+-- keymap('i','kj','<Esc>',opts)
 
 -- Ways to cycle between open buffers
 keymap('n','<S-l>',':bnext<CR>',opts)
@@ -52,18 +52,28 @@ keymap('n','<leader>bd',':bd<CR>',opts)  -- close current split
 
 -- telescope
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
-keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts) --find in open buffers
-keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --find in current buffer
-keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts) --find in current buffer
-keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts) --find in current buffer
-keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --find in open buffers
-keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --find in open buffers
-keymap('n','gi','<cmd>Telescope lsp_implementations<cr>',opts) --find in open buffers
-keymap('n','gt','<cmd>Telescope lsp_type_definitions<cr>',opts) --find in open buffers
-keymap('n','gs','<cmd>Telescope lsp_document_symbols<cr>',opts) --find in open buffers
-
+keymap('n','<leader>fg','<cmd>Telescope git_files<cr>',opts) --find git files
+keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts) --find vim help tage
+keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts) --fuzzy find in current buffer
+keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts) --fuzzy find in current project
+keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts) --switch git projects
+keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --lsp go to definition - shows telescope picker if there are multiple entries
+keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --lsp go to symbol refrences - shows telescope picker if there are multiple entries
+keymap('n','gi','<cmd>Telescope lsp_implementations<cr>',opts) --lsp go to implementation - shows telescope picker if there are multiple entries
+keymap('n','gt','<cmd>Telescope lsp_type_definitions<cr>',opts) --lsp go to type definition - shows telescope picker if there are multiple entries
+keymap('n','gs','<cmd>Telescope lsp_document_symbols<cr>',opts) --lsp list symbols from current buffer
 
 -- nvim tree
 keymap('n','<leader>ee','<cmd>NvimTreeToggle<CR>',opts)
 
--- for lsp bindings, see /configs/lsps.lua
+-- jump to next or previous highlight of symbol under cursor
+-- this binding using ctrl might get problematic, keep an eye on it
+keymap('n', '<C-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+keymap('n', '<C-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+
+-- git
+keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts)  -- preview change hunk using gitsigns
+keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts) -- custom funtion to toggle Diffview
+keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
+keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
+

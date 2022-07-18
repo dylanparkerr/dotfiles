@@ -48,7 +48,7 @@ keymap("v", "p", '"_dP', opts)
 keymap('n','<leader>vs',':vs<CR>',opts)  -- vertical split
 keymap('n','<leader>hs',':split<CR>',opts)  -- horizontal split
 keymap('n','<leader>cs','<C-w>c',opts)  -- close current split
-keymap('n','<leader>bd',':bd<CR>',opts)  -- close current split
+-- keymap('n','<leader>bd',':bd<CR>',opts)  -- close current split
 
 -- telescope
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
@@ -77,3 +77,5 @@ keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts) -- custom funtion 
 keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
 keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
 
+-- better buffer delete so that nvimtree doesn't resize
+keymap("n", "<leader>bd", "<cmd>lua DeleteCurrentBuffer()<cr>", opts)

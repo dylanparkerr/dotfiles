@@ -16,6 +16,10 @@ keymap('n','<C-h>','<C-w>h',opts)
 keymap('n','<C-j>','<C-w>j',opts)
 keymap('n','<C-k>','<C-w>k',opts)
 keymap('n','<C-l>','<C-w>l',opts)
+keymap('t','<C-h>','<C-\\><C-n><C-w>h',opts)
+keymap('t','<C-j>','<C-\\><C-n><C-w>j',opts)
+keymap('t','<C-k>','<C-\\><C-n><C-w>k',opts)
+keymap('t','<C-l>','<C-\\><C-n><C-w>l',opts)
 
 -- Alternate ways to exit
 keymap('i','jk','<Esc>',opts)
@@ -40,6 +44,7 @@ keymap("v", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- Better tabbing
 keymap('v','<A-h>','<gv',opts)
 keymap('v','<A-l>','>gv',opts)
+--TODO same tabbing for single lines in normal and insert mode for consistency
 
 -- Hold on to yanked word after pasting over highlighted word
 keymap("v", "p", '"_dP', opts)
@@ -48,7 +53,6 @@ keymap("v", "p", '"_dP', opts)
 keymap('n','<leader>vs',':vs<CR>',opts)  -- vertical split
 keymap('n','<leader>hs',':split<CR>',opts)  -- horizontal split
 keymap('n','<leader>cs','<C-w>c',opts)  -- close current split
--- keymap('n','<leader>bd',':bd<CR>',opts)  -- close current split
 
 -- telescope
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts) --find files
@@ -65,6 +69,7 @@ keymap('n','gs','<cmd>Telescope lsp_document_symbols<cr>',opts) --lsp list symbo
 
 -- nvim tree
 keymap('n','<leader>ee','<cmd>NvimTreeToggle<CR>',opts)
+keymap('n','<C-e>','<cmd>NvimTreeToggle<CR>',opts)
 
 -- jump to next or previous highlight of symbol under cursor
 -- this binding using ctrl might get problematic, keep an eye on it
@@ -76,6 +81,10 @@ keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts)  -- preview chang
 keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts) -- custom funtion to toggle Diffview
 keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
 keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts)  -- custom function to toggle lazygit
+
+-- specifically toggle term 1 since lazygit spawns on term 9
+keymap("n", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts)  -- actually maps to ctrl + /
+keymap("t", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts) -- actually maps to ctrl + /
 
 -- better buffer delete so that nvimtree doesn't resize
 keymap("n", "<leader>bd", "<cmd>lua DeleteCurrentBuffer()<cr>", opts)

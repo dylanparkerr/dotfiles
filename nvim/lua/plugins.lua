@@ -28,6 +28,7 @@ packer.startup(function()
     use 'akinsho/toggleterm.nvim' --integrated terminal
     use 'terrortylor/nvim-comment' --easier comments
     use 'ahmedkhalf/project.nvim' --git project switcher
+    use 'windwp/nvim-autopairs' --auto pair ' " { ( [ etc
 
     --telescope
     use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
@@ -55,4 +56,5 @@ packer.startup(function()
     --git
     use 'lewis6991/gitsigns.nvim'  -- visual git change indicators in gutters
     use 'sindrets/diffview.nvim'  -- tabgroup for viewing git changes
+
 end)

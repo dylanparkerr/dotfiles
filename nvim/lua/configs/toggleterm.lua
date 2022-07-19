@@ -20,7 +20,8 @@ local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({
   cmd = "lazygit",
   dir = "git_dir",
-  close_on_exit = true, -- this doesn't work for some reason :(
+  count = 9,
+  close_on_exit = true,
   direction = "float",
   float_opts = {
     border = "curved",
@@ -30,4 +31,3 @@ local lazygit = Terminal:new({
 function Lazygit_toggle()
   lazygit:toggle()
 end
-

@@ -38,3 +38,6 @@ set.number=true                         -- Line numbers
 set.numberwidth=4                       -- columns used for the line number
 set.scrolloff=10                        -- start scrolling when 10 lines from top or bottom
 set.wrap=false                          -- Display long lines as just one line
+
+-- when entering terminal windows, enter insert mode
+vim.api.nvim_exec([[ autocmd BufWinEnter,WinEnter term://* startinsert ]], false)

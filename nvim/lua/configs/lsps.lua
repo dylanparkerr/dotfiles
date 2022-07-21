@@ -1,23 +1,19 @@
 vim.lsp.set_log_level("debug")
 local nvim_data = vim.fn.stdpath('data')
+
 -- this assumes language server is install with lspinstall
 local sumneko_bin = ''
 local pyright_bin = ''
 if vim.fn.has("unix") == 1 then
     sumneko_bin = nvim_data.."/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"
     pyright_bin = nvim_data.."/lsp_servers/python/node_modules/.bin/pyright-langserver"
-    -- sumneko_bin = "/home/dylan/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"
-    -- pyright_bin = "/home/dylan/.local/share/nvim/lsp_servers/python/node_modules/.bin/pyright-langserver"
 elseif vim.fn.has('win32') == 1 then
-    -- local user = 'dylparke'  -- work
-    -- local user = 'Dylan'        -- personal
     sumneko_bin = nvim_data.."\\lsp_servers\\sumneko_lua\\extension\\server\\bin\\lua-language-server.exe"
     pyright_bin = nvim_data.."\\lsp_servers/python/node_modules/.bin/pyright-langserver.cmd"
-    -- sumneko_bin = "C:\\Users\\"..user.."\\AppData\\Local\\nvim-data\\lsp_servers\\sumneko_lua\\extension\\server\\bin\\lua-language-server.exe"
-    -- pyright_bin = "C:\\Users\\"..user.."\\AppData\\Local\\nvim-data\\lsp_servers/python/node_modules/.bin/pyright-langserver.cmd"
 end
 
 local on_attach = function (client, bufnr)
+    -- keymaps
     local bufopts = { noremap=true, silent=true, buffer=0 }
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)

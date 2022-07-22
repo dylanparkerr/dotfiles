@@ -25,6 +25,7 @@ packer.startup(function()
     use 'goolord/alpha-nvim'  --startup screen
 
     --functional
+    use 'lewis6991/impatient.nvim' --speeds up performance by caching compiled plugins
     use 'kyazdani42/nvim-tree.lua'--file tree viewer
     use 'akinsho/toggleterm.nvim' --integrated terminal
     use 'terrortylor/nvim-comment' --easier comments

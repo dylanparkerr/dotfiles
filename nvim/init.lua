@@ -7,6 +7,7 @@
 Neovim init file
 --]]
 
+require('caffeine')
 require('settings')
 require('keymaps')
 require('plugins')

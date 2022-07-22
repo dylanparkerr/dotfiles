@@ -19,7 +19,13 @@ require('nvim-tree').setup({
                 { key = "<C-e>", action = "" }
             }
         }
-    }
+    },
+    respect_buf_cwd = true,
+    update_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_cwd = true
+    },
 })
 
 function DeleteCurrentBuffer()

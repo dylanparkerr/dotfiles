@@ -33,15 +33,20 @@ packer.startup(function()
     use 'echasnovski/mini.nvim' --add/delete/replace ' " { ( [ etc around things
 
     --telescope
-    use {'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim'} --telescope fuzzy finder
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
+    use 'nvim-lua/plenary.nvim' --used by a lot of stuff
+    use 'nvim-telescope/telescope.nvim'
+    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
     use 'ahmedkhalf/project.nvim' --git project switcher
 
     --lsp
+    use 'williamboman/mason.nvim' -- installer for lsp servers, dap servers, linters, and formaters
+    use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
-    use 'williamboman/nvim-lsp-installer' --lsp server installer
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --better code parsing
+    -- use 'williamboman/nvim-lsp-installer' --old lsp installer
+    use {'nvim-treesitter/nvim-treesitter'} --better code parsing
+    -- use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --TSUpdate needs to be ran in the x64 Native Tools Command Line on Windows
     use 'RRethy/vim-illuminate' --highlight symbol under cursor
+
 
     --auto complete and sources
     use 'hrsh7th/nvim-cmp' --completetion engine

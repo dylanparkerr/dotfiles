@@ -57,12 +57,14 @@ cmp.setup({
             -- if luasnip.expandable() then
             --     luasnip.expand()
             -- elseif luasnip.expand_or_jumpable() then
-            -- if luasnip.expand_or_jumpable() then
-            --     luasnip.expand_or_jump()
-            if luasnip.jumpable(1) then
-                luasnip.jump(1)
-            elseif check_backspace() then
-                fallback()
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            -- end
+
+            -- if luasnip.jumpable(1) then
+            --     luasnip.jump(1)
+            -- elseif check_backspace() then
+            --     fallback()
             else
                 fallback()
             end
@@ -78,6 +80,7 @@ cmp.setup({
             end
         end, {'i', 's'}),
     }, --end mappings
+
 
     sources = cmp.config.sources{
         { name = 'luasnip' },

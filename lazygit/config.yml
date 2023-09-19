@@ -1,0 +1,9 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+      - underline
+    selectedRangeBgColor:
+      - default
+      - underline
+

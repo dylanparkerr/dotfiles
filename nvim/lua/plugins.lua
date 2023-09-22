@@ -26,7 +26,7 @@ packer.startup(function()
 
     --functional
     use 'lewis6991/impatient.nvim' --speeds up performance by caching compiled plugins
-    use 'kyazdani42/nvim-tree.lua'--file tree viewer
+    -- use 'kyazdani42/nvim-tree.lua'--file tree viewer  ******* TODO probably remove this if the telescope file browser is good **********
     use 'akinsho/toggleterm.nvim' --integrated terminal
     use 'terrortylor/nvim-comment' --easier comments
     use 'windwp/nvim-autopairs' --auto pair ' " { ( [ etc
@@ -35,18 +35,17 @@ packer.startup(function()
     --telescope
     use 'nvim-lua/plenary.nvim' --used by a lot of stuff
     use 'nvim-telescope/telescope.nvim'
-    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
     use 'ahmedkhalf/project.nvim' --git project switcher
+    use 'nvim-telescope/telescope-file-browser.nvim' --switched to this from nvim-tree
 
     --lsp
     use 'williamboman/mason.nvim' -- installer for lsp servers, dap servers, linters, and formaters
     use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
-    -- use 'williamboman/nvim-lsp-installer' --old lsp installer
-    use {'nvim-treesitter/nvim-treesitter'} --better code parsing
-    -- use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --TSUpdate needs to be ran in the x64 Native Tools Command Line on Windows
+    -- use {'nvim-treesitter/nvim-treesitter'} --better code parsing
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --TSUpdate needs to be ran in the x64 Native Tools Command Line on Windows
     use 'RRethy/vim-illuminate' --highlight symbol under cursor
-
 
     --auto complete and sources
     use 'hrsh7th/nvim-cmp' --completetion engine

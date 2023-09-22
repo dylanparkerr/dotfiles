@@ -38,6 +38,14 @@ require('telescope').setup{
 }
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('projects')
+require("telescope").load_extension "file_browser"
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>fb",
+  ":Telescope file_browser<CR>",
+  { noremap = true }
+)
 
 -- TODO: get this to work
 local mappings = {}

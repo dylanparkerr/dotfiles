@@ -1,17 +1,20 @@
-require('rainbow-delimiters').setup{
+local rainbow_delimiters = require 'rainbow-delimiters'
+vim.g.rainbow_delimiters = {
     strategy = {
         [''] = rainbow_delimiters.strategy['global'],
+        commonlisp = rainbow_delimiters.strategy['local'],
     },
     query = {
         [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
     },
     highlight = {
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterViolet',
         'RainbowDelimiterYellow',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterOrange',
         'RainbowDelimiterCyan',
-        'RainbowDelimiterRed',
         'RainbowDelimiterGreen',
+        'RainbowDelimiterRed',
         'RainbowDelimiterBlue',
     },
     blacklist = {'c', 'cpp'},

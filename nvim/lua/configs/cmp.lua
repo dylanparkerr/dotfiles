@@ -1,14 +1,8 @@
-local cmp = require'cmp'
+local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 
 require("luasnip/loaders/from_vscode").lazy_load()
-
--- helper function for super tab functionality
-local check_backspace = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
 
 cmp.setup({
     enabled = function()
@@ -42,37 +36,30 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
-        -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = cmp.mapping({
+            i = function(fallback)
+                if cmp.visible() and cmp.get_active_entry() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                else
+                    fallback()
+                end
+            end,
+            s = cmp.mapping.confirm({ select = true }),
+            c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        }),
         ['<Tab>'] = cmp.mapping(function(fallback)
-            -- if cmp.visible() then
-            --     cmp.select_next_item()
-            -- elseif luasnip.expandable() then
-            -- if luasnip.expandable() then
-            --     luasnip.expand()
-            -- elseif luasnip.expand_or_jumpable() then
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            -- end
-
-            -- if luasnip.jumpable(1) then
-            --     luasnip.jump(1)
-            -- elseif check_backspace() then
-            --     fallback()
             else
                 fallback()
             end
         end, {'i', 's',}),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-            -- if cmp.visible() then
-            --     cmp.select_prev_item()
-            -- elseif luasnip.jumpable(-1) then
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -80,7 +67,6 @@ cmp.setup({
             end
         end, {'i', 's'}),
     }, --end mappings
-
 
     sources = cmp.config.sources{
         { name = 'luasnip' },

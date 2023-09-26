@@ -31,7 +31,7 @@ packer.startup(function()
     use 'terrortylor/nvim-comment' --easier comments
     use 'windwp/nvim-autopairs' --auto pair ' " { ( [ etc
     use 'echasnovski/mini.nvim' --add/delete/replace ' " { ( [ etc around things
-    -- use 'folke/which-key.nvim' --motion and command key reminders
+    use 'folke/which-key.nvim' --motion and command key reminders
 
     --telescope
     use 'nvim-lua/plenary.nvim' --used by a lot of stuff
@@ -45,7 +45,6 @@ packer.startup(function()
     use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
     use 'nvim-treesitter/nvim-treesitter' --better code parsing
-    -- use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} --TSUpdate needs to be ran in the x64 Native Tools Command Line on Windows
     use 'RRethy/vim-illuminate' --highlight symbol under cursor
 
     --auto complete and sources

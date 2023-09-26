@@ -1,20 +1,6 @@
 -- WARNING Log level DEBUG will cause degraded performance and high disk usage
 -- vim.lsp.set_log_level("debug")
 
--- local nvim_data = vim.fn.stdpath('data')
-
--- this assumes language server is install with lspinstall
--- local sumneko_bin = ''
--- local pyright_bin = ''
--- if vim.fn.has("unix") == 1 then
---     sumneko_bin = nvim_data.."/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"
---     pyright_bin = nvim_data.."/lsp_servers/python/node_modules/.bin/pyright-langserver"
---     tsserver_bin = nvim_data..""
--- elseif vim.fn.has('win32') == 1 then
---     sumneko_bin = nvim_data.."\\lsp_servers\\sumneko_lua\\extension\\server\\bin\\lua-language-server.exe"
---     pyright_bin = nvim_data.."\\lsp_servers/python/node_modules/.bin/pyright-langserver.cmd"
--- end
-
 -- ALL LSP BUFFERS
 local on_attach = function (client, bufnr)
     -- These are essentially global and will try to be setup on any buffer attached to an lsp

@@ -21,7 +21,7 @@ packer.startup(function()
     use 'nvim-lualine/lualine.nvim'  --status bar at the bottom
     use 'akinsho/bufferline.nvim'  --text buffers as tabs
     use 'lukas-reineke/indent-blankline.nvim'  --indent guidelines
-    use 'j-hui/fidget.nvim'  --lsp loading indicator
+    use {'j-hui/fidget.nvim', tag='legacy'}  --lsp loading indicator
     use 'goolord/alpha-nvim'  --startup screen
 
     --functional

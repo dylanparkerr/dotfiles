@@ -1,17 +1,26 @@
 -- WARNING Log level DEBUG will cause degraded performance and high disk usage
 -- vim.lsp.set_log_level("debug")
 
+local keymap = function (mode, lhs, rhs, opts, desc)
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("keep", opts, {desc = desc}))
+end
+
 -- ALL LSP BUFFERS
 local on_attach = function (client, bufnr)
     -- These are essentially global and will try to be setup on any buffer attached to an lsp
     -- keymaps
-    local bufopts = { noremap=true, silent=true, buffer=0 }
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', '<leader>fm', vim.lsp.buf.formatting, bufopts)
+    local opts = { noremap=true, silent=true, buffer=0 }
+    keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --lsp go to definition - shows telescope picker if there are multiple entries
+    keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --lsp go to symbol refrences - shows telescope picker if there are multiple entries
+    keymap('n','gi','<cmd>Telescope lsp_implementations<cr>',opts) --lsp go to implementation - shows telescope picker if there are multiple entries
+    keymap('n','gt','<cmd>Telescope lsp_type_definitions<cr>',opts) --lsp go to type definition - shows telescope picker if there are multiple entries
+    keymap('n','gh','<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+    keymap('n','gn','<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+    keymap('n','ga','<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    keymap('n','gf','<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 
     -- highlight symbol under cursor
+    -- ********** I dont know if this should be here, i think it only uses treesitter, so i am limiting this functionality to only when i have an lsp?
     require('illuminate').on_attach(client)
 end
 

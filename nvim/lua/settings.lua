@@ -28,8 +28,8 @@ set.smartcase=true                      -- Automatically switch search to case-s
 set.expandtab=true                      -- Converts tabs to spaces
 set.tabstop=4                           -- Insert 4 spaces for a tab
 set.shiftwidth=4                        -- Change the number of space characters inserted for indentation
-set.smarttab=true                       -- Makes tabbing smarter will realize you have 2 vs 4
-set.smartindent=true                    -- Makes indenting smart
+set.smarttab=true                       -- Pressing tab and bksp at the beggining of a line inserts/removes shiftwidth number of spaces
+set.smartindent=true                    -- Will add an indent when creating a newline after a { for instance
 set.autoindent=true                     -- New lines inherit the indent of prev line
 set.shiftround=true                     -- When shifting lines, round the indentation to the nearest multiple of shiftwidth
 

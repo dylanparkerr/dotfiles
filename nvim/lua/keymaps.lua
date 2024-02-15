@@ -59,9 +59,11 @@ keymap('n','<leader>sc','<C-w>c',opts, 'Close split')  -- close current split
 -- telescope
 keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts, 'Find local file') --find files
 keymap('n','<leader>fg','<cmd>Telescope git_files<cr>',opts, 'Find git file') --find git files
-keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts, 'Find help tags') --find vim help tage
+keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts, 'Find help tag') --find vim help tage
 keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts, 'Find word in current buffer') --fuzzy find in current buffer
 keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts, 'Find word in current project') --fuzzy find in current project
+keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find user command') --switch git projects
+keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker') --switch git projects
 keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts, 'Switch project') --switch git projects
 -- keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --lsp go to definition - shows telescope picker if there are multiple entries
 -- keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --lsp go to symbol refrences - shows telescope picker if there are multiple entries

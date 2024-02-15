@@ -66,8 +66,10 @@ wk.register({
         g = "Find git project file",
         c = "Find word in current buffer",
         p = "Find word in current project",
-        h = "Find help tags",
-        b = "Find file in browser"
+        h = "Find help tag",
+        b = "Find file in browser",
+        u = "Find user command",
+        t = "Find telescope picker"
     },
     p = {
         name = "Project",

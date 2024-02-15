@@ -2,6 +2,8 @@ local packer = require('packer')
 
 -- packer config
 packer.init{
+    snapshot = 'vim-9-point-1-stable', -- Name of the snapshot you would like to load at startup
+    snapshot_path = packer.util.join_paths(vim.fn.stdpath('config'), 'snapshot'),
     display = {
         open_fn = require('packer.util').float
     }

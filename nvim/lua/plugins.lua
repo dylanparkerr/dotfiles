@@ -1,4 +1,5 @@
 local packer = require('packer')
+packer.util = require('packer.util')
 
 -- packer config
 packer.init{
@@ -43,10 +44,10 @@ packer.startup(function()
     use 'nvim-telescope/telescope-file-browser.nvim' --switched to this from nvim-tree
 
     --lsp
-    use 'williamboman/mason.nvim' -- installer for lsp servers, dap servers, linters, and formaters
+    use {'williamboman/mason.nvim', commit='d66c60e'} -- installer for lsp servers, dap servers, linters, and formaters
     use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig' --automatically launch and initialize language servers
-    use 'nvim-treesitter/nvim-treesitter' --better code parsing
+    use {'nvim-treesitter/nvim-treesitter', commit='b5873ba'} --better code parsing
     use 'RRethy/vim-illuminate' --highlight symbol under cursor
 
     --auto complete and sources

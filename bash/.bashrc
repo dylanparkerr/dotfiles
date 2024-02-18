@@ -17,21 +17,29 @@ git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 # \[\033[COLORm\]
-# colors
-# Black: 30
-# Blue: 34
-# Cyan: 36
-# Green: 32
-# Purple: 35
-# Red: 31
-# White: 37
-# Yellow: 33
-
+# Color	Foreground Code	Background Code
+# Black	        30	40
+# Red	        31	41
+# Green	        32	42
+# Yellow	    33	43
+# Blue	        34	44
+# Magenta	    35	45
+# Cyan	        36	46
+# Light Gray	37	47
+# Gray	        90	100
+# Light Red	    91	101
+# Light Green	92	102
+# Light Yellow	93	103
+# Light Blue	94	104
+# Light Magenta	95	105
+# Light Cyan	96	106
+# White	        97	107
+#
 #one dark themed prompt
 # PS1="\[\033[35m\]\u@\h\[\033[34m\][\w]\[\033[32m\]\$(git_branch)\[\033[37m\]\$ "
 
 # gruvbox themed prompt
-PS1="\[\033[33m\]\u@\h\[\033[32m\][\w]\[\033[31m\]\$(git_branch)\[\033[37m\]\$ "
+PS1="\[\033[93m\]\u@\h\[\033[92m\][\w]\[\033[91m\]\$(git_branch)\[\033[97m\]\$ "
 PS2='>'
 
 export NVM_DIR="$HOME/.nvm"

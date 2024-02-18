@@ -34,7 +34,7 @@ git_branch() {
 # Light Magenta	95	105
 # Light Cyan	96	106
 # White	        97	107
-#
+
 #one dark themed prompt
 # PS1="\[\033[35m\]\u@\h\[\033[34m\][\w]\[\033[32m\]\$(git_branch)\[\033[37m\]\$ "
 
@@ -50,5 +50,6 @@ alias ls='LC_COLLATE=C ls -al --group-directories-first --color=auto'
 alias v='nvim'
 alias vdot='nvim ~/repos/dotfiles/nvim/init.lua'
 alias bdot='nvim ~/repos/dotfiles/bash/.bashrc'
+alias tdot='nvim ~/repos/dotfiles/tmux/tmux.conf'
 
 PATH=$PATH:/usr/local/go/bin

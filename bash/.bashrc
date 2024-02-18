@@ -16,7 +16,22 @@ export HISTCONTROL=ignoreboth
 git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-PS1="\[\033[35m\]\u@\h\[\033[34m\][\w]\[\033[32m\]\$(git_branch)\[\033[37m\]\$ "
+# \[\033[COLORm\]
+# colors
+# Black: 30
+# Blue: 34
+# Cyan: 36
+# Green: 32
+# Purple: 35
+# Red: 31
+# White: 37
+# Yellow: 33
+
+#one dark themed prompt
+# PS1="\[\033[35m\]\u@\h\[\033[34m\][\w]\[\033[32m\]\$(git_branch)\[\033[37m\]\$ "
+
+# gruvbox themed prompt
+PS1="\[\033[33m\]\u@\h\[\033[32m\][\w]\[\033[31m\]\$(git_branch)\[\033[37m\]\$ "
 PS2='>'
 
 export NVM_DIR="$HOME/.nvm"

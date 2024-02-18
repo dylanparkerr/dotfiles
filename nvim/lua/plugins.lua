@@ -20,6 +20,7 @@ packer.startup(function()
     --aesthetics
     use 'kyazdani42/nvim-web-devicons' --fancy icons - requires a patched font
     use 'navarasu/onedark.nvim' --theme
+    use "ellisonleao/gruvbox.nvim" --theme
     use 'HiPhish/rainbow-delimiters.nvim' --alternating paren and bracket colors
     use 'nvim-lualine/lualine.nvim'  --status bar at the bottom
     use 'akinsho/bufferline.nvim'  --text buffers as tabs

@@ -14,6 +14,7 @@ rm nvim-linux64.tar.gz
 sudo apt install build-essential npm unzip tmux ripgrep fzf
 
 # dotfile sym links
-ln -sf $HOME/repos/dotfiles/nvim $HOME/.config/nvim
 ln -sf $HOME/repos/dotfiles/scripts/bash/.bashrc $HOME/.bashrc
+ln -sf $HOME/repos/dotfiles/nvim $HOME/.config/nvim
+ln -sf $HOME/repos/dotfiles/lazygit/config.yml $HOME/.config/lazygit/config.yml
 

@@ -23,7 +23,7 @@ packer.startup(function()
     use 'HiPhish/rainbow-delimiters.nvim' --alternating paren and bracket colors
     use 'nvim-lualine/lualine.nvim'  --status bar at the bottom
     use 'akinsho/bufferline.nvim'  --text buffers as tabs
-    use 'lukas-reineke/indent-blankline.nvim'  --indent guidelines
+    use {'lukas-reineke/indent-blankline.nvim',commit='9637670'}  --indent guidelines
     use {'j-hui/fidget.nvim', tag='legacy'}  --lsp loading indicator
     use 'goolord/alpha-nvim'  --startup screen
 
@@ -39,7 +39,7 @@ packer.startup(function()
     --telescope
     use 'nvim-lua/plenary.nvim' --used by a lot of stuff
     use 'nvim-telescope/telescope.nvim'
-    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } --faster searching
     use 'ahmedkhalf/project.nvim' --git project switcher
     use 'nvim-telescope/telescope-file-browser.nvim' --switched to this from nvim-tree
 

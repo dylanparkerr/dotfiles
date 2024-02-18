@@ -43,5 +43,4 @@ alias v='nvim'
 alias vdot='nvim ~/repos/dotfiles/nvim/init.lua'
 alias bdot='nvim ~/repos/dotfiles/bash/.bashrc'
 
-PATH=$PATH:~/tools/nvim/nvim-linux64/bin/
 PATH=$PATH:/usr/local/go/bin

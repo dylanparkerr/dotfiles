@@ -1,8 +1,7 @@
-require"fidget".setup({
-    text = {
-        spinner = 'dots'
-    },
-    window = {
-        blend = 0  --so loading widgets dont appear dimmed
+require('fidget').setup({
+    progress = {
+        display = {
+            progress_icon = {pattern = 'dots'}
+        }
     }
 })

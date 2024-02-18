@@ -8,7 +8,9 @@ if [[ ! -d "$HOME/tools" ]]; then
 fi
 
 # packages
-sudo apt install build-essential npm unzip tmux ripgrep fzf cmake gettext
+sudo apt install -y build-essential npm unzip tmux ripgrep fzf cmake gettext openjdk-17-jdk
+
+# need node 18+ for the js/ts lsp to work, this might not be viable on work machine
 
 # neovim from source
 # git clone https://github.com/neovim/neovim
@@ -22,3 +24,4 @@ ln -sf $HOME/repos/dotfiles/scripts/bash/.bashrc $HOME/.bashrc
 ln -sf $HOME/repos/dotfiles/nvim $HOME/.config/nvim
 ln -sf $HOME/repos/dotfiles/lazygit/config.yml $HOME/.config/lazygit/config.yml
 
+# ** set up a nerd font manually :/**

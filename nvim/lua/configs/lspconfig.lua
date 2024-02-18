@@ -24,6 +24,9 @@ local on_attach = function (client, bufnr)
     require('illuminate').on_attach(client)
 end
 
+-- server configs
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
 -- LUA
 require('lspconfig').lua_ls.setup{
     on_attach = on_attach,
@@ -63,3 +66,12 @@ require('lspconfig').tsserver.setup{
 require('lspconfig').gopls.setup{
     on_attach = on_attach,
 }
+
+require('lspconfig').jdtls.setup{
+    on_attach = on_attach,
+}
+
+require('lspconfig').terraformls.setup{
+    on_attach = on_attach,
+}
+

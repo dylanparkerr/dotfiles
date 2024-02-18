@@ -23,5 +23,6 @@ sudo apt install -y build-essential npm unzip tmux ripgrep fzf cmake gettext ope
 ln -sf $HOME/repos/dotfiles/scripts/bash/.bashrc $HOME/.bashrc
 ln -sf $HOME/repos/dotfiles/nvim $HOME/.config/nvim
 ln -sf $HOME/repos/dotfiles/lazygit/config.yml $HOME/.config/lazygit/config.yml
+ln -sf $HOME/repos/dotfiles/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # ** set up a nerd font manually :/**

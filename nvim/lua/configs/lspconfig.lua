@@ -18,10 +18,6 @@ local on_attach = function (client, bufnr)
     keymap('n','gn','<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     keymap('n','ga','<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
     keymap('n','gf','<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
-
-    -- highlight symbol under cursor
-    -- ********** I dont know if this should be here, i think it only uses treesitter, so i am limiting this functionality to only when i have an lsp?
-    -- require('illuminate').on_attach(client)
 end
 
 -- server configs

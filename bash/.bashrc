@@ -51,5 +51,6 @@ alias v='nvim'
 alias vdot='nvim ~/repos/dotfiles/nvim/init.lua'
 alias bdot='nvim ~/repos/dotfiles/bash/.bashrc'
 alias tdot='nvim ~/repos/dotfiles/tmux/tmux.conf'
+alias python='python3'
 
 PATH=$PATH:/usr/local/go/bin

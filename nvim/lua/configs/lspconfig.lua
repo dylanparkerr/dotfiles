@@ -21,7 +21,7 @@ local on_attach = function (client, bufnr)
 
     -- highlight symbol under cursor
     -- ********** I dont know if this should be here, i think it only uses treesitter, so i am limiting this functionality to only when i have an lsp?
-    require('illuminate').on_attach(client)
+    -- require('illuminate').on_attach(client)
 end
 
 -- server configs

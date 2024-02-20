@@ -39,7 +39,8 @@ git_branch() {
 # PS1="\[\033[35m\]\u@\h\[\033[34m\][\w]\[\033[32m\]\$(git_branch)\[\033[37m\]\$ "
 
 # gruvbox themed prompt
-PS1="\[\033[93m\]\u@\h\[\033[92m\][\w]\[\033[91m\]\$(git_branch)\[\033[97m\]\$ "
+# PS1="\[\033[93m\]\u@\h\[\033[92m\][\w]\[\033[91m\]\$(git_branch)\[\033[97m\]\$ "
+PS1="\[\033[92m\]\u@\h\[\033[94m\][\w]\[\033[91m\]\$(git_branch)\[\033[97m\]\$ "
 PS2='>'
 
 export NVM_DIR="$HOME/.nvm"
@@ -54,3 +55,6 @@ alias tdot='nvim ~/repos/dotfiles/tmux/tmux.conf'
 alias python='python3'
 
 PATH=$PATH:/usr/local/go/bin
+
+# export REQUESTS_CA_BUNDLE=/mnt/c/Users/cap8823/dev/windows-certs-2-wsl/all-certificates/A340FE5272235DF17E05A55CD858B8DF3BA3D9EF__CN_Kroger_Root_CA.pem
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt

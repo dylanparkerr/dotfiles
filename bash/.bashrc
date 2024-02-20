@@ -53,6 +53,8 @@ alias vdot='nvim ~/repos/dotfiles/nvim/init.lua'
 alias bdot='nvim ~/repos/dotfiles/bash/.bashrc'
 alias tdot='nvim ~/repos/dotfiles/tmux/tmux.conf'
 alias python='python3'
+alias azrun='mvn clean package && mvn azure-functions:run'
+alias fman='compgen -c | fzf | xargs man'
 
 PATH=$PATH:/usr/local/go/bin
 

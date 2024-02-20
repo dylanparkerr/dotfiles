@@ -20,13 +20,12 @@ sudo apt install -y build-essential npm unzip tmux ripgrep fzf cmake gettext ope
 # cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb #this is for ubuntu/deb based distros
 
 # dotfile sym links
-ln -sf $HOME/repos/dotfiles/scripts/bash/.bashrc $HOME/.bashrc
+ln -sf $HOME/repos/dotfiles/bash/.bashrc $HOME/.bashrc
 ln -sf $HOME/repos/dotfiles/nvim $HOME/.config/nvim
 ln -sf $HOME/repos/dotfiles/lazygit/config.yml $HOME/.config/lazygit/config.yml
 
 
 # tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir $HOME/.config/tmux/
 ln -sf $HOME/repos/dotfiles/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 

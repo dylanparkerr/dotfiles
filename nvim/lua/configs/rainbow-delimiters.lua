@@ -8,14 +8,14 @@ vim.g.rainbow_delimiters = {
         [''] = 'rainbow-delimiters',
         lua = 'rainbow-blocks',
     },
-    highlight = {
-        'RainbowDelimiterYellow',
-        'RainbowDelimiterViolet',
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterCyan',
-        'RainbowDelimiterGreen',
-        'RainbowDelimiterRed',
-        'RainbowDelimiterBlue',
-    },
+    -- highlight = {
+    --     'RainbowDelimiterYellow',
+    --     'RainbowDelimiterViolet',
+    --     'RainbowDelimiterOrange',
+    --     'RainbowDelimiterCyan',
+    --     'RainbowDelimiterGreen',
+    --     'RainbowDelimiterRed',
+    --     'RainbowDelimiterBlue',
+    -- },
     blacklist = {'c', 'cpp'},
 }

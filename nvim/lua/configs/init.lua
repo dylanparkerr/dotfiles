@@ -1,5 +1,5 @@
--- require('configs/onedark') -- has to be loaded first
-require('configs/gruvbox') -- has to be loaded first
+require('configs/onedark') -- has to be loaded first
+-- require('configs/gruvbox') -- has to be loaded first
 require('configs/lualine')
 require('configs/bufferline')
 require('configs/nvim-comment')

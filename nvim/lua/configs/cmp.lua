@@ -32,38 +32,60 @@ cmp.setup({
     },
 
     mapping = {
+        -- (`i` = insert mode, `c` = command mode, `s` = select mode )
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ["<CR>"] = cmp.mapping({
-            i = function(fallback)
-                if cmp.visible() and cmp.get_active_entry() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                else
-                    fallback()
+        -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        -- ["<CR>"] = cmp.mapping({
+        --     i = function(fallback)
+        --         if cmp.visible() and cmp.get_active_entry() then
+        --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        --         else
+        --             fallback()
+        --         end
+        --     end,
+        --     s = cmp.mapping.confirm({ select = true }),
+        --     c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        -- }),
+        -- ['<Tab>'] = cmp.mapping(function(fallback)
+        --     if luasnip.expand_or_jumpable() then
+        --         luasnip.expand_or_jump()
+        --     else
+        --         fallback()
+        --     end
+        -- end, {'i', 's',}),
+        -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+        --     if luasnip.jumpable(-1) then
+        --         luasnip.jump(-1)
+        --     else
+        --         fallback()
+        --     end
+        -- end, {'i', 's'}),
+        -- test new bindings
+        ["<C-y>"] = cmp.mapping({
+            i = function()
+                if cmp.visible() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
                 end
             end,
             s = cmp.mapping.confirm({ select = true }),
             c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         }),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<C-l>'] = cmp.mapping(function()
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            else
-                fallback()
             end
         end, {'i', 's',}),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
+        ['<C-h>'] = cmp.mapping(function()
+            -- maybe check if this should be locally_jumpable or locally_expandable_jumpable
+            if luasnip.locally_jumpable(-1) then
                 luasnip.jump(-1)
-            else
-                fallback()
             end
         end, {'i', 's'}),
     }, --end mappings

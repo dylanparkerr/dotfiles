@@ -55,6 +55,10 @@ alias tdot='nvim ~/repos/dotfiles/tmux/tmux.conf'
 alias python='python3'
 alias azrun='mvn clean package && mvn azure-functions:run'
 alias fman='compgen -c | fzf | xargs man'
+alias note='nvim ~/repos/notes/inbox.md'
+alias notes='nvim ~/repos/notes/inbox.md'
+alias work='nvim ~/work/notes.md'
+alias gb='git branch | fzf | xargs git checkout'
 
 PATH=$PATH:/usr/local/go/bin
 

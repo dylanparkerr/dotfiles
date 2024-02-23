@@ -28,7 +28,6 @@ local plugins = {
 
     --functional
     'lewis6991/impatient.nvim', --speeds up performance by caching compiled plugins
-    -- use 'kyazdani42/nvim-tree.lua'--file tree viewer  ******* TODO probably remove this if the telescope file browser is good **********
     'akinsho/toggleterm.nvim', --integrated terminal
     'terrortylor/nvim-comment', --easier comments
     'windwp/nvim-autopairs', --auto pair ' " { ( [ etc

@@ -1,13 +1,14 @@
 local keymap = function (mode, lhs, rhs, opts, desc)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("keep", opts, {desc = desc}))
 end
+
 local opts = {noremap = true, silent = true}
 
 --leader key for my own commands
 keymap('','<Space>','<Nop>',opts)
 vim.g.mapleader = ' '
 
--- Use alt + hjkl to resize windows
+-- Use alt + arrows to resize windows
 keymap('n','<C-Up>',':resize +2<CR>',opts,'Increase window vertical size')
 keymap('n','<C-Down>',':resize -2<CR>',opts, 'Decrease window vertical size')
 keymap('n','<C-Right>',':vertical resize +2<CR>',opts, 'Increase window horizontal size')
@@ -46,78 +47,41 @@ keymap("v", "<A-k>", ":move '<-2<CR>gv-gv", opts, 'Move current text line up')
 -- Better tabbing
 keymap('v','<A-h>','<gv',opts, 'Indent currently selected line(s)')
 keymap('v','<A-l>','>gv',opts, 'Unindent currently selected line(s)')
---TODO same tabbing for single lines in normal and insert mode for consistency
+
+-- TODO --------
+-- same tabbing for single lines in normal and insert mode for consistency
+-- TODO --------
 
 -- Hold on to yanked word after pasting over highlighted word
 keymap("v", "p", '"_dP', opts)
 
--- better splits
-keymap('n','<leader>sv',':vs<CR>',opts, 'Vertical split')  -- vertical split
-keymap('n','<leader>sh',':split<CR>',opts, 'Horizontal split')  -- horizontal split
-keymap('n','<leader>sc','<C-w>c',opts, 'Close split')  -- close current split
+-- consistent split commands
+keymap('n','<leader>sv',':vs<CR>',opts, 'Vertical split')
+keymap('n','<leader>sh',':split<CR>',opts, 'Horizontal split')
+keymap('n','<leader>sc','<C-w>c',opts, 'Close split')
 
 -- telescope
-keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts, 'Find local file') --find files
-keymap('n','<leader>fg','<cmd>Telescope git_files<cr>',opts, 'Find git file') --find git files
-keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts, 'Find help tag') --find vim help tage
-keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts, 'Find word in current buffer') --fuzzy find in current buffer
-keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts, 'Find word in current project') --fuzzy find in current project
-keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find user command') --switch git projects
-keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker') --switch git projects
-keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts, 'Switch project') --switch git projects
--- keymap('n','gd','<cmd>Telescope lsp_definitions<cr>',opts) --lsp go to definition - shows telescope picker if there are multiple entries
--- keymap('n','gr','<cmd>Telescope lsp_references<cr>',opts) --lsp go to symbol refrences - shows telescope picker if there are multiple entries
--- keymap('n','gi','<cmd>Telescope lsp_implementations<cr>',opts) --lsp go to implementation - shows telescope picker if there are multiple entries
--- keymap('n','gt','<cmd>Telescope lsp_type_definitions<cr>',opts) --lsp go to type definition - shows telescope picker if there are multiple entries
--- keymap('n','gs','<cmd>Telescope lsp_document_symbols<cr>',opts) --lsp list symbols from current buffer
-
---*************THESE KEYBINDS ONLY BIND WHEN AN LSP SERVER ATTACHES TO A BUFFER*****************
---found in configs/lspconfig.lua
-    -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    -- vim.keymap.set('n', '<leader>fm', vim.lsp.buf.formatting, bufopts)
-
--- jump to next or previous highlight of symbol under cursor
--- this binding using ctrl might get problematic, keep an eye on it
-keymap('n', '<C-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts, 'Next ref of word under cursor')
-keymap('n', '<C-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts, 'Previous ref of word under cursor')
+keymap('n','<leader>ff','<cmd>Telescope find_files<cr>',opts, 'Find local file')
+keymap('n','<leader>fg','<cmd>Telescope git_files<cr>',opts, 'Find git file')
+keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts, 'Find help tag')
+keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts, 'Find word in current buffer')
+keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts, 'Find word in current project')
+keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find available user(:) command')
+keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker')
+keymap('n','<leader>fk','<cmd>Telescope keymaps<cr>',opts, 'Find keymaps')
+keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts, 'Switch project')
 
 -- git
-keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts, 'Diff hunk preview')  -- preview change hunk using gitsigns
-keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts, 'Diff full preview') -- custom funtion to toggle Diffview
-keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')  -- custom function to toggle lazygit
-keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')  -- custom function to toggle lazygit
+keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts, 'Diff hunk preview')
+keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts, 'Diff full preview')
+keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')
+keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')
 
 -- specifically toggle term 1 since lazygit spawns on term 9
 keymap("n", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts, 'Toggle terminal')  -- actually maps to ctrl + /
-keymap("t", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts, 'Toggle terminal') -- actually maps to ctrl + /
+keymap("t", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts, 'Toggle terminal')
 
--- Center search results
+-- built in buffer search (/search-term)
 keymap("n", "n", "nzz", opts, 'Next result in buffer search')
 keymap("n", "N", "Nzz", opts, 'Previous result in buffer search')
-
--- Cancel search highlighting with ESC
 keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
-
--- better buffer delete so that nvimtree doesn't resize
-function DeleteCurrentBuffer()
-    local cbn = vim.api.nvim_get_current_buf()
-    local buffers = vim.fn.getbufinfo({buflisted = true})
-    local size = 0
-    local idx = 0
-    for n, e in ipairs(buffers) do
-        size = size + 1
-        if e.bufnr == cbn then
-            idx = n
-        end
-    end
-    if idx == 0 then return end
-    if idx == size then
-        vim.cmd("bprevious")
-    else
-        vim.cmd("bnext")
-    end
-    vim.cmd("bdelete " .. cbn)
-end
-keymap("n", "<leader>bd", "<cmd>lua DeleteCurrentBuffer()<cr>", opts, 'Close current buffer')

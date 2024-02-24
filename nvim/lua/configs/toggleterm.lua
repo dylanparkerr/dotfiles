@@ -12,7 +12,6 @@ require('toggleterm').setup{
     direction = 'horizontal',
     close_on_exit = true, -- close the terminal window when the process exits
     shell = 'bash' -- change the default shell
-    -- shell = 'git-bash' -- change the default shell
 }
 
 -- custom floating term for lazygit

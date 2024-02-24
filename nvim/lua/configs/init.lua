@@ -1,9 +1,10 @@
-require('configs/onedark') -- has to be loaded first
--- require('configs/gruvbox') -- has to be loaded first
+-----------theme-----------
+require('configs/onedark')
+-- require('configs/gruvbox')
+---------------------------
 require('configs/lualine')
 require('configs/bufferline')
 require('configs/nvim-comment')
--- require('configs/nvim-tree') -- *****************TODO remove this if the telescope file browser works well **********************
 require('configs/toggleterm')
 require('configs/treesitter')
 require('configs/cmp')

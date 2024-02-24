@@ -1,7 +1,5 @@
 require('telescope').setup{
     defaults = {
-        -- Default configuration for telescope goes here:
-        -- config_key = value,
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_config = {
@@ -36,21 +34,6 @@ require('telescope').setup{
         }
     }
 }
--- require('telescope').load_extension('fzf')
-require('telescope').load_extension('projects')
-require("telescope").load_extension "file_browser"
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<space>fb",
-  ":Telescope file_browser<CR>",
-  { noremap = true }
-)
-
--- TODO: get this to work
-local mappings = {}
-mappings.grep_current_buff = function ()
-    require("telescope.builtin").current_buffer_fuzzy_find()
-end
-
-return mappings

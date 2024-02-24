@@ -69,7 +69,7 @@ keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts, 'Find word in curre
 keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find available user(:) command')
 keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker')
 keymap('n','<leader>fk','<cmd>Telescope keymaps<cr>',opts, 'Find keymaps')
-keymap('n','<leader>pp','<cmd>Telescope projects<cr>',opts, 'Switch project')
+keymap('n','<leader>fb','<cmd>Telescope file_browser<cr>',opts, 'File browser')
 
 -- git
 keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts, 'Diff hunk preview')

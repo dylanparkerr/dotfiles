@@ -49,6 +49,7 @@ local plugins = {
     {'neovim/nvim-lspconfig'}, --automatically launch and initialize language servers
     {'nvim-treesitter/nvim-treesitter', build=':TSUpdate'}, --better code parsing
     {'RRethy/vim-illuminate'}, --highlight symbol under cursor
+    {'folke/neodev.nvim', opts = {} }, -- neovim lua api completion
 
     -- auto complete and sources
     {'hrsh7th/nvim-cmp'}, --completetion engine

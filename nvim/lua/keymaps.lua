@@ -85,3 +85,5 @@ keymap("t", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts, 'Toggle terminal')
 keymap("n", "n", "nzz", opts, 'Next result in buffer search')
 keymap("n", "N", "Nzz", opts, 'Previous result in buffer search')
 keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
+
+

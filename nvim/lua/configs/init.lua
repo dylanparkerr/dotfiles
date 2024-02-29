@@ -19,4 +19,3 @@ require('configs/fidget')
 require('configs/treesitter')
 -- require('configs/illuminate')
 require('configs/rainbow-delimiters')
-

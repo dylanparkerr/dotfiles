@@ -41,3 +41,11 @@ set.wrap=false                          -- Display long lines as just one line
 
 -- when entering terminal windows, enter insert mode
 vim.api.nvim_exec([[ autocmd BufWinEnter,WinEnter term://* startinsert ]], false)
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+

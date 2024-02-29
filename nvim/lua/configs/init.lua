@@ -13,11 +13,10 @@ require('configs/which-key')
 require('configs/diffview')
 require('configs/telescope')
 --------lsp & text---------
-require('configs/mason')
 require('configs/lspconfig')
 require('configs/cmp')
 require('configs/fidget')
 require('configs/treesitter')
-require('configs/illuminate')
+-- require('configs/illuminate')
 require('configs/rainbow-delimiters')
 

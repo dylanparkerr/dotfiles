@@ -4,18 +4,6 @@ local dashboard = require("alpha.themes.dashboard")
 -- padding at the top of the page
 dashboard.config.layout[1] = { type = "padding", val = 12 }
 
--- -- header text
--- dashboard.section.header.val = {
---     "                                                     ",
---     "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
---     "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
---     "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
---     "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
---     "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
---     "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
---     "                                                     ",
--- }
-
 -- header color
 dashboard.section.header.opts.hl = 'String'
 

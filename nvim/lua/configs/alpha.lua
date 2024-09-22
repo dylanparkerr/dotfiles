@@ -11,7 +11,8 @@ dashboard.section.header.opts.hl = 'String'
 dashboard.section.buttons.val = {
     dashboard.button( "e", "  > new file" , ":ene <BAR> startinsert <CR>", {}),
     dashboard.button( "space ff", "🔍 > find file", ":Telescope find_files<CR>", {}),
-    dashboard.button( "space pp", "  > find project"   , ":Telescope projects<CR>", {}),
+    dashboard.button( "space fp", "  > find in project"   , ":Telescope live_grep<CR>", {}),
+    dashboard.button( "space fb", "  > file browser"   , ":Telescope file_browser<CR>", {}),
     dashboard.button( "space fh", "⁇  > find help" , ":Telescope help_tags<cr>", {}),
 }
 

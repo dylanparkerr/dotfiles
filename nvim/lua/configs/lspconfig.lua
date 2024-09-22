@@ -40,6 +40,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- i think this looks right but this could cause issues in the future if multiple clients are attached and not in the order i need
         -- not going to over engineer this for now until the need arises
         -- setting it to work only for gopls right now
+        --
+        -- this is me coming back after something like a year.. 
+        -- i dont think this needs to be a for loop
+        -- i can just format the current buffer..
+        -- if it supports it.. but not sure why that if statement didnt work
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
             callback = function()
@@ -120,6 +125,9 @@ local ensure_installed = vim.tbl_keys(servers)
 
 
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+-- again me comming back after like a year..
+-- i think that mason-lspconfig wraps the regular lspconfig plugin
+-- so its still needed
 require('mason-lspconfig').setup {
     handlers = {
         function(server_name)

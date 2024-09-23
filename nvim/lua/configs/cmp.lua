@@ -10,7 +10,9 @@ cmp.setup({
         ------------------------------------
         -- disable in telescope prompts
         local buftype = vim.api.nvim_buf_get_option(0, "buftype")
-        if buftype == "prompt" then return false end
+        if buftype == "prompt"
+            then return false
+        end
         ------------------------------------
 
         -- disable completion in comments
@@ -21,7 +23,6 @@ cmp.setup({
         else
             return not context.in_treesitter_capture("comment")
             and not context.in_syntax_group("Comment")
-            -- and buftype == "prompt"
         end
         -----------------------------------
     end,
@@ -33,7 +34,7 @@ cmp.setup({
     },
 
     mapping = {
-        -- (`i` = insert mode, `c` = command mode, `s` = select mode )
+        -- `i` = insert mode, `c` = command mode, `s` = select mode 
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -42,33 +43,6 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        -- ["<CR>"] = cmp.mapping({
-        --     i = function(fallback)
-        --         if cmp.visible() and cmp.get_active_entry() then
-        --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-        --         else
-        --             fallback()
-        --         end
-        --     end,
-        --     s = cmp.mapping.confirm({ select = true }),
-        --     c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-        -- }),
-        -- ['<Tab>'] = cmp.mapping(function(fallback)
-        --     if luasnip.expand_or_jumpable() then
-        --         luasnip.expand_or_jump()
-        --     else
-        --         fallback()
-        --     end
-        -- end, {'i', 's',}),
-        -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-        --     if luasnip.jumpable(-1) then
-        --         luasnip.jump(-1)
-        --     else
-        --         fallback()
-        --     end
-        -- end, {'i', 's'}),
-        -- test new bindings
         ["<C-y>"] = cmp.mapping({
             i = function()
                 if cmp.visible() then
@@ -98,6 +72,8 @@ cmp.setup({
         { name = 'buffer', keyword_length=5 },
     },
 
+    -- this annotation gets read by lua_ls and removes the ghost text about missing fields
+    ---@diagnostic disable-next-line: missing-fields
     formatting = {
         format = lspkind.cmp_format({
             menu={
@@ -105,33 +81,6 @@ cmp.setup({
                 luasnip = '[luasnip]',
                 path = '[path]',
                 buffer = '[buffer]',
-            },
-            symbol_map = {
-                Text = "",
-                Method = "",
-                Function = "",
-                Constructor = "",
-                Field = "🠶",
-                Variable = "",
-                Class = "∴",
-                Interface = "",
-                Module = "",
-                Property = "🠶",
-                Unit = "塞",
-                Value = "",
-                Enum = "",
-                Keyword = "",
-                Snippet = "",
-                Color = "",
-                File = "",
-                Reference = "",
-                Folder = "",
-                EnumMember = "",
-                Constant = "",
-                Struct = "פּ",
-                Event = "",
-                Operator = "",
-                TypeParameter = ""
             },
         })
     },

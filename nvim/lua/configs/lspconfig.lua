@@ -7,12 +7,15 @@
 -- LspAttach is a special event (see :help LspAttach) that triggers when an LSP server attaches to a buffer
 -- so these mappings will be set
 vim.api.nvim_create_autocmd('LspAttach', {
+
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+
     callback = function(event)
-        -- these makes the maps easier
+        -- keybind map helper
         local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
+
         local telescope = require('telescope.builtin')
 
         map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')           --lsp go to definition - shows telescope picker if there are multiple entries
@@ -73,14 +76,14 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 
 
 -- ************** NOTE **************
--- if i remove masnon/masnon-lsp-config in the future this will need to be refactored
+-- if i remove mason/masnon-lsp-config in the future this will need to be refactored
 --
 -- this is a custum object from TJ that we will iterate over and setup
 -- key names(servers) like lua_ls correspond to the names of lspconfig objects that have a setup function
 -- e.g require('lspconfig').lua_ls.setup() is how I used to do this
--- #addserver
+-- servers and their configs here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
--- to uninstall a server use :Mason and X on the server
+-- to uninstall a server use :Mason and X on the server, and remove from this table
 local servers = {
     lua_ls = {
         filetypes = { 'lua' }, -- had to add this as luals was attaching to java files, not sure why
@@ -118,16 +121,15 @@ local servers = {
     -- bashls = {},
     -- rust_analyzer = {},
 }
+
+-- ensure that the servers defined above are installed by using mason tool installer
 local ensure_installed = vim.tbl_keys(servers)
 -- vim.list_extend(ensure_installed, {
 --     'google-java-format', -- figure this out later
 -- })
-
-
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
--- again me comming back after like a year..
--- i think that mason-lspconfig wraps the regular lspconfig plugin
--- so its still needed
+
+-- mason-lspconfig here makes sure that servers are setup
 require('mason-lspconfig').setup {
     handlers = {
         function(server_name)
@@ -139,6 +141,7 @@ require('mason-lspconfig').setup {
                 -- This handles overriding only values explicitly passed
                 -- by the server configuration above. Useful when disabling
                 -- certain features of an LSP (for example, turning off formatting for tsserver)
+                -- the inclusion of the capabilites table from above makes sure nvim-cmp is added
                 capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
             }
         end,

@@ -27,6 +27,7 @@ local plugins = {
     {'lukas-reineke/indent-blankline.nvim', main='ibl', opts={}},  --indent guidelines
     {'j-hui/fidget.nvim'},  --lsp loading indicator
     {'goolord/alpha-nvim'},  --startup screen
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     -- functional
     {'lewis6991/impatient.nvim'}, --speeds up performance by caching compiled plugins

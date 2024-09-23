@@ -1,6 +1,7 @@
 -----------theme-----------
-require('configs/onedark')
+-- require('configs/onedark')
 -- require('configs/gruvbox')
+require('configs/catppuccin')
 ----------general----------
 require('configs/lualine')
 require('configs/bufferline')

@@ -10,7 +10,7 @@ require('configs/toggleterm')
 require('configs/nvim-autopairs')
 require('configs/mini')
 require('configs/alpha')
-require('configs/which-key')
+-- require('configs/which-key')
 require('configs/diffview')
 require('configs/telescope')
 --------lsp & text---------

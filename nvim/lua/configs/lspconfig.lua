@@ -114,7 +114,7 @@ local servers = {
         capabilities = {}
     },
     pyright = {},
-    tsserver = {},
+    -- tsserver = {},
     gopls = {},
     jdtls = {},
     terraformls = {},

@@ -6,6 +6,10 @@ format = '$all'
 [directory]
 read_only = " 󰌾"
 truncation_length = 100
+style = "blue"
+
+[git_branch]
+symbol = " "
 style = "mauve"
 
 [git_commit]
@@ -48,9 +52,6 @@ symbol = " "
 [fossil_branch]
 symbol = " "
 
-[git_branch]
-symbol = " "
-style = "peach"
 
 [golang]
 symbol = " "

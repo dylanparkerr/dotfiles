@@ -14,7 +14,7 @@ require('configs/alpha')
 require('configs/diffview')
 require('configs/telescope')
 --------lsp & text---------
-require('configs/lspconfig')
+require('configs/lsp')
 require('configs/cmp')
 require('configs/fidget')
 require('configs/treesitter')

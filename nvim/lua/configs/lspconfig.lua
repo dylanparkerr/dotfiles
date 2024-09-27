@@ -114,19 +114,18 @@ local servers = {
         capabilities = {}
     },
     pyright = {},
-    -- tsserver = {},
     gopls = {},
-    jdtls = {},
-    terraformls = {},
-    -- bashls = {},
-    -- rust_analyzer = {},
 }
 
 -- ensure that the servers defined above are installed by using mason tool installer
 local ensure_installed = vim.tbl_keys(servers)
--- vim.list_extend(ensure_installed, {
---     'google-java-format', -- figure this out later
--- })
+vim.list_extend(ensure_installed, {
+    -- 'google-java-format', -- figure this out later
+    -- we want this here instead of in the servers bc it has a different setup
+    'jdtls',
+    'java-debug-adapter',
+    'java-test'
+})
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
 -- mason-lspconfig here makes sure that servers are setup

@@ -15,6 +15,7 @@ only_detached = false
 disabled = true
 
 [aws]
+disabled = true
 symbol = "  "
 
 [buf]

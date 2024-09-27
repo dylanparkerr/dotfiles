@@ -4,18 +4,6 @@ local dashboard = require("alpha.themes.dashboard")
 -- padding at the top of the page
 dashboard.config.layout[1] = { type = "padding", val = 12 }
 
--- -- header text
--- dashboard.section.header.val = {
---     "                                                     ",
---     "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
---     "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
---     "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
---     "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
---     "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
---     "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
---     "                                                     ",
--- }
-
 -- header color
 dashboard.section.header.opts.hl = 'String'
 
@@ -23,7 +11,8 @@ dashboard.section.header.opts.hl = 'String'
 dashboard.section.buttons.val = {
     dashboard.button( "e", "  > new file" , ":ene <BAR> startinsert <CR>", {}),
     dashboard.button( "space ff", "🔍 > find file", ":Telescope find_files<CR>", {}),
-    dashboard.button( "space pp", "  > find project"   , ":Telescope projects<CR>", {}),
+    dashboard.button( "space fp", "  > find in project"   , ":Telescope live_grep<CR>", {}),
+    dashboard.button( "space fb", "  > file browser"   , ":Telescope file_browser<CR>", {}),
     dashboard.button( "space fh", "⁇  > find help" , ":Telescope help_tags<cr>", {}),
 }
 

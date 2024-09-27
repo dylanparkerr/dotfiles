@@ -27,6 +27,7 @@ local plugins = {
     {'lukas-reineke/indent-blankline.nvim', main='ibl', opts={}},  --indent guidelines
     {'j-hui/fidget.nvim'},  --lsp loading indicator
     {'goolord/alpha-nvim'},  --startup screen
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     -- functional
     {'lewis6991/impatient.nvim'}, --speeds up performance by caching compiled plugins
@@ -43,11 +44,13 @@ local plugins = {
     {'nvim-telescope/telescope-file-browser.nvim'}, --switched to this from nvim-tree
 
     -- lsp
-    {'williamboman/mason.nvim'}, -- installer for lsp servers, dap servers, linters, and formaters
+    {'williamboman/mason.nvim', opts={ui = {border = 'rounded'}}}, -- installer for lsp servers, dap servers, linters, and formaters
     {'williamboman/mason-lspconfig.nvim'}, --shim to close the gaps between mason and lspconfig
+    {'WhoIsSethDaniel/mason-tool-installer.nvim'}, -- automatically installs lsp servers
     {'neovim/nvim-lspconfig'}, --automatically launch and initialize language servers
     {'nvim-treesitter/nvim-treesitter', build=':TSUpdate'}, --better code parsing
     {'RRethy/vim-illuminate'}, --highlight symbol under cursor
+    {'folke/neodev.nvim', opts = {} }, -- neovim lua api completion
 
     -- auto complete and sources
     {'hrsh7th/nvim-cmp'}, --completetion engine
@@ -59,7 +62,7 @@ local plugins = {
     -- snipets
     {'L3MON4D3/LuaSnip'}, --snippet engine
     {'saadparwaiz1/cmp_luasnip'}, --luasnip as cmp completion source
-    -- {'rafamadriz/friendly-snippets'}, --a bunch of snippets
+    {'rafamadriz/friendly-snippets'}, --a bunch of snippets
 
     -- git
     {'lewis6991/gitsigns.nvim', opts={}}, --visual git change indicators in gutters

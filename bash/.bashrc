@@ -64,3 +64,5 @@ PATH=$PATH:/usr/local/go/bin
 
 # export REQUESTS_CA_BUNDLE=/mnt/c/Users/cap8823/dev/windows-certs-2-wsl/all-certificates/A340FE5272235DF17E05A55CD858B8DF3BA3D9EF__CN_Kroger_Root_CA.pem
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+eval "$(starship init bash)"

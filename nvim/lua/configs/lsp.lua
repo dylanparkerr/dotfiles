@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
         map('gf', vim.lsp.buf.format, '[g]et code [f]ormat')
         map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame token')
+        map('<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end, '[f]ind [m]method')
 
         -- some nice highlighting
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -115,14 +116,14 @@ local servers = {
     },
     pyright = {},
     gopls = {},
+    jdtls = {},
 }
 
 -- ensure that the servers defined above are installed by using mason tool installer
 local ensure_installed = vim.tbl_keys(servers)
 vim.list_extend(ensure_installed, {
     -- 'google-java-format', -- figure this out later
-    -- we want this here instead of in the servers bc it has a different setup
-    'jdtls',
+    -- these are external tools, not lsps
     'java-debug-adapter',
     'java-test'
 })
@@ -133,16 +134,26 @@ require('mason-lspconfig').setup {
     handlers = {
         function(server_name)
             local server = servers[server_name] or {}
-            require('lspconfig')[server_name].setup {
-                cmd = server.cmd,
-                settings = server.settings,
-                filetypes = server.filetypes,
-                -- This handles overriding only values explicitly passed
-                -- by the server configuration above. Useful when disabling
-                -- certain features of an LSP (for example, turning off formatting for tsserver)
-                -- the inclusion of the capabilites table from above makes sure nvim-cmp is added
-                capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
-            }
+            if server_name ~= 'jdtls' then -- of course jdtls has to be configured in a special way *eye roll*
+                require('lspconfig')[server_name].setup {
+                    cmd = server.cmd,
+                    settings = server.settings,
+                    filetypes = server.filetypes,
+                    -- This handles overriding only values explicitly passed
+                    -- by the server configuration above. Useful when disabling
+                    -- certain features of an LSP (for example, turning off formatting for tsserver)
+                    -- the inclusion of the capabilites table from above makes sure nvim-cmp is added
+                    capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
+                }
+            end
         end,
     },
 }
+
+-- Globally configure all LSP floating preview popups (like hover, signature help, etc) 
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or "rounded" -- Set border to rounded
+    return orig_open_floating_preview(contents, syntax, opts, ...)
+end

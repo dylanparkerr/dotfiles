@@ -27,7 +27,7 @@ local plugins = {
     {'lukas-reineke/indent-blankline.nvim', main='ibl', opts={}},  --indent guidelines
     {'j-hui/fidget.nvim'},  --lsp loading indicator
     {'goolord/alpha-nvim'},  --startup screen
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 }, --theme
 
     -- functional
     {'lewis6991/impatient.nvim'}, --speeds up performance by caching compiled plugins
@@ -48,6 +48,10 @@ local plugins = {
     {'williamboman/mason-lspconfig.nvim'}, --shim to close the gaps between mason and lspconfig
     {'WhoIsSethDaniel/mason-tool-installer.nvim'}, -- automatically installs lsp servers
     {'neovim/nvim-lspconfig'}, --automatically launch and initialize language servers
+    {'mfussenegger/nvim-dap'}, -- the debug adapter protocol client implentation for neovim
+    {'mfussenegger/nvim-jdtls', ft='java', dependencies = {"mfussenegger/nvim-dap"}}, --makes setup of jdtls(eclipse java language server) not a pain
+    {'rcarriga/nvim-dap-ui', dependencies = {"nvim-neotest/nvim-nio"}},              -- TODO: config
+    {'theHamsta/nvim-dap-virtual-text'},   -- TODO:config
     {'nvim-treesitter/nvim-treesitter', build=':TSUpdate'}, --better code parsing
     {'RRethy/vim-illuminate'}, --highlight symbol under cursor
     {'folke/neodev.nvim', opts = {} }, -- neovim lua api completion

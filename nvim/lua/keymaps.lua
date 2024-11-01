@@ -33,9 +33,9 @@ keymap('n','<S-l>',':bnext<CR>',opts, 'Move to next buffer')
 keymap('n','<S-h>',':bprevious<CR>',opts, 'Move to previous buffer')
 
 -- Alternate ways to save and exit
-keymap('n','<C-s>',':w<CR>',opts, 'Save')
-keymap('n','<C-q>',':q!<CR>',opts, 'Quit')
-keymap('n','<C-x>',':wq<CR>',opts, 'Save and quit')
+-- keymap('n','<C-s>',':w<CR>',opts, 'Save')
+-- keymap('n','<C-q>',':q!<CR>',opts, 'Quit')
+-- keymap('n','<C-x>',':wq<CR>',opts, 'Save and quit')
 
 -- Move visual lines with Alt+j and Alt+k
 keymap('n', '<A-j>', ':move .+1<CR>==', opts, 'Move current text line down')
@@ -66,10 +66,10 @@ keymap('n','<leader>fg','<cmd>Telescope git_files<cr>',opts, 'Find git file')
 keymap('n','<leader>fh','<cmd>Telescope help_tags<cr>',opts, 'Find help tag')
 keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',opts, 'Find word in current buffer')
 keymap('n','<leader>fp','<cmd>Telescope live_grep<cr>',opts, 'Find word in current project')
-keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find available user(:) command')
-keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker')
-keymap('n','<leader>fk','<cmd>Telescope keymaps<cr>',opts, 'Find keymaps')
 keymap('n','<leader>fb','<cmd>Telescope file_browser<cr>',opts, 'File browser')
+keymap('n','<leader>ft','<cmd>Telescope builtin<cr>',opts, 'Find telescope picker')
+keymap('n','<leader>fu','<cmd>Telescope commands<cr>',opts, 'Find available user(:) command')
+keymap('n','<leader>fk','<cmd>Telescope keymaps<cr>',opts, 'Find keymaps')
 
 -- git
 keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts, 'Diff hunk preview')

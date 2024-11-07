@@ -26,7 +26,7 @@ local bundles = {
 
 -- Needed for running/debugging unit tests
 -- TODO: *************************************** uncomment when I need this ***************************************
--- vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n"))
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", true), "\n")) -- lsp said to change 1 to true
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {

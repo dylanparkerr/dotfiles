@@ -1,3 +1,11 @@
+local keymap = function (mode, lhs, rhs, opts, desc)
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("keep", opts, {desc = desc}))
+end
+
+
+
+
+
 -- JDTLS (Java LSP) configuration
 local home = vim.env.HOME -- Get the home directory
 
@@ -6,12 +14,21 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/jdtls-workspace/" .. project_name
 
 local system_os = ""
+local java_11
+local java_17
+local java_21
 
 -- Determine OS
 if vim.fn.has("mac") == 1 then
 	system_os = "mac"
+    java_11 ="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
+    java_17 ="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home"
+    java_21 ="/Library/Java/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home"
 elseif vim.fn.has("unix") == 1 then
 	system_os = "linux"
+    java_11 ="/usr/lib/jvm/java-11-amazon-corretto"
+    java_17 ="/usr/lib/jvm/java-17-amazon-corretto"
+    java_21 ="/usr/lib/jvm/java-21-amazon-corretto"
 elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	system_os = "win"
 else
@@ -67,7 +84,8 @@ local config = {
 		java = {
 			-- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
             -- TODO find a way to make this work with Mac
-			home = "/usr/lib/jvm/java-17-openjdk-amd64",
+			-- home = "/usr/lib/jvm/java-17-openjdk-amd64",
+            home = java_21,
 			eclipse = {
 				downloadSources = true,
 			},
@@ -75,17 +93,17 @@ local config = {
 				updateBuildConfiguration = "interactive",
 				-- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
 				runtimes = {
-					-- {
-					-- 	name = "JavaSE-11",
-					-- 	path = "/usr/lib/jvm/java-11-openjdk-amd64",
-					-- },
+					{
+						name = "JavaSE-11",
+						path = java_11,
+					},
 					{
 						name = "JavaSE-17",
-						path = "/usr/lib/jvm/java-17-openjdk-amd64",
+						path = java_17,
 					},
 					{
 						name = "JavaSE-21",
-						path = "/usr/lib/jvm/java-21-amazon-corretto",
+						path = java_21,
 					},
 				},
 			},

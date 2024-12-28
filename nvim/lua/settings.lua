@@ -6,7 +6,7 @@ set.mouse='a'                           -- Enable your mouse
 set.splitbelow=true                     -- Horizontal splits will automatically be below
 set.splitright=true                     -- Vertical splits will automatically be to the right
 set.conceallevel=0                      -- So that I can see `` in markdown files
-set.background='dark'                   -- tell vim what the background color looks like
+set.background='dark'                   -- Tell vim what the background color looks like
 set.showtabline=2                       -- Always show tabs
 set.backup=false                        -- Do not save backup
 set.swapfile=false                      -- Do not make swap file
@@ -34,6 +34,7 @@ set.autoindent=true                     -- New lines inherit the indent of prev 
 set.shiftround=true                     -- When shifting lines, round the indentation to the nearest multiple of shiftwidth
 
 --lines
+-- set.relativenumber=true                 -- Relative line numbers
 set.number=true                         -- Line numbers
 set.numberwidth=4                       -- columns used for the line number
 set.scrolloff=10                        -- start scrolling when 10 lines from top or bottom

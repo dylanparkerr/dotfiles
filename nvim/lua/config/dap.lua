@@ -20,23 +20,24 @@ end
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 dap.configurations.java = {
     {
-        name = "Debug Launch (2GB)";
+        name = "Spotlight (2GB)";
         type = "java";
         request = "launch";
-        vmArgs = "".."-Xmx2g"
-    },
-    -- {
-    --     name = "Debug Attach (8000)";
-    --     type = "java";
-    --     request = "attach";
-    --     hostName = "127.0.0.1";
-    --     port = 8000;
-    -- },
-    {
-        name = "Debug Attach (5005)";
-        type = "java";
-        request = "attach";
-        hostName = "127.0.0.1";
-        port = 5005;
+        mainClass = 'cfa.spotlight.TestApplication';
+        -- vmArgs = {"-Xmx2g","-Dspring-boot.run.profiles=global-defaults,test-environment,api,local,local-api,api-local,local-socailidm,dylan"}
+        vmArgs = "".."-Xmx2g".." -Dspring-boot.run.profiles=global-defaults,test-environment,api,local,local-api,api-local,local-socailidm,dylan";
     },
 }
+
+dap.configurations.typescript = {
+    {
+        name = 'Typescript',
+        type = 'pwa-node',
+		request = 'launch',
+		program = '${file}',
+		cwd = '${workspaceFolder}',
+    }
+}
+
+-- plugin to do it for go
+require('dap-go').setup()

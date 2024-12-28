@@ -125,7 +125,8 @@ vim.list_extend(ensure_installed, {
     -- 'google-java-format', -- figure this out later
     -- these are external tools, not lsps
     'java-debug-adapter',
-    'java-test'
+    'java-test',
+    'delve'
 })
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

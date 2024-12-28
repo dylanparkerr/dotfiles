@@ -1,0 +1,23 @@
+-- -- local M = {}
+-- local ts = vim.treesitter
+-- local pl = require('plenary')
+--
+-- local jump_next = function ()
+--     -- local query = ts.query.parse('(method_declaration(identifier)@name)@func')
+--     local query = ts.query.parse('lua','(function_definition)')
+--     print(vim.inspect(query))
+--     -- local list = ts.query.get('lua', query)
+--     --
+--     -- for _,value in ipairs(list) do
+--     --    print(value)
+--     -- end
+--     print('hello world')
+-- end
+--
+-- local jump_prev = function()
+--     print('prev')
+-- end
+--
+-- jump_next()
+--
+-- -- return M

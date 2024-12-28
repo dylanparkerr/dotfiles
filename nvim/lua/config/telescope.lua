@@ -7,6 +7,7 @@ require('telescope').setup{
                 prompt_position = "top",
             },
         },
+        path_display = {"truncate"},
         mappings = {
             i = {
                 -- map actions.which_key to <C-h> (default: <C-/>)
@@ -17,13 +18,9 @@ require('telescope').setup{
         }
     },
     pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
+        find_files = {
+            hidden = true
+        },
     },
     extensions = {
         fzf = {                              -- these are the defaults
@@ -35,5 +32,4 @@ require('telescope').setup{
     }
 }
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('file_browser')
-
+require('telescope').load_extension('dap')

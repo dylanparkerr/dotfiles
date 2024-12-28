@@ -76,6 +76,7 @@ keymap('n','<leader>dp','<cmd>Gitsigns preview_hunk<cr>',opts, 'Diff hunk previe
 keymap('n','<leader>dv','<cmd>lua DiffviewToggle()<cr>',opts, 'Diff full preview')
 keymap("n", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')
 keymap("t", "<C-g>", "<cmd>lua Lazygit_toggle()<CR>", opts, 'Toggle Lazygit')
+keymap('n', '<leader>tb', function() require('gitsigns').toggle_current_line_blame(); end, opts, 'Toggle git blame')
 
 -- specifically toggle term 1 since lazygit spawns on term 9
 keymap("n", "<C-_>", "<cmd>ToggleTerm 1<CR>", opts, 'Toggle terminal')  -- actually maps to ctrl + /
@@ -86,4 +87,16 @@ keymap("n", "n", "nzz", opts, 'Next result in buffer search')
 keymap("n", "N", "Nzz", opts, 'Previous result in buffer search')
 keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
 
-
+-- debugging
+keymap('n', '<leader>bb', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts, 'Toggle breakpoint')
+keymap('n', '<leader>bc', "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", opts, 'Toggle condition breakpoint')
+keymap('n', '<leader>bl', "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", opts, 'Toggle breakpoint log')
+keymap('n', '<leader>br', "<cmd>lua require'dap'.clear_breakpoints()<cr>", opts, 'Clear breakpoints')
+keymap('n', '<leader>ba', "<cmd>Telescope dap list_breakpoints<cr>", opts, 'List breakpoints')
+keymap("n", '<leader>di', function() require "dap.ui.widgets".hover() end, opts, "Debug information")
+keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts, 'Debug - continue')
+keymap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", opts, 'Debug - step over')
+keymap("n", "<leader>dl", "<cmd>lua require'dap'.step_into()<cr>", opts, 'Debug - step into')
+keymap("n", "<leader>dh", "<cmd>lua require'dap'.step_out()<cr>", opts, 'Debug - step out')
+keymap("n", '<leader>dd', function() require('dap').disconnect(); require('dapui').close(); end, opts, 'Debug detatch')
+keymap("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end, opts, 'Debug terminate')

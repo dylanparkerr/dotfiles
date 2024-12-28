@@ -20,36 +20,35 @@ local plugins = {
     {'kyazdani42/nvim-web-devicons'},                               -- fancy icons - requires a patched font
     {'navarasu/onedark.nvim'},                                      -- theme
     {'ellisonleao/gruvbox.nvim'},                                   -- theme
-    {'catppuccin/nvim', name = 'catppuccin', priority = 1000 },     -- theme
+    {'catppuccin/nvim'},                                            -- theme
     {'nvim-lualine/lualine.nvim'},                                  -- status bar at the bottom
     {'akinsho/bufferline.nvim'},                                    -- text buffers as tabs
-    -- {'lukas-reineke/indent-blankline.nvim', main='ibl', opts={}},   -- indent guidelines
     {'j-hui/fidget.nvim'},                                          -- lsp loading indicator
     {'goolord/alpha-nvim'},                                         -- startup screen
+    -- {'lukas-reineke/indent-blankline.nvim', main='ibl', opts={}},-- indent guidelines
 
     -- functional
-    {'akinsho/toggleterm.nvim'},    -- integrated terminal
-    {'terrortylor/nvim-comment'},   -- easier comments
-    {'echasnovski/mini.nvim'},      -- add/delete/replace ' " { ( [ etc around things
-    {'stevearc/oil.nvim'},          -- edit files as a buffer
-    {'ThePrimeagen/harpoon',branch='harpoon2'},       -- mark and jump to files
+    {'akinsho/toggleterm.nvim'},                    -- integrated terminal *** probably dont need this now that i have tmux
+    {'terrortylor/nvim-comment'},                   -- easier comments
+    {'echasnovski/mini.nvim'},                      -- add/delete/replace ' " { ( [ etc around things
+    {'stevearc/oil.nvim'},                          -- edit files as a buffer
+    {'ThePrimeagen/harpoon',branch='harpoon2'},     -- mark and jump to files
 
     -- telescope
     {'nvim-lua/plenary.nvim'},                                  -- used by a lot of stuff
     {'nvim-telescope/telescope.nvim'},                          -- the goated fuzzy finder
     {'nvim-telescope/telescope-fzf-native.nvim', build='make'}, -- faster searching
-    -- {'nvim-telescope/telescope-file-browser.nvim'},          -- switched to this from nvim-tree
-    {'nvim-telescope/telescope-dap.nvim'},                      -- switched to this from nvim-tree
+    {'nvim-telescope/telescope-dap.nvim'},                      -- search break points
 
     -- lsp
     {'williamboman/mason.nvim', opts={ui = {border = 'rounded'}}},                      -- installer for lsp servers, dap servers, linters, and formaters
     {'williamboman/mason-lspconfig.nvim'},                                              -- shim to close the gaps between mason and lspconfig
-    {'WhoIsSethDaniel/mason-tool-installer.nvim'},                                      -- automatically installs lsp servers
+    {'WhoIsSethDaniel/mason-tool-installer.nvim'},                                      -- automatically installs external programs like lsp servers
     {'neovim/nvim-lspconfig'},                                                          -- automatically launch and initialize language servers
-    -- {'nvim-treesitter/nvim-treesitter', build=':TSUpdate'},                          -- better code parsing
-    {'RRethy/vim-illuminate'},                                                          -- highlight symbol under cursor
-    {'folke/neodev.nvim', opts = {} },                                                  -- neovim lua api completion
     {'mfussenegger/nvim-jdtls', ft='java', dependencies = {"mfussenegger/nvim-dap"}},   -- makes setup of jdtls(eclipse java language server) not a pain
+    {'nvim-treesitter/nvim-treesitter', build=':TSUpdate'},                             -- abstraction layer for treesitter config
+    {'folke/neodev.nvim', opts = {} },                                                  -- neovim lua api completion
+    {'RRethy/vim-illuminate'},                                                          -- highlight symbol under cursor
 
     -- dap
     {'mfussenegger/nvim-dap'},                                          -- the debug adapter protocol client implentation for neovim
@@ -74,4 +73,7 @@ local plugins = {
     {'sindrets/diffview.nvim'},             -- tabgroup for viewing git changes
 }
 
-require('lazy').setup(plugins, {ui={border='rounded'}})
+require('lazy').setup(
+    plugins,
+    {ui={border='rounded'}}
+)

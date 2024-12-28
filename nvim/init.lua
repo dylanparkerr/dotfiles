@@ -5,7 +5,7 @@
 --  \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\
 --   \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/
 
-require('settings') -- nvim base settings
-require('keymaps')  -- nvim and plugin keymaps
+require('settings') -- base settings
+require('keymaps')  -- keymaps
 require('plugins')  -- install plugings
-require('config')  -- configure plugins
+require('config')   -- configure plugins

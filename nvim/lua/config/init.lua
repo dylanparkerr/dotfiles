@@ -1,11 +1,9 @@
 -----------theme-----------
--- require('config/onedark')
--- require('config/gruvbox')
 require('config/catppuccin')
 ----------general----------
 require('config/lualine')
 require('config/bufferline')
-require('config/nvim-comment')
+-- require('config/nvim-comment')
 require('config/toggleterm')
 require('config/harpoon')
 require('config/mini')

@@ -34,8 +34,9 @@ set.autoindent=true                     -- New lines inherit the indent of prev 
 set.shiftround=true                     -- When shifting lines, round the indentation to the nearest multiple of shiftwidth
 
 --lines
--- set.relativenumber=true                 -- Relative line numbers
 set.number=true                         -- Line numbers
+-- set.relativenumber=true                 -- Relative line numbers
+-- set.statuscolumn="%=%{v:lnum}|%{v:relnum}" --playing around with absolute and relative line numbers
 set.numberwidth=4                       -- columns used for the line number
 set.scrolloff=10                        -- start scrolling when 10 lines from top or bottom
 set.wrap=false                          -- Display long lines as just one line

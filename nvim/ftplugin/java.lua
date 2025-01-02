@@ -177,5 +177,17 @@ config["on_attach"] = function(client, bufnr)
 	require("jdtls.dap").setup_dap_main_class_configs()
 end
 
+vim.keymap.set("n", '<leader>tc', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_class();
+  end
+end)
+
+vim.keymap.set("n", '<leader>tm', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_nearest_method();
+  end
+end)
+
 -- This starts a new client & server, or attaches to an existing client & server based on the `root_dir`.
 jdtls.start_or_attach(config)

@@ -29,6 +29,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame token')
         map('<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end, '[f]ind [m]method')
 
+        vim.keymap.set('v', 'ga', vim.lsp.buf.code_action, {})
+
         -- some nice highlighting
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -56,7 +58,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 local clients = vim.lsp.get_active_clients({ bufnr = event.buf })
                 for _, client in ipairs(clients) do
                     -- if client.supports_method('textDocument/formatting')  then
-                    if client.name == 'gopls' then
+                    if client.name == 'gopls' or client.name == 'jsonls' then
                         vim.lsp.buf.format({ async = true })
                         break -- Stop after finding the first client that supports formatting
                     end
@@ -125,8 +127,8 @@ vim.list_extend(ensure_installed, {
     -- 'google-java-format', -- figure this out later
     -- these are external tools, not lsps
     'java-debug-adapter',
-    'java-test',
-    'delve'
+    'java-test', -- do i need this if i have the java-debug-adapter?
+    'delve', -- go debugger
 })
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

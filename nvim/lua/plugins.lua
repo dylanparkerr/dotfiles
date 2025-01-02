@@ -18,8 +18,6 @@ local plugins = {
 
     -- aesthetics
     {'kyazdani42/nvim-web-devicons'},                               -- fancy icons - requires a patched font
-    {'navarasu/onedark.nvim'},                                      -- theme
-    {'ellisonleao/gruvbox.nvim'},                                   -- theme
     {'catppuccin/nvim'},                                            -- theme
     {'nvim-lualine/lualine.nvim'},                                  -- status bar at the bottom
     {'akinsho/bufferline.nvim'},                                    -- text buffers as tabs
@@ -29,7 +27,6 @@ local plugins = {
 
     -- functional
     {'akinsho/toggleterm.nvim'},                    -- integrated terminal *** probably dont need this now that i have tmux
-    {'terrortylor/nvim-comment'},                   -- easier comments
     {'echasnovski/mini.nvim'},                      -- add/delete/replace ' " { ( [ etc around things
     {'stevearc/oil.nvim'},                          -- edit files as a buffer
     {'ThePrimeagen/harpoon',branch='harpoon2'},     -- mark and jump to files

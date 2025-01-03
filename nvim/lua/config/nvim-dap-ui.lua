@@ -63,7 +63,7 @@ local opts = {
             },
             position = "bottom",
             size = 10
-        } 
+        }
     },
     mappings = {
         edit = "e",
@@ -80,7 +80,6 @@ local opts = {
 }
 require('dapui').setup(opts)
 
--- use telescope to find highlight groups
 vim.fn.sign_define('DapBreakpoint', { text='', texthl='error', linehl='', numhl='' })
 vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='', linehl='', numhl='' })
 vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='', linehl='', numhl= '' })

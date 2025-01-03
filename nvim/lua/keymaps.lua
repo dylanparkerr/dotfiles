@@ -9,14 +9,16 @@ local remap_opts = {remap = true, silent = true}
 -- leader
 keymap('','<Space>','<Nop>',opts)
 vim.g.mapleader = ' '
+-- esc
+keymap('i','jk','<Esc>',opts)
 
--- Use alt + arrows to resize windows
+-- use alt + arrows to resize windows
 keymap('n','<C-Up>',':resize +2<CR>',opts,'Increase window vertical size')
 keymap('n','<C-Down>',':resize -2<CR>',opts, 'Decrease window vertical size')
 keymap('n','<C-Right>',':vertical resize +2<CR>',opts, 'Increase window horizontal size')
 keymap('n','<C-Left>',':vertical resize -2<CR>',opts, 'Decrease window horizontal size')
 
--- Better window navigation
+-- better window navigation
 keymap('n','<C-h>','<C-w>h',opts, 'Move to left window')
 keymap('n','<C-j>','<C-w>j',opts,'Move to lower window')
 keymap('n','<C-k>','<C-w>k',opts, 'Move to upper window')
@@ -26,25 +28,26 @@ keymap('t','<C-j>','<C-\\><C-n><C-w>j',opts, 'Move to lower window')
 keymap('t','<C-k>','<C-\\><C-n><C-w>k',opts, 'Move to upper window')
 keymap('t','<C-l>','<C-\\><C-n><C-w>l',opts, 'Move to right window')
 
--- Alternate ways to exit
-keymap('i','jk','<Esc>',opts)
-
--- Ways to cycle between open buffers
+-- cycle buffers
 keymap('n','<S-l>',':bnext<CR>',opts, 'Move to next buffer')
 keymap('n','<S-h>',':bprevious<CR>',opts, 'Move to previous buffer')
 
--- Move visual lines with Alt+j and Alt+k
+-- move lines
+-- normal
 keymap('n', '<A-j>', ':move .+1<CR>==', opts, 'Move current text line down')
 keymap('n', '<A-k>', ':move .-2<CR>==', opts, 'Move current text line up')
-keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', opts, 'Move current text line down')
-keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', opts, 'Move current text line up')
+keymap('n','<A-h>','<<',opts, 'Indent currently selected line(s)')
+keymap('n','<A-l>','>>',opts, 'Unindent currently selected line(s)')
+-- visual
 keymap("v", "<A-j>", ":move '>+1<CR>gv-gv", opts, 'Move current text line down')
 keymap("v", "<A-k>", ":move '<-2<CR>gv-gv", opts, 'Move current text line up')
--- Better tabbing
 keymap('v','<A-h>','<gv',opts, 'Indent currently selected line(s)')
 keymap('v','<A-l>','>gv',opts, 'Unindent currently selected line(s)')
--- TODO:
--- same tabbing for single lines in normal and insert mode for consistency
+-- insert
+keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', opts, 'Move current text line down')
+keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', opts, 'Move current text line up')
+keymap('i', '<A-h>', '<Esc><<gi', opts, 'Indent currently selected line(s)')
+keymap('i', '<A-l>', '<Esc>>>gi', opts, 'Unindent currently selected line(s)')
 
 -- Hold on to yanked word after pasting over highlighted word
 keymap("v", "p", '"_dP', opts)

@@ -29,15 +29,5 @@ dap.configurations.java = {
     },
 }
 
-dap.configurations.typescript = {
-    {
-        name = 'Typescript',
-        type = 'pwa-node',
-		request = 'launch',
-		program = '${file}',
-		cwd = '${workspaceFolder}',
-    }
-}
-
 -- plugin to do it for go
 require('dap-go').setup()

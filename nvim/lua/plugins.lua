@@ -28,8 +28,12 @@ local plugins = {
     -- functional
     {'akinsho/toggleterm.nvim'},                    -- integrated terminal *** probably dont need this now that i have tmux
     {'echasnovski/mini.nvim'},                      -- add/delete/replace ' " { ( [ etc around things
-    {'stevearc/oil.nvim'},                          -- edit files as a buffer
+    {'stevearc/oil.nvim', opts={}},                          -- edit files as a buffer
     {'ThePrimeagen/harpoon',branch='harpoon2'},     -- mark and jump to files
+
+    -- git
+    {'lewis6991/gitsigns.nvim', opts={}},   -- visual git change indicators in gutters
+    {'sindrets/diffview.nvim'},             -- tabgroup for viewing git changes
 
     -- telescope
     {'nvim-lua/plenary.nvim'},                                  -- used by a lot of stuff
@@ -49,9 +53,9 @@ local plugins = {
 
     -- dap
     {'mfussenegger/nvim-dap'},                                          -- the debug adapter protocol client implentation for neovim
-    {'rcarriga/nvim-dap-ui', dependencies = {"nvim-neotest/nvim-nio"}}, -- TODO:config
+    {'rcarriga/nvim-dap-ui', dependencies = {"nvim-neotest/nvim-nio"}}, -- debug ui
     {'theHamsta/nvim-dap-virtual-text'},                                -- TODO:config
-    {'leoluz/nvim-dap-go'},                                             -- TODO:config
+    {'leoluz/nvim-dap-go'},                                             -- auto setup go dap config
 
     -- auto complete and sources
     {'hrsh7th/nvim-cmp'},       -- completetion engine
@@ -64,10 +68,6 @@ local plugins = {
     {'L3MON4D3/LuaSnip'},               -- snippet engine
     {'saadparwaiz1/cmp_luasnip'},       -- luasnip as cmp completion source
     {'rafamadriz/friendly-snippets'},   -- a bunch of snippets
-
-    -- git
-    {'lewis6991/gitsigns.nvim', opts={}},   -- visual git change indicators in gutters
-    {'sindrets/diffview.nvim'},             -- tabgroup for viewing git changes
 }
 
 require('lazy').setup(

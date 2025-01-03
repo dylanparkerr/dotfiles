@@ -3,6 +3,10 @@
 --   enabling features based on lsp servers
 --   installing/configuring lsp servers (via mason/mason-lspconfig)
 --   installing/configuring other linters and formatters
+-- keybind map helper
+local map = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+end
 
 -- LspAttach is a special event (see :help LspAttach) that triggers when an LSP server attaches to a buffer
 -- so these mappings will be set
@@ -11,13 +15,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
 
     callback = function(event)
-        -- keybind map helper
-        local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-
         local telescope = require('telescope.builtin')
-
         map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')           --lsp go to definition - shows telescope picker if there are multiple entries
         map('gr', telescope.lsp_references, '[g]o to [r]eferences')            --lsp go to symbol refrences - shows telescope picker if there are multiple entries
         map('gi', telescope.lsp_implementations, '[g]o to [i]mplementations')  --lsp go to implementation - shows telescope picker if there are multiple entries
@@ -41,23 +39,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
         })
-
-        -- this was created with the help of chatgpt
-        -- i think this looks right but this could cause issues in the future if multiple clients are attached and not in the order i need
-        -- not going to over engineer this for now until the need arises
-        -- setting it to work only for gopls right now
-        --
-        -- this is me coming back after something like a year.. 
-        -- i dont think this needs to be a for loop
-        -- i can just format the current buffer..
-        -- if it supports it.. but not sure why that if statement didnt work
+        -- auto format on save
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
             callback = function()
-                -- Check if LSP formatting is supported for the buffer
+                -- in theory this should be one client with the buf number filter
                 local clients = vim.lsp.get_active_clients({ bufnr = event.buf })
                 for _, client in ipairs(clients) do
-                    -- if client.supports_method('textDocument/formatting')  then
                     if client.name == 'gopls' or client.name == 'jsonls' then
                         vim.lsp.buf.format({ async = true })
                         break -- Stop after finding the first client that supports formatting
@@ -65,6 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 end
             end,
         })
+
     end,
 })
 
@@ -108,7 +97,6 @@ local servers = {
                     -- TJ mentions to try this instead of lua is running slow
                     -- library = { vim.env.VIMRUNTIME },
                 },
-
                 telemetry = {
                     enable = false,
                 },
@@ -137,7 +125,7 @@ require('mason-lspconfig').setup {
     handlers = {
         function(server_name)
             local server = servers[server_name] or {}
-            if server_name ~= 'jdtls' then -- of course jdtls has to be configured in a special way *eye roll*
+            if server_name ~= 'jdtls' then -- of course jdtls has to be configured in a special way...
                 require('lspconfig')[server_name].setup {
                     cmd = server.cmd,
                     settings = server.settings,

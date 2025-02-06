@@ -1,0 +1,9 @@
+theme = catppuccin-macchiato
+font-family = "Fira Mono"
+font-size = 16
+font-thicken
+
+adjust-cell-height = 5%
+
+macos-titlebar-proxy-icon = hidden
+

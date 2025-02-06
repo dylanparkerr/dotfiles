@@ -20,12 +20,26 @@ end
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 dap.configurations.java = {
     {
-        name = "Spotlight (2GB)";
+        name = "Spotlight";
         type = "java";
         request = "launch";
         mainClass = 'cfa.spotlight.TestApplication';
         -- vmArgs = {"-Xmx2g","-Dspring-boot.run.profiles=global-defaults,test-environment,api,local,local-api,api-local,local-socailidm,dylan"}
         vmArgs = "".."-Xmx2g".." -Dspring-boot.run.profiles=global-defaults,test-environment,api,local,local-api,api-local,local-socailidm,dylan";
+    },
+    {
+        name = "Analytics",
+        type = "java",
+        request = "launch",
+        mainClass = "com.cfa.crn.TestApplication",
+        vmArgs = "" .. "-Xmx2g ",
+    },
+    {
+        name = "Analytics-Data",
+        type = "java",
+        request = "launch",
+        mainClass = "com.spotlight.analytics.data.services",
+        vmArgs = "" .. "-Xmx2g ",
     },
 }
 

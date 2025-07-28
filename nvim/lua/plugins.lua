@@ -40,6 +40,7 @@ local plugins = {
     {'nvim-telescope/telescope.nvim'},                          -- the goated fuzzy finder
     {'nvim-telescope/telescope-fzf-native.nvim', build='make'}, -- faster searching
     {'nvim-telescope/telescope-dap.nvim'},                      -- search break points
+    {'jmacadie/telescope-hierarchy.nvim'},                      -- search function call hierachry
 
     -- lsp
     {'williamboman/mason.nvim', opts={ui = {border = 'rounded'}}},                      -- installer for lsp servers, dap servers, linters, and formaters

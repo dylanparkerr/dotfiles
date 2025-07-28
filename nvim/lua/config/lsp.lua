@@ -3,10 +3,6 @@
 --   enabling features based on lsp servers
 --   installing/configuring lsp servers (via mason/mason-lspconfig)
 --   installing/configuring other linters and formatters
--- keybind map helper
-local map = function(keys, func, desc)
-    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-end
 
 -- LspAttach is a special event (see :help LspAttach) that triggers when an LSP server attaches to a buffer
 -- so these mappings will be set
@@ -15,6 +11,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
 
     callback = function(event)
+        -- keybind map helper
+        local map = function(keys, func, desc)
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        end
         local telescope = require('telescope.builtin')
         map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')           --lsp go to definition - shows telescope picker if there are multiple entries
         map('gr', telescope.lsp_references, '[g]o to [r]eferences')            --lsp go to symbol refrences - shows telescope picker if there are multiple entries
@@ -24,15 +24,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
         map('ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
         map('gf', vim.lsp.buf.format, '[g]et code [f]ormat')
+        -- map('gn', vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}), '[g]o [n]ext diagnostic')
+        -- map('gp', vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}), '[g]o [p]revious diagnostic')
+        map('gn', vim.diagnostic.goto_next, '[g]o [n]ext diagnostic')
+        map('gp', vim.diagnostic.goto_prev, '[g]o [p]revious diagnostic')
         map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame token')
         map('<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end, '[f]ind [m]method')
+        map('<leader>si','<cmd>Telescope hierarchy incoming_calls<cr>','')
+        map('<leader>so','<cmd>Telescope hierarchy outgoing_calls<cr>','')
 
         vim.keymap.set('v', 'ga', vim.lsp.buf.code_action, {})
 
         -- some nice highlighting
+        -- TODO: i should just check if a given client had a capability before trying to use it
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
+            callback = function()
+                local clients = vim.lsp.get_clients({ bufnr = event.buf })
+                for _, client in ipairs(clients) do
+                    if client.name ~= 'jsonls' or client.name ~= 'terraform-vars' then
+                        vim.lsp.buf.document_highlight()
+                    end
+                end
+            end,
         })
         -- remove hl after cursor moves
         vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
@@ -44,7 +58,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             buffer = event.buf,
             callback = function()
                 -- in theory this should be one client with the buf number filter
-                local clients = vim.lsp.get_active_clients({ bufnr = event.buf })
+                local clients = vim.lsp.get_clients({ bufnr = event.buf })
                 for _, client in ipairs(clients) do
                     if client.name == 'gopls' or client.name == 'jsonls' then
                         vim.lsp.buf.format({ async = true })
@@ -107,6 +121,7 @@ local servers = {
     pyright = {},
     gopls = {},
     jdtls = {},
+    robotcode = {},
 }
 
 -- ensure that the servers defined above are installed by using mason tool installer
@@ -140,6 +155,10 @@ require('mason-lspconfig').setup {
         end,
     },
 }
+-- need to update to new neovim..
+-- bc mason-lspconfig doesnt have this one...
+-- vim.lsp.enable('robotcode')
+-- require('lspconfig').robotcode.setup()
 
 -- Globally configure all LSP floating preview popups (like hover, signature help, etc) 
 local orig_open_floating_preview = vim.lsp.util.open_floating_preview

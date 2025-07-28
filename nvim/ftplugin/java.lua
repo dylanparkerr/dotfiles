@@ -93,14 +93,14 @@ local config = {
 				updateBuildConfiguration = "interactive",
 				-- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
 				runtimes = {
-					{
-						name = "JavaSE-11",
-						path = java_11,
-					},
-					{
-						name = "JavaSE-17",
-						path = java_17,
-					},
+					-- {
+					-- 	name = "JavaSE-11",
+					-- 	path = java_11,
+					-- },
+					-- {
+					-- 	name = "JavaSE-17",
+					-- 	path = java_17,
+					-- },
 					{
 						name = "JavaSE-21",
 						path = java_21,

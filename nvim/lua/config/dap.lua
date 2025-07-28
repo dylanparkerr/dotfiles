@@ -41,7 +41,60 @@ dap.configurations.java = {
         mainClass = "com.spotlight.analytics.data.services",
         vmArgs = "" .. "-Xmx2g ",
     },
+    {
+        name = "Campaigns",
+        type = "java",
+        request = "launch",
+        mainClass = "com.cfa.crn.spotlight.campaigns.TestApplication",
+        -- vmArgs = "" .. "-Xmx2g ",
+        -- vmArgs = "".."-Xmx2g".." -Dspring-boot.run.profiles=global-defaults,test-environment,api,local,local-api,api-local,local-socailidm,dylan";
+    },
+    {
+        name = "Cares",
+        type = "java",
+        request = "launch",
+        mainClass = "crn.idm.cares.TestApplication",
+        vmArgs = "" .. "-Xmx2g ",
+    },
 }
 
 -- plugin to do it for go
-require('dap-go').setup()
+-- require('dap-go').setup()
+require('dap-go').setup({
+  dap_configurations = {
+    {
+        name = "DMS - Debug test",
+        request = "launch",
+        mode = "test",
+        program = "${file}",
+    },
+    {
+        name = "DMS - Container",
+        type = "go",
+        request = "attach",
+        mode = "remote",
+        substitutePath = {
+            {
+                from = "${workspaceFolder}/digital-marketing-service/",
+                to = "/digital-marketing/",
+            },
+        },
+        port = 2345,
+        host = "127.0.0.1",
+        showLog = true,
+        apiVersion = 2,
+        trace = "verbose"
+    },
+    {
+        name = "DMS - Binary",
+        type = "go",
+        request = "launch",
+        program = "${workspaceFolder}/cmd/digital-marketing",
+        envFile = "../.env",
+        -- delve = {
+        --     -- args = {"--wd ${workspaceFolder}/digital-marketing-service/"},
+        --     cwd = "${workspaceFolder}/digital-marketing-service/",
+        -- }
+    }
+  },
+})

@@ -60,37 +60,15 @@ dap.configurations.java = {
 
 -- plugin to do it for go
 -- require('dap-go').setup()
+-- dont really need this if i can find a way to export my .env vars before running
 require('dap-go').setup({
   dap_configurations = {
-    {
-        name = "DMS - Debug test",
-        request = "launch",
-        mode = "test",
-        program = "${file}",
-    },
-    {
-        name = "DMS - Container",
-        type = "go",
-        request = "attach",
-        mode = "remote",
-        substitutePath = {
-            {
-                from = "${workspaceFolder}/digital-marketing-service/",
-                to = "/digital-marketing/",
-            },
-        },
-        port = 2345,
-        host = "127.0.0.1",
-        showLog = true,
-        apiVersion = 2,
-        trace = "verbose"
-    },
     {
         name = "DMS - Binary",
         type = "go",
         request = "launch",
-        program = "${workspaceFolder}/cmd/digital-marketing",
-        envFile = "../.env",
+        program = "${workspaceFolder}/digital-marketing-service/cmd/digital-marketing/main.go",
+        --envFile = "${workspaceFolder}/.env",
         -- delve = {
         --     -- args = {"--wd ${workspaceFolder}/digital-marketing-service/"},
         --     cwd = "${workspaceFolder}/digital-marketing-service/",

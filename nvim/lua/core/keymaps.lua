@@ -9,8 +9,11 @@ Keymap = function (mode, keymap, command, desc, opts)
     vim.keymap.set(mode, keymap, command, vim.tbl_extend('keep', opts, {desc = desc}))
 end
 
+local keymap = require('core.utils').keymap
+
 -- leader
-Keymap('','<Space>','<Nop>')
+-- Keymap('','<Space>','<Nop>')
+keymap({mode='', key='<Space>', cmd='<Nop>'})
 vim.g.mapleader = ' '
 
 -- esc
@@ -33,8 +36,10 @@ Keymap('t','<C-k>','<C-\\><C-n><C-w>k', 'Move to upper window')
 Keymap('t','<C-l>','<C-\\><C-n><C-w>l', 'Move to right window')
 
 -- cycle buffers
-Keymap('n','<S-l>',':bnext<CR>', 'Move to next buffer')
-Keymap('n','<S-h>',':bprevious<CR>', 'Move to previous buffer')
+-- Keymap('n','<S-l>',':bnext<CR>', 'Move to next buffer')
+-- Keymap('n','<S-h>',':bprevious<CR>', 'Move to previous buffer')
+keymap({key='<S-l>', cmd=':bnext<CR>', desc='Move to next buffer'})
+keymap({key='<S-h>', cmd=':bprevious<CR>', desc='Move to previous buffer'})
 
 -- move lines
 -- normal

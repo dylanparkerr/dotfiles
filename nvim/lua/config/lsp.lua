@@ -4,7 +4,6 @@ vim.pack.add({
 })
 require('mason').setup()
 
-
 -- only set these bindings if an lsp client is attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -18,14 +17,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         Keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
         Keymap('n', 'ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
         Keymap('n', 'gf', vim.lsp.buf.format, '[g]o [f]ormat')
-        Keymap('n', 'gR', vim.lsp.buf.rename, '[g]o [R]ename')
-        -- Keymap('n', 'gn', vim.lsp.diagnostic.goto_next, '[g]o [n]ext diagnostic')
-        -- Keymap('n', 'gp', vim.lsp.diagnostic.goto_prev, '[g]o [p]revious diagnostic')
+        Keymap('n', 'ge', vim.lsp.buf.rename, '[g]o r[e]name')
+        Keymap('n', 'gn', function() vim.diagnostic.jump({count=1}) end, '[g]o [n]ext diagnostic')
+        Keymap('n', 'gp', function() vim.diagnostic.jump({count=-1}) end, '[g]o [p]revious diagnostic')
 
         -- highlight symbol under cursor
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
-            -- callback = vim.lsp.buf.document_highlight
+            -- GATCHA: tbd if this pcall stops errors from showing in servers that dont support
             callback = function()
                 pcall(vim.lsp.buf.document_highlight)
             end,
@@ -36,18 +35,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
             callback = vim.lsp.buf.clear_references,
         })
 
-        -- TODO: make a list of clients that i want to do this on
-        -- then add it for those clients instead of hard coding
-        -- auto format on save
+        -- GATCHA: i think there should really only be one client attached 
+        -- to a buffer.. but i've seen alot of snippets of iterating over 
+        -- clients.. so i guess just be on the look out..
+        local format_servers = {'gopls'}
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
             callback = function()
-                -- in theory this should be one client with the buf number filter
                 local clients = vim.lsp.get_clients({ bufnr = event.buf })
                 for _, client in ipairs(clients) do
-                    if client.name == 'gopls' then
+                    if require('core.utils').contains(format_servers, client.name) then
                         vim.lsp.buf.format({ async = true })
-                        break -- Stop after finding the first client that supports formatting
+                        break -- stop after finding the first client that supports formatting
                     end
                 end
             end,
@@ -59,13 +58,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- ADDING NEW SERVERS
 -- find and install one with :Mason
--- the lspconfig has sane defaults and calls vim.lsp.config(<server>) behind the seens
+-- the lspconfig plugin has sane defaults and calls vim.lsp.config(<server>) behind the scenes
 -- see those here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 -- or set custom options if needed
 -- vim.lsp.enable(<server>) makes sure they launch
 
----------
--- lua --
 vim.lsp.config('lua_ls', {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
@@ -92,8 +89,5 @@ vim.lsp.config('lua_ls', {
     },
 })
 vim.lsp.enable('lua_ls')
-
---------
--- go --
 vim.lsp.enable('gopls')
 vim.lsp.enable('pyright')

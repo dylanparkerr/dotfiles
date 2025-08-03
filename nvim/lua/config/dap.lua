@@ -8,6 +8,9 @@ vim.pack.add({
 local dap = require('dap')
 local widgets = require("dap.ui.widgets")
 local ui = require('dapui')
+-- TODO: maybe change this set up, old config at the bottom
+-- could be nice if i could mimic dap view.. and get a nice
+-- toggle for big floating scopes window
 ui.setup()
 
 -- debugger

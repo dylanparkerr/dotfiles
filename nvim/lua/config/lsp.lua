@@ -1,51 +1,33 @@
--- LSP configuration
---   lsp based keybindings
---   enabling features based on lsp servers
---   installing/configuring lsp servers (via mason/mason-lspconfig)
---   installing/configuring other linters and formatters
+vim.pack.add({
+    {src = 'https://github.com/williamboman/mason.nvim'}, -- installer for lsp servers, dap servers, linters, and formaters
+    {src = 'https://github.com/neovim/nvim-lspconfig'},   -- sane default configs for new servers
+})
+require('mason').setup()
 
--- LspAttach is a special event (see :help LspAttach) that triggers when an LSP server attaches to a buffer
--- so these mappings will be set
+
+-- only set these bindings if an lsp client is attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
-
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
-
     callback = function(event)
-        -- keybind map helper
-        local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-        local telescope = require('telescope.builtin')
-        map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')           --lsp go to definition - shows telescope picker if there are multiple entries
-        map('gr', telescope.lsp_references, '[g]o to [r]eferences')            --lsp go to symbol refrences - shows telescope picker if there are multiple entries
-        map('gi', telescope.lsp_implementations, '[g]o to [i]mplementations')  --lsp go to implementation - shows telescope picker if there are multiple entries
-        map('gt', telescope.lsp_type_definitions, '[g]o to [t]ype definition') --lsp go to type definition - shows telescope picker if there are multiple entries
-        map('gh', vim.lsp.buf.hover, '[g]et [h]over information')
-        map('gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
-        map('ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
-        map('gf', vim.lsp.buf.format, '[g]et code [f]ormat')
-        -- map('gn', vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}), '[g]o [n]ext diagnostic')
-        -- map('gp', vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}), '[g]o [p]revious diagnostic')
-        map('gn', vim.diagnostic.goto_next, '[g]o [n]ext diagnostic')
-        map('gp', vim.diagnostic.goto_prev, '[g]o [p]revious diagnostic')
-        map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame token')
-        map('<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end, '[f]ind [m]method')
-        map('<leader>si','<cmd>Telescope hierarchy incoming_calls<cr>','')
-        map('<leader>so','<cmd>Telescope hierarchy outgoing_calls<cr>','')
+        local picker = require('config.finder')
+        Keymap('n', 'gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+        Keymap('n', 'gr', picker.lsp_references, '[g]o to [r]eferences')
+        Keymap('n', 'gi', picker.lsp_implementations, '[g]o to [i]mplementations')
+        Keymap('n', 'gt', vim.lsp.buf.type_definition, '[g]o to [t]ype definition')
+        Keymap('n', 'gh', vim.lsp.buf.hover, '[g]et [h]over information')
+        Keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
+        Keymap('n', 'ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
+        Keymap('n', 'gf', vim.lsp.buf.format, '[g]o [f]ormat')
+        Keymap('n', 'gR', vim.lsp.buf.rename, '[g]o [R]ename')
+        -- Keymap('n', 'gn', vim.lsp.diagnostic.goto_next, '[g]o [n]ext diagnostic')
+        -- Keymap('n', 'gp', vim.lsp.diagnostic.goto_prev, '[g]o [p]revious diagnostic')
 
-        vim.keymap.set('v', 'ga', vim.lsp.buf.code_action, {})
-
-        -- some nice highlighting
-        -- TODO: i should just check if a given client had a capability before trying to use it
+        -- highlight symbol under cursor
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
+            -- callback = vim.lsp.buf.document_highlight
             callback = function()
-                local clients = vim.lsp.get_clients({ bufnr = event.buf })
-                for _, client in ipairs(clients) do
-                    if client.name ~= 'jsonls' or client.name ~= 'terraform-vars' then
-                        vim.lsp.buf.document_highlight()
-                    end
-                end
+                pcall(vim.lsp.buf.document_highlight)
             end,
         })
         -- remove hl after cursor moves
@@ -53,6 +35,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
         })
+
+        -- TODO: make a list of clients that i want to do this on
+        -- then add it for those clients instead of hard coding
         -- auto format on save
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
@@ -60,7 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 -- in theory this should be one client with the buf number filter
                 local clients = vim.lsp.get_clients({ bufnr = event.buf })
                 for _, client in ipairs(clients) do
-                    if client.name == 'gopls' or client.name == 'jsonls' then
+                    if client.name == 'gopls' then
                         vim.lsp.buf.format({ async = true })
                         break -- Stop after finding the first client that supports formatting
                     end
@@ -72,98 +57,43 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 
--- courtesy of TJ
--- LSP servers and clients are able to communicate to each other what features they support.
---  By default, Neovim doesn't support everything that is in the LSP Specification.
---  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
---  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+-- ADDING NEW SERVERS
+-- find and install one with :Mason
+-- the lspconfig has sane defaults and calls vim.lsp.config(<server>) behind the seens
+-- see those here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+-- or set custom options if needed
+-- vim.lsp.enable(<server>) makes sure they launch
 
-
--- ************** NOTE **************
--- if i remove mason/masnon-lsp-config in the future this will need to be refactored
---
--- this is a custum object from TJ that we will iterate over and setup
--- key names(servers) like lua_ls correspond to the names of lspconfig objects that have a setup function
--- e.g require('lspconfig').lua_ls.setup() is how I used to do this
--- servers and their configs here:
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
--- to uninstall a server use :Mason and X on the server, and remove from this table
-local servers = {
-    lua_ls = {
-        filetypes = { 'lua' }, -- had to add this as luals was attaching to java files, not sure why
-        settings = {
-            Lua = {
-                runtime = {
-                    version = 'LuaJIT',
-                },
-                diagnostics = {
-                    globals = { 'vim' }, -- vim is indeeed a global
-                },
-                workspace = {
-                    checkThirdParty = false,
-                    -- Make the server aware of Neovim runtime files
-                    library = {
-                        '${3rd}/luv/library',
-                        unpack(vim.api.nvim_get_runtime_file('', true)),
-                    },
-                    -- TJ mentions to try this instead of lua is running slow
-                    -- library = { vim.env.VIMRUNTIME },
-                },
-                telemetry = {
-                    enable = false,
+---------
+-- lua --
+vim.lsp.config('lua_ls', {
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                globals = { 'vim', 'Keymap' },
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    '${3rd}/luv/library',
+                    -- unpack(vim.api.nvim_get_runtime_file('', true)),
                 },
             },
+            telemetry = {
+                enable = false,
+            },
         },
-        capabilities = {}
     },
-    pyright = {},
-    gopls = {},
-    jdtls = {},
-    robotcode = {},
-}
-
--- ensure that the servers defined above are installed by using mason tool installer
-local ensure_installed = vim.tbl_keys(servers)
-vim.list_extend(ensure_installed, {
-    -- 'google-java-format', -- figure this out later
-    -- these are external tools, not lsps
-    'java-debug-adapter',
-    'java-test', -- do i need this if i have the java-debug-adapter?
-    'delve', -- go debugger
 })
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+vim.lsp.enable('lua_ls')
 
--- mason-lspconfig here makes sure that servers are setup
-require('mason-lspconfig').setup {
-    handlers = {
-        function(server_name)
-            local server = servers[server_name] or {}
-            if server_name ~= 'jdtls' then -- of course jdtls has to be configured in a special way...
-                require('lspconfig')[server_name].setup {
-                    cmd = server.cmd,
-                    settings = server.settings,
-                    filetypes = server.filetypes,
-                    -- This handles overriding only values explicitly passed
-                    -- by the server configuration above. Useful when disabling
-                    -- certain features of an LSP (for example, turning off formatting for tsserver)
-                    -- the inclusion of the capabilites table from above makes sure nvim-cmp is added
-                    capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
-                }
-            end
-        end,
-    },
-}
--- need to update to new neovim..
--- bc mason-lspconfig doesnt have this one...
--- vim.lsp.enable('robotcode')
--- require('lspconfig').robotcode.setup()
-
--- Globally configure all LSP floating preview popups (like hover, signature help, etc) 
-local orig_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
-    opts.border = opts.border or "rounded" -- Set border to rounded
-    return orig_open_floating_preview(contents, syntax, opts, ...)
-end
+--------
+-- go --
+vim.lsp.enable('gopls')
+vim.lsp.enable('pyright')

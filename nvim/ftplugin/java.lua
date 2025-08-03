@@ -1,33 +1,22 @@
-local keymap = function (mode, lhs, rhs, opts, desc)
-    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("keep", opts, {desc = desc}))
-end
-
-
-
-
+-- Needed from :Mason
+--
+-- jdtls              - the language server
+-- java-debug-adapter - to debug applications via explicit configuration, or automatically discovered main classes
+-- java-test          - to debug junit tests, either whole classes or individual test methods
 
 -- JDTLS (Java LSP) configuration
-local home = vim.env.HOME -- Get the home directory
-
 local jdtls = require("jdtls")
+local home = vim.env.HOME
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/jdtls-workspace/" .. project_name
-
 local system_os = ""
-local java_11
-local java_17
-local java_21
 
--- Determine OS
+local java_21
 if vim.fn.has("mac") == 1 then
 	system_os = "mac"
-    java_11 ="/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home"
-    java_17 ="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home"
     java_21 ="/Library/Java/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home"
 elseif vim.fn.has("unix") == 1 then
 	system_os = "linux"
-    java_11 ="/usr/lib/jvm/java-11-amazon-corretto"
-    java_17 ="/usr/lib/jvm/java-17-amazon-corretto"
     java_21 ="/usr/lib/jvm/java-21-amazon-corretto"
 elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	system_os = "win"
@@ -37,17 +26,12 @@ else
 end
 
 -- Needed for debugging
-local bundles = {
-	vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"),
-}
-
+local bundles = {vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar")}
 -- Needed for running/debugging unit tests
--- TODO: *************************************** uncomment when I need this ***************************************
-vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", true), "\n")) -- lsp said to change 1 to true
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", true), "\n"))
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
-	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	cmd = {
 		"java", -- or '/path/to/java17_or_newer/bin/java'
@@ -74,24 +58,18 @@ local config = {
 		workspace_dir,
 	},
 
-	-- This is the default if not provided, you can remove it. Or adjust as needed.
-	-- One dedicated LSP server & client will be started per unique root_dir
 	root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "pom.xml", "build.gradle" }),
 
 	-- Here you can configure eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	settings = {
 		java = {
-			-- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
-            -- TODO find a way to make this work with Mac
-			-- home = "/usr/lib/jvm/java-17-openjdk-amd64",
             home = java_21,
 			eclipse = {
 				downloadSources = true,
 			},
 			configuration = {
 				updateBuildConfiguration = "interactive",
-				-- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
 				runtimes = {
 					-- {
 					-- 	name = "JavaSE-11",
@@ -129,30 +107,30 @@ local config = {
 				-- },
 			},
 		},
-		-- completion = {
-		-- 	favoriteStaticMembers = {
-		-- 		"org.hamcrest.MatcherAssert.assertThat",
-		-- 		"org.hamcrest.Matchers.*",
-		-- 		"org.hamcrest.CoreMatchers.*",
-		-- 		"org.junit.jupiter.api.Assertions.*",
-		-- 		"java.util.Objects.requireNonNull",
-		-- 		"java.util.Objects.requireNonNullElse",
-		-- 		"org.mockito.Mockito.*",
-		-- 	},
-		-- 	importOrder = {
-		-- 		"java",
-		-- 		"javax",
-		-- 		"com",
-		-- 		"org",
-		-- 	},
-		-- },
+		completion = {
+			favoriteStaticMembers = {
+				"org.hamcrest.MatcherAssert.assertThat",
+				"org.hamcrest.Matchers.*",
+				"org.hamcrest.CoreMatchers.*",
+				"org.junit.jupiter.api.Assertions.*",
+				"java.util.Objects.requireNonNull",
+				"java.util.Objects.requireNonNullElse",
+				"org.mockito.Mockito.*",
+			},
+			importOrder = {
+				"java",
+				"javax",
+				"com",
+				"org",
+			},
+		},
 		extendedClientCapabilities = jdtls.extendedClientCapabilities,
-		-- sources = {
-		-- 	organizeImports = {
-		-- 		starThreshold = 9999,
-		-- 		staticStarThreshold = 9999,
-		-- 	},
-		-- },
+		sources = {
+			organizeImports = {
+				starThreshold = 9999,
+				staticStarThreshold = 9999,
+			},
+		},
 		codeGeneration = {
 			toString = {
 				template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
@@ -161,7 +139,7 @@ local config = {
 		},
 	},
 	-- Needed for auto-completion with method signatures and placeholders
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	capabilities = require('config.completion').capabilities,
 	flags = {
 		allow_incremental_sync = true,
 	},

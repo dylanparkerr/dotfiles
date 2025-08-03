@@ -1,11 +1,34 @@
 vim.pack.add({
-    {src = 'https://github.com/Saghen/blink.cmp',
-     version = vim.version.range('1.6.0')},
+    {src = 'https://github.com/Saghen/blink.cmp', -- fast and fuzzy completion with good defaults included
+     version = vim.version.range('1.6.0')},       -- specific version tag downloads prebuilt binaries since its rust
 })
 local blink = require('blink.cmp')
 
 -- GATCHA: with lua_ls, sometimes completion will remove text in the remaing of the line..
-blink.setup()
+
+-- config help: https://cmp.saghen.dev/configuration/general.html
+blink.setup({
+    sources = {
+        -- add lazydev to your completion providers
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        providers = {
+            lazydev = {
+                name = "LazyDev",
+                module = "lazydev.integrations.blink",
+                -- make lazydev completions top priority
+                score_offset = 100,
+            },
+        },
+    },
+    completion = {
+        menu = {
+            draw = {
+                -- this is the default plus the source name (LSP, TEXT, etc.) at the end
+                columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, {'source_name'} },
+            }
+        }
+    }
+})
 
 -- export for other areas to use
 local completion = {}

@@ -3,7 +3,7 @@ vim.pack.add({
     {src = 'https://github.com/catppuccin/nvim'},                 -- theme
     {src = 'https://github.com/nvim-lualine/lualine.nvim'},       -- status bar at the bottom
     {src = 'https://github.com/akinsho/bufferline.nvim'},         -- text buffers as tabs
-    {src = 'https://github.com/nvim-treesitter/nvim-treesitter'}, -- parser manager
+    {src = 'https://github.com/nvim-treesitter/nvim-treesitter'}, -- launguage parser manager
     {src = 'https://github.com/j-hui/fidget.nvim'},               -- lsp loading indicator
 })
 local keymap = require('core.utils').keymap
@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- TODO: does this go here, or does it go in lsp ?
 -- clearer diagnostic info
 vim.diagnostic.config({
     virtual_text = true,
@@ -73,3 +72,5 @@ require('nvim-treesitter.configs').setup({
     highlight = { enable = true, },
     indent = { enable = true, }
 })
+
+-- TODO: make help pages open full screen

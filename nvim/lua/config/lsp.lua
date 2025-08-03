@@ -9,10 +9,10 @@ local keymap = require('core.utils').keymap
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
-        local picker = require('config.finder')
-        keymap('n', 'gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
-        keymap('n', 'gr', picker.lsp_references, '[g]o to [r]eferences')
-        keymap('n', 'gi', picker.lsp_implementations, '[g]o to [i]mplementations')
+        local finder = require('config.finder')
+        keymap('n', 'gd', finder.lsp_definitions, '[g]o to [d]efinition')
+        keymap('n', 'gr', finder.lsp_references, '[g]o to [r]eferences')
+        keymap('n', 'gi', finder.lsp_implementations, '[g]o to [i]mplementations')
         keymap('n', 'gt', vim.lsp.buf.type_definition, '[g]o to [t]ype definition')
         keymap('n', 'gh', vim.lsp.buf.hover, '[g]et [h]over information')
         keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')

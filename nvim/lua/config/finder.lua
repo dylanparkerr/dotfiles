@@ -28,7 +28,7 @@ snacks.setup(
         indent = { enabled = false },
         input = { enabled = false },
         notifier = { enabled = false },
-        picker = { enabled = true },
+        picker = { enabled = true }, -- this overrides vim.ui.select() lists
         quickfile = { enabled = false },
         scope = { enabled = false },
         scroll = { enabled = false },
@@ -56,6 +56,10 @@ keymap('n', '<leader>fk', function() snacks.picker.keymaps({layout={preset='sele
 
 -- export for use in lsp settings
 local finder = {}
+    function finder.lsp_definitions()
+        snacks.picker.lsp_definitions()
+    end
+
     function finder.lsp_references()
         snacks.picker.lsp_references()
     end

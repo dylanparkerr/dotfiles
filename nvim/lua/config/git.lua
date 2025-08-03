@@ -2,14 +2,15 @@ vim.pack.add({
     {src = 'https://github.com/lewis6991/gitsigns.nvim'}, -- git signs, blame, hunk actions
     {src = 'https://github.com/sindrets/diffview.nvim'},  -- tabgroup for viewing git changes
 })
+local keymap = require('core.utils').keymap
 
--- the goat git plugin - should explore this more
 local git = require('gitsigns')
 git.setup()
-Keymap('n', '<leader>vn', function() git.nav_hunk('next') end, '[v]ersion control: [n]ext hunk' )
-Keymap('n', '<leader>vp', function() git.nav_hunk('prev') end, '[v]ersion control: [p]rev hunk' )
-Keymap('n', '<leader>vb', function() git.toggle_current_line_blame() end, '[v]ersion control [b]lame' )
-Keymap('n', '<leader>vh', function() git.preview_hunk() end, '[v]ersion control: [h]unk preview')
+
+keymap('n', '<leader>vn', function() git.nav_hunk('next') end, '[v]ersion control: [n]ext hunk' )
+keymap('n', '<leader>vp', function() git.nav_hunk('prev') end, '[v]ersion control: [p]rev hunk' )
+keymap('n', '<leader>vb', function() git.toggle_current_line_blame() end, '[v]ersion control [b]lame' )
+keymap('n', '<leader>vh', function() git.preview_hunk() end, '[v]ersion control: [h]unk preview')
 -- MAYBE: staging individual hunks
 
 -- TODO: review if i want this or not
@@ -25,4 +26,4 @@ function DiffviewToggle()
     vim.cmd(":DiffviewOpen")
   end
 end
-Keymap('n','<leader>vv','<cmd>lua DiffviewToggle()<cr>', 'Diff full preview')
+keymap('n','<leader>vv','<cmd>lua DiffviewToggle()<cr>', 'Diff full preview')

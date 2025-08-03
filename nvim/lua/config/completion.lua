@@ -4,13 +4,10 @@ vim.pack.add({
 })
 local blink = require('blink.cmp')
 
+-- GATCHA: with lua_ls, sometimes completion will remove text in the remaing of the line..
 blink.setup()
-
-
--- TODO: completion will remove text in the remaing of the line...
--- that just cannot be
 
 -- export for other areas to use
 local completion = {}
-completion.capabilities = blink.get_lsp_capabilities({}, false)
+    completion.capabilities = blink.get_lsp_capabilities({}, false)
 return completion

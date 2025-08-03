@@ -4,7 +4,7 @@ vim.pack.add({
     {src = 'https://github.com/rcarriga/nvim-dap-ui'},   -- debugger ui
     {src = 'https://github.com/leoluz/nvim-dap-go'},     -- auto setup go dap config
 })
-
+local keymap = require('core.utils').keymap
 local dap = require('dap')
 local widgets = require("dap.ui.widgets")
 local ui = require('dapui')
@@ -14,19 +14,19 @@ local ui = require('dapui')
 ui.setup()
 
 -- debugger
-Keymap("n", "<leader>dc", function() dap.continue() end,  'Debug - continue')
-Keymap("n", '<leader>dd', function() dap.disconnect() end,  'Debug detatch')
-Keymap("n", '<leader>dt', function() dap.terminate(); ui.close(); end, 'Debug terminate')
-Keymap("n", '<leader>di', function() widgets.hover() end, "Debug information")
-Keymap("n", "<leader>dj", function() dap.step_over() end, 'Debug - step over')
-Keymap("n", "<leader>dl", function() dap.step_into() end, 'Debug - step into')
-Keymap("n", "<leader>dh", function() dap.step_out() end, 'Debug - step out')
+keymap("n", "<leader>dc", function() dap.continue() end,  'Debug - continue')
+keymap("n", '<leader>dd', function() dap.disconnect() end,  'Debug detatch')
+keymap("n", '<leader>dt', function() dap.terminate(); ui.close(); end, 'Debug terminate')
+keymap("n", '<leader>di', function() widgets.hover() end, "Debug information")
+keymap("n", "<leader>dj", function() dap.step_over() end, 'Debug - step over')
+keymap("n", "<leader>dl", function() dap.step_into() end, 'Debug - step into')
+keymap("n", "<leader>dh", function() dap.step_out() end, 'Debug - step out')
 
 -- breakpoints
-Keymap('n', '<leader>bb', function() dap.toggle_breakpoint() end, 'Toggle breakpoint')
-Keymap('n', '<leader>bc', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, 'Toggle condition breakpoint')
-Keymap('n', '<leader>bl', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, 'Toggle breakpoint log')
-Keymap('n', '<leader>br', function() dap.clear_breakpoints() end, 'Clear breakpoints')
+keymap('n', '<leader>bb', function() dap.toggle_breakpoint() end, 'Toggle breakpoint')
+keymap('n', '<leader>bc', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, 'Toggle condition breakpoint')
+keymap('n', '<leader>bl', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, 'Toggle breakpoint log')
+keymap('n', '<leader>br', function() dap.clear_breakpoints() end, 'Clear breakpoints')
 
 -- better icons
 vim.fn.sign_define('DapBreakpoint',          { text='', texthl='error', linehl='', numhl='' })
@@ -48,7 +48,8 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     ui.close()
 end
 
--- go config
+-- this makes some go configs for me
+-- bc delve is a pain manually for some reason
 require('dap-go').setup()
 
 -- ---------------------------------------------------------------------
@@ -94,7 +95,9 @@ require('dap-go').setup()
 --     },
 -- }
 
+--
 -- i remeber i made some changes to this if i need to look back at it
+--
 -- local opts = {
 --     -- theses are the defaults -- see :help dapui.setup() for more
 --     controls = {

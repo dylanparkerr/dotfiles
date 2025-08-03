@@ -6,6 +6,7 @@ vim.pack.add({
     {src = 'https://github.com/nvim-treesitter/nvim-treesitter'}, -- parser manager
     {src = 'https://github.com/j-hui/fidget.nvim'},               -- lsp loading indicator
 })
+local keymap = require('core.utils').keymap
 
 -- visually highlight the text that gets copied when i yank 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -15,6 +16,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- TODO: does this go here, or does it go in lsp ?
 -- clearer diagnostic info
 vim.diagnostic.config({
     virtual_text = true,
@@ -52,8 +54,8 @@ bufferline.setup()
 -- the new internal order is accessable when using :bnext and :bprevious
 vim.opt.sessionoptions:append('globals')
 -- idk if its mac version of vim, or tmux, but keybind modifiers are limited..
-Keymap('n','<leader>hh', function() bufferline.move(-1)end, "")
-Keymap('n','<leader>ll', function() bufferline.move(1)end, "")
+keymap('n','<leader>hh', function() bufferline.move(-1)end, "")
+keymap('n','<leader>ll', function() bufferline.move(1)end, "")
 
 
 -- lsp loading indicator

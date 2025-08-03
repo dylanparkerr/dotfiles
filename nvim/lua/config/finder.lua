@@ -1,9 +1,12 @@
 vim.pack.add({
     {src = 'https://github.com/folke/snacks.nvim'}, -- too many things in one honestly.. picker, dashboard, QoL stuff
 })
+local keymap = require('core.utils').keymap
 
 -- really wish there was a way to set these up individually...
-require('snacks').setup(
+-- TODO: see if its possible...
+local snacks = require('snacks')
+snacks.setup(
     {
         bigfile = { enabled = true },
         dashboard = {
@@ -39,25 +42,25 @@ require('snacks').setup(
     }
 )
 
-Keymap('n', '<leader>ff', function() Snacks.picker.files() end, "[f]ind [f]iles" )
-Keymap('n', '<leader>fh', function() Snacks.picker.help() end, "[f]ind [h]elp" )
-Keymap('n', '<leader>fp', function() Snacks.picker.grep() end, "[f]ind in [p]roject" )
-Keymap('n', '<leader>fg', function() Snacks.picker.git_files() end, '[f]ind [g]it files')
-Keymap('n', '<leader>fs', function() Snacks.picker.pickers() end, '[f]ind [s]nacks pickers')
-Keymap('n', '<leader>fu', function() Snacks.picker.commands() end, '[f]ind [u]ser (:) commands')
-Keymap('n', '<leader>fk', function() Snacks.picker.keymaps({layout={preset='select'}}) end, '[f]ind [k]eymaps')
--- Keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',default_opts, 'Find word in current buffer')
--- Keymap('n','<leader>fb','<cmd>Telescope dap list_breakpoints<cr>', default_opts, 'Find breakpoints')
+keymap('n', '<leader>ff', function() snacks.picker.files() end, "[f]ind [f]iles" )
+keymap('n', '<leader>fh', function() snacks.picker.help() end, "[f]ind [h]elp" )
+keymap('n', '<leader>fp', function() snacks.picker.grep() end, "[f]ind in [p]roject" )
+keymap('n', '<leader>fg', function() snacks.picker.git_files() end, '[f]ind [g]it files')
+keymap('n', '<leader>fs', function() snacks.picker.pickers() end, '[f]ind [s]nacks pickers')
+keymap('n', '<leader>fu', function() snacks.picker.commands() end, '[f]ind [u]ser (:) commands')
+keymap('n', '<leader>fk', function() snacks.picker.keymaps({layout={preset='select'}}) end, '[f]ind [k]eymaps')
+-- keymap('n','<leader>fc','<cmd>Telescope current_buffer_fuzzy_find<cr>',default_opts, 'Find word in current buffer')
+-- keymap('n','<leader>fb','<cmd>Telescope dap list_breakpoints<cr>', default_opts, 'Find breakpoints')
 
 
 
 -- export for use in lsp settings
 local finder = {}
     function finder.lsp_references()
-        Snacks.picker.lsp_references()
+        snacks.picker.lsp_references()
     end
 
     function finder.lsp_implementations()
-        Snacks.picker.lsp_implementations()
+        snacks.picker.lsp_implementations()
     end
 return finder

@@ -3,23 +3,24 @@ vim.pack.add({
     {src = 'https://github.com/neovim/nvim-lspconfig'},   -- sane default configs for new servers
 })
 require('mason').setup()
+local keymap = require('core.utils').keymap
 
 -- only set these bindings if an lsp client is attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
         local picker = require('config.finder')
-        Keymap('n', 'gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
-        Keymap('n', 'gr', picker.lsp_references, '[g]o to [r]eferences')
-        Keymap('n', 'gi', picker.lsp_implementations, '[g]o to [i]mplementations')
-        Keymap('n', 'gt', vim.lsp.buf.type_definition, '[g]o to [t]ype definition')
-        Keymap('n', 'gh', vim.lsp.buf.hover, '[g]et [h]over information')
-        Keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
-        Keymap('n', 'ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
-        Keymap('n', 'gf', vim.lsp.buf.format, '[g]o [f]ormat')
-        Keymap('n', 'ge', vim.lsp.buf.rename, '[g]o r[e]name')
-        Keymap('n', 'gn', function() vim.diagnostic.jump({count=1}) end, '[g]o [n]ext diagnostic')
-        Keymap('n', 'gp', function() vim.diagnostic.jump({count=-1}) end, '[g]o [p]revious diagnostic')
+        keymap('n', 'gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+        keymap('n', 'gr', picker.lsp_references, '[g]o to [r]eferences')
+        keymap('n', 'gi', picker.lsp_implementations, '[g]o to [i]mplementations')
+        keymap('n', 'gt', vim.lsp.buf.type_definition, '[g]o to [t]ype definition')
+        keymap('n', 'gh', vim.lsp.buf.hover, '[g]et [h]over information')
+        keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
+        keymap('n', 'ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
+        keymap('n', 'gf', vim.lsp.buf.format, '[g]o [f]ormat')
+        keymap('n', 'ge', vim.lsp.buf.rename, '[g]o r[e]name')
+        keymap('n', 'gn', function() vim.diagnostic.jump({count=1}) end, '[g]o [n]ext diagnostic')
+        keymap('n', 'gp', function() vim.diagnostic.jump({count=-1}) end, '[g]o [p]revious diagnostic')
 
         -- highlight symbol under cursor
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -72,7 +73,7 @@ vim.lsp.config('lua_ls', {
                 version = 'LuaJIT',
             },
             diagnostics = {
-                globals = { 'vim', 'Keymap' },
+                globals = { 'vim' },
             },
             workspace = {
                 checkThirdParty = false,

@@ -26,4 +26,5 @@ oil.setup({
         end,
     },
 })
-Keymap('n','<leader>e', function() oil.toggle_float() end, 'open file [e]xplorer')
+
+require('core.utils').keymap('n','<leader>e', function() oil.toggle_float() end, 'open file [e]xplorer')

@@ -1,10 +1,11 @@
 -- Needed from :Mason
---
 -- jdtls              - the language server
 -- java-debug-adapter - to debug applications via explicit configuration, or automatically discovered main classes
 -- java-test          - to debug junit tests, either whole classes or individual test methods
+vim.pack.add({
+    {src = 'https://github.com/mfussenegger/nvim-jdtls'},  -- makes configuring jdtls less of a pain, even though its still a pain..
+})
 
--- JDTLS (Java LSP) configuration
 local jdtls = require("jdtls")
 local home = vim.env.HOME
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -21,21 +22,19 @@ elseif vim.fn.has("unix") == 1 then
 elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	system_os = "win"
 else
-	print("OS not found, defaulting to 'linux'")
+	print("uhhh, defaulting to linux")
 	system_os = "linux"
 end
 
--- Needed for debugging
+-- needed for debugging
 local bundles = {vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar")}
--- Needed for running/debugging unit tests
+-- needed for running/debugging unit tests
 vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", true), "\n"))
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
-	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	cmd = {
 		"java", -- or '/path/to/java17_or_newer/bin/java'
-                -- depends on if `java` is in your $PATH env variable and if it points to the right version
+                -- depends on if `java` is in $PATH  and if it points to the right version
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -49,7 +48,7 @@ local config = {
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
 
-		-- Eclipse jdtls location
+		-- eclipse jdtls location
 		"-jar",
 		home .. "/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
 		"-configuration",
@@ -60,7 +59,7 @@ local config = {
 
 	root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "pom.xml", "build.gradle" }),
 
-	-- Here you can configure eclipse.jdt.ls specific settings
+	-- eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	settings = {
 		java = {
@@ -138,18 +137,18 @@ local config = {
 			useBlocks = true,
 		},
 	},
-	-- Needed for auto-completion with method signatures and placeholders
+	-- needed for auto-completion with method signatures and placeholders
 	capabilities = require('config.completion').capabilities,
 	flags = {
 		allow_incremental_sync = true,
 	},
 	init_options = {
-		-- References the bundles defined above to support Debugging and Unit Testing
+		-- the bundles above to support debugging and unit testing
 		bundles = bundles,
 	},
 }
 
--- Needed for debugging
+-- needed for debugging
 config["on_attach"] = function(client, bufnr)
 	jdtls.setup_dap({ hotcodereplace = "auto" })
 	require("jdtls.dap").setup_dap_main_class_configs()
@@ -167,5 +166,5 @@ vim.keymap.set("n", '<leader>tm', function()
   end
 end)
 
--- This starts a new client & server, or attaches to an existing client & server based on the `root_dir`.
+-- starts a new client and server, or attaches to an existing client and server based on the `root_dir`
 jdtls.start_or_attach(config)

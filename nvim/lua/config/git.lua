@@ -9,6 +9,7 @@ git.setup()
 Keymap('n', '<leader>vn', function() git.nav_hunk('next') end, '[v]ersion control: [n]ext hunk' )
 Keymap('n', '<leader>vp', function() git.nav_hunk('prev') end, '[v]ersion control: [p]rev hunk' )
 Keymap('n', '<leader>vb', function() git.toggle_current_line_blame() end, '[v]ersion control [b]lame' )
+Keymap('n', '<leader>vh', function() git.preview_hunk() end, '[v]ersion control: [h]unk preview')
 -- MAYBE: staging individual hunks
 
 -- TODO: review if i want this or not
@@ -24,3 +25,4 @@ function DiffviewToggle()
     vim.cmd(":DiffviewOpen")
   end
 end
+Keymap('n','<leader>vv','<cmd>lua DiffviewToggle()<cr>', 'Diff full preview')

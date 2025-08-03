@@ -6,6 +6,10 @@ local blink = require('blink.cmp')
 
 blink.setup()
 
+
+-- TODO: completion will remove text in the remaing of the line...
+-- that just cannot be
+
 -- export for other areas to use
 local completion = {}
 completion.capabilities = blink.get_lsp_capabilities({}, false)

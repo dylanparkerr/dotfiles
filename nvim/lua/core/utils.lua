@@ -20,7 +20,7 @@ function utils.keymap(mode, keymap, command, desc, opts)
         opts = {noremap = true, silent = true}
     end
     if desc ~= nil then
-        desc = 'custom: '..desc
+        desc = 'custom: ' .. desc
     end
     vim.keymap.set(mode, keymap, command, vim.tbl_extend('keep', opts, {desc = desc}))
 end

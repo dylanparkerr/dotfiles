@@ -36,9 +36,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
             callback = vim.lsp.buf.clear_references,
         })
 
-        -- GATCHA: i think there should really only be one client attached 
-        -- to a buffer.. but i've seen alot of snippets of iterating over 
-        -- clients.. so i guess just be on the look out..
+        -- MAYBE: need to associate filetypes and which server i want to format it
+        -- or i might be able to put this ftpluglin configs
         local format_servers = {'gopls'}
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
@@ -47,7 +46,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 for _, client in ipairs(clients) do
                     if require('core.utils').contains(format_servers, client.name) then
                         vim.lsp.buf.format({ async = true })
-                        break -- stop after finding the first client that supports formatting
+                        break
                     end
                 end
             end,
@@ -64,31 +63,39 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- or set custom options if needed
 -- vim.lsp.enable(<server>) makes sure they launch
 
-vim.lsp.config('lua_ls', {
-    cmd = { 'lua-language-server' },
-    filetypes = { 'lua' },
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-            },
-            diagnostics = {
-                globals = { 'vim' },
-            },
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME,
-                    '${3rd}/luv/library',
-                    -- unpack(vim.api.nvim_get_runtime_file('', true)),
+local servers = {
+    lua_ls = {
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
+        settings = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
                 },
-            },
-            telemetry = {
-                enable = false,
+                diagnostics = {
+                    globals = { 'vim' },
+                },
+                workspace = {
+                    checkThirdParty = false,
+                    library = {
+                        vim.env.VIMRUNTIME,
+                        '${3rd}/luv/library',
+                        -- unpack(vim.api.nvim_get_runtime_file('', true)),
+                    },
+                },
+                telemetry = {
+                    enable = false,
+                },
             },
         },
     },
-})
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('gopls')
-vim.lsp.enable('pyright')
+    gopls = {},
+    pyright = {},
+}
+
+for server, config in pairs(servers) do
+    if next(config) then
+        vim.lsp.config(server, config)
+    end
+    vim.lsp.enable(server)
+end

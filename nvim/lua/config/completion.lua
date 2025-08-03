@@ -9,8 +9,7 @@ local blink = require('blink.cmp')
 -- config help: https://cmp.saghen.dev/configuration/general.html
 blink.setup({
     sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        -- add lazydev as a provider only with lua files
         providers = {
             lazydev = {
                 name = "LazyDev",
@@ -18,6 +17,9 @@ blink.setup({
                 -- make lazydev completions top priority
                 score_offset = 100,
             },
+        },
+        per_filetype = {
+            lua = { inherit_defaults = true, 'lazydev' }
         },
     },
     completion = {

@@ -16,8 +16,7 @@ require('config.lsp')
 require('config.dap')
 require('config.misc')
 
--- TODO: LOOK INTO GHOSTTY CURSOR TRAILS
--- TODO: folke's noice replacement for the command line looks cool
+-- TODO: check back when ghostty hits milestone 1.2 for cursor shaders
 
 -- TODO: check back when neovim .12 is stable, hoping for some QoL
--- with vim.pack like lockfile, health, ways to delete
+--       with vim.pack like lockfile, health, ways to delete

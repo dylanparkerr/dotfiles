@@ -11,7 +11,7 @@ snacks.setup(
         bigfile = { enabled = true },
         dashboard = {
             preset ={
-                header = [[
+                header = table.concat({[[
                                  __                
     ___     ___    ___   __  __ /\_\    ___ ___    
    / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  
@@ -19,9 +19,10 @@ snacks.setup(
   \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\
    \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/
 ]],
+'\n'..vim.version().major..'.'..vim.version().minor..'.'..vim.version().patch}),
             },
             sections = {
-                { section = "header" }
+                { section = 'header' },
             }
         },
         explorer = { enabled = false },

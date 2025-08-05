@@ -1,0 +1,13 @@
+[push]
+	autoSetupRemote = true
+#https://github.com/dandavison/delta
+[core]
+    pager = delta --side-by-side
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+[merge]
+    conflictStyle = zdiff3
+

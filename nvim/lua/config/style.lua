@@ -8,11 +8,24 @@ vim.pack.add({
 })
 local keymap = require('core.utils').keymap
 
+-- theme
+vim.cmd.colorscheme("catppuccin-macchiato")
+
 -- visually highlight the text that gets copied when i yank 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+-- always open help pages in a new tab 
+-- so they are full screen
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if vim.bo.buftype == "help" then
+      vim.cmd("wincmd T")
+    end
   end,
 })
 
@@ -32,8 +45,13 @@ vim.diagnostic.config({
     },
 })
 
--- theme
-vim.cmd.colorscheme("catppuccin-macchiato")
+-- language syntax token parsers
+---@diagnostic disable-next-line: missing-fields
+require('nvim-treesitter.configs').setup({
+    auto_install = true, -- when opening new filetype
+    highlight = { enable = true, },
+    indent = { enable = true, }
+})
 
 -- bottom status bar
 require('lualine').setup{
@@ -46,15 +64,13 @@ require('lualine').setup{
     }
 }
 
--- buffers as tabs
+-- buffers as 'tab's
 local bufferline = require("bufferline")
 bufferline.setup()
--- so that when using :BuffLineMovePrev and :BuffLineMoveNext to order buffers
--- the new internal order is accessable when using :bnext and :bprevious
-vim.opt.sessionoptions:append('globals')
--- idk if its mac version of vim, or tmux, but keybind modifiers are limited..
-keymap('n','<leader>hh', function() bufferline.move(-1)end, "")
-keymap('n','<leader>ll', function() bufferline.move(1)end, "")
+keymap('n','<S-h>', function() bufferline.cycle(-1)end , 'Move to previous buffer')
+keymap('n','<S-l>', function () bufferline.cycle(1) end, 'Move to next buffer')
+keymap('n','<leader>hh', function() bufferline.move(-1)end, 'Move current buffer left')
+keymap('n','<leader>ll', function() bufferline.move(1)end, 'Move current buffer right')
 
 
 -- lsp loading indicator
@@ -66,11 +82,3 @@ require('fidget').setup({
     }
 })
 
--- language syntax token parsers
-require('nvim-treesitter.configs').setup({
-    auto_install = true, -- when opening new filetype
-    highlight = { enable = true, },
-    indent = { enable = true, }
-})
-
--- TODO: make help pages open full screen

@@ -23,9 +23,9 @@ keymap('t','<C-j>','<C-\\><C-n><C-w>j', 'Move to lower window')
 keymap('t','<C-k>','<C-\\><C-n><C-w>k', 'Move to upper window')
 keymap('t','<C-l>','<C-\\><C-n><C-w>l', 'Move to right window')
 
--- cycle buffers
-keymap('n','<S-l>',':bnext<CR>', 'Move to next buffer')
-keymap('n','<S-h>',':bprevious<CR>', 'Move to previous buffer')
+-- cycle buffers -- using bufferline to preseve order
+-- keymap('n','<S-l>',':bnext<CR>', 'Move to next buffer')
+-- keymap('n','<S-h>',':bprevious<CR>', 'Move to previous buffer')
 
 -- move lines
 -- normal

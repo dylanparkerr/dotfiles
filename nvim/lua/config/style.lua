@@ -9,6 +9,7 @@ vim.pack.add({
 local keymap = require('core.utils').keymap
 
 -- theme
+-- :help highlight-groups
 vim.cmd.colorscheme("catppuccin-macchiato")
 
 -- visually highlight the text that gets copied when i yank 

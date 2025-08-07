@@ -3,8 +3,6 @@ vim.pack.add({
 })
 local keymap = require('core.utils').keymap
 
--- really wish there was a way to set these up individually...
--- TODO: see if its possible...
 local snacks = require('snacks')
 snacks.setup(
     {
@@ -45,7 +43,7 @@ snacks.setup(
 
 keymap('n', '<leader>ff', function() snacks.picker.files() end, "[f]ind [f]iles" )
 keymap('n', '<leader>fh', function() snacks.picker.help() end, "[f]ind [h]elp" )
-keymap('n', '<leader>fp', function() snacks.picker.grep() end, "[f]ind in [p]roject" )
+keymap('n', '<leader>fp', function() snacks.picker.grep() end, "[f]ind gre[p]" )
 keymap('n', '<leader>fg', function() snacks.picker.git_files() end, '[f]ind [g]it files')
 keymap('n', '<leader>fs', function() snacks.picker.pickers() end, '[f]ind [s]nacks pickers')
 keymap('n', '<leader>fu', function() snacks.picker.commands() end, '[f]ind [u]ser (:) commands')

@@ -24,8 +24,9 @@ blink.setup({
         },
     },
     completion = {
+        -- https://cmp.saghen.dev/configuration/completion.html#menu-draw
         menu = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+            winhighlight = "Normal:Normal,FloatBorder:Question,CursorLine:BlinkCmpMenuSelection,Search:None",
             draw = {
                 -- this is the default plus the source name (LSP, TEXT, etc.) at the end
                 columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, {'source_name'} },
@@ -34,6 +35,9 @@ blink.setup({
         documentation = {
             auto_show = true,
             auto_show_delay_ms = 1000,
+            window = {
+                winhighlight = 'Normal:Normal,FloatBorder:Question,EndOfBuffer:BlinkCmpDoc,NormalFloat:Normal',
+            }
         }
     }
 })

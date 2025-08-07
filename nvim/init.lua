@@ -16,7 +16,7 @@ require('config.lsp')
 require('config.dap')
 require('config.misc')
 
--- TODO: check back when ghostty hits milestone 1.2 for cursor shaders
+-- LATER: check back when ghostty hits milestone 1.2 for cursor shaders
 
--- TODO: check back when neovim .12 is stable, hoping for some QoL
+-- LATER: check back when neovim .12 is stable, hoping for some QoL
 --       with vim.pack like lockfile, health, ways to delete

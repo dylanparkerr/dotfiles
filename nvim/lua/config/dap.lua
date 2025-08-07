@@ -8,14 +8,12 @@ local keymap = require('core.utils').keymap
 local dap = require('dap')
 local widgets = require("dap.ui.widgets")
 local ui = require('dapui')
--- TODO: maybe change this set up, old config at the bottom
--- could be nice if i could mimic dap view.. and get a nice
--- toggle for big floating scopes window
+-- TODO: toggle for big floating scopes window
 ui.setup()
 
 -- debugger
 keymap("n", "<leader>dc", function() dap.continue() end,  'Debug - continue')
-keymap("n", '<leader>dd', function() dap.disconnect() end,  'Debug detatch')
+keymap("n", '<leader>dd', function() dap.disconnect(); ui.close(); end,  'Debug detatch')
 keymap("n", '<leader>dt', function() dap.terminate(); ui.close(); end, 'Debug terminate')
 keymap("n", '<leader>di', function() widgets.hover() end, "Debug information")
 keymap("n", "<leader>dj", function() dap.step_over() end, 'Debug - step over')
@@ -41,12 +39,12 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 end
 -- comment out to prevent ui from closing when unit tests finish
 -- think this is why i used to have the these close functions in the keymap itself
-dap.listeners.before.event_terminated["dapui_config"] = function()
-    ui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-    ui.close()
-end
+-- dap.listeners.before.event_terminated["dapui_config"] = function()
+--     ui.close()
+-- end
+-- dap.listeners.before.event_exited["dapui_config"] = function()
+--     ui.close()
+-- end
 
 -- this makes some go configs for me
 -- bc delve is a pain manually for some reason
@@ -93,88 +91,4 @@ require('dap-go').setup()
 --         mainClass = "crn.idm.cares.TestApplication",
 --         vmArgs = "" .. "-Xmx2g ",
 --     },
--- }
-
---
--- i remeber i made some changes to this if i need to look back at it
---
--- local opts = {
---     -- theses are the defaults -- see :help dapui.setup() for more
---     controls = {
---         element = "repl",
---         enabled = true,
---         icons = {
---             disconnect = "",
---             pause = "",
---             play = "",
---             run_last = "",
---             step_back = "",
---             step_into = "",
---             step_out = "",
---             step_over = "",
---             terminate = ""
---         }
---     },
---     element_mappings = {},
---     expand_lines = true,
---     floating = {
---         border = "single",
---         mappings = {
---             close = { "q", "<Esc>" }
---         }
---     },
---     force_buffers = true,
---     icons = {
---         collapsed = "",
---         current_frame = "",
---         expanded = ""
---     },
---     layouts = { {
---         elements = {
---             {
---                 id = "scopes",
---                 size = 0.75
---             },
---             -- {
---             --     id = "breakpoints",
---             --     size = 0.25
---             -- },
---             -- {
---             --     id = "stacks",
---             --     size = 0.25
---             -- },
---             {
---                 id = "watches",
---                 size = 0.25
---             }
---         },
---         position = "left",
---         size = 40
---     }, {
---             elements = {
---                 {
---                     id = "repl",
---                     size = 0.5
---                 },
---                 {
---                     id = "console",
---                     size = 0.5
---                 }
---             },
---             position = "bottom",
---             size = 10
---         }
---     },
---     mappings = {
---         edit = "e",
---         expand = { "<CR>", "<2-LeftMouse>" },
---         open = "o",
---         remove = "d",
---         repl = "r",
---         toggle = "t"
---     },
---     render = {
---         indent = 1,
---         max_value_lines = 100
---     }
 -- }

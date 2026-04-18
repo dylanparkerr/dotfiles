@@ -5,6 +5,8 @@ vim.pack.add({
 require('mason').setup()
 local keymap = require('core.utils').keymap
 
+vim.lsp.log.set_level("WARN")
+
 -- only set these bindings if an lsp client is attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -15,6 +17,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap('n', 'gi', finder.lsp_implementations, '[g]o to [i]mplementations')
         keymap('n', 'gt', vim.lsp.buf.type_definition, '[g]o to [t]ype definition')
         keymap('n', 'gh', vim.lsp.buf.hover, '[g]et [h]over information')
+        keymap('n', 'gm', function() vim.diagnostic.open_float({event.buf}) end, '[g]et [m]ore hover info')
         keymap('n', 'gs', vim.lsp.buf.signature_help, '[g]et [s]ignature')
         keymap('n', 'ga', vim.lsp.buf.code_action, '[g]et code [a]ctions')
         keymap('n', 'gf', vim.lsp.buf.format, '[g]o [f]ormat')
@@ -25,9 +28,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- highlight symbol under cursor
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
-            -- GATCHA: tbd if this pcall stops errors from showing in servers that dont support
             callback = function()
-                pcall(vim.lsp.buf.document_highlight)
+                local clients = vim.lsp.get_clients({ bufnr = event.buf })
+                for _, client in ipairs(clients) do
+                    if client:supports_method("textDocument/documentHighlight") then
+                        vim.lsp.buf.document_highlight()
+                        break
+                    end
+                end
             end,
         })
         -- remove hl after cursor moves
@@ -91,6 +99,9 @@ local servers = {
     },
     gopls = {},
     pyright = {},
+    ts_ls = {},
+    angularls = {},
+    terraformls = {}
 }
 
 for server, config in pairs(servers) do
@@ -99,3 +110,17 @@ for server, config in pairs(servers) do
     end
     vim.lsp.enable(server)
 end
+
+-- restoring some usefult user commands now that they are gone
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
+  desc = "Show LSP Info",
+})
+
+vim.api.nvim_create_user_command("LspLog", function(_)
+  local state_path = vim.fn.stdpath("state")
+  local log_path = vim.fs.joinpath(state_path, "lsp.log")
+
+  vim.cmd(string.format("edit %s", log_path))
+end, {
+  desc = "Show LSP log",
+})

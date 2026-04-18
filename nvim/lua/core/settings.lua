@@ -21,11 +21,12 @@ vim.o.shiftwidth=4
 vim.o.smartindent=true
 vim.o.shiftround=true
 
--- jlines
+-- lines
 vim.o.number=true
 vim.o.scrolloff=10
 vim.o.wrap=false
 vim.o.signcolumn='yes'
+-- vim.o.fillchars = {eob = " "}
 
 -- floating windows
 vim.o.winborder='rounded'

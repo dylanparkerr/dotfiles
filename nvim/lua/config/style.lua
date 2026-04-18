@@ -1,10 +1,10 @@
 vim.pack.add({
-    {src = 'https://github.com/kyazdani42/nvim-web-devicons'},    -- requires a patched font
-    {src = 'https://github.com/catppuccin/nvim'},                 -- theme
-    {src = 'https://github.com/nvim-lualine/lualine.nvim'},       -- status bar at the bottom
-    {src = 'https://github.com/akinsho/bufferline.nvim'},         -- text buffers as tabs
-    {src = 'https://github.com/nvim-treesitter/nvim-treesitter'}, -- launguage parser manager
-    {src = 'https://github.com/j-hui/fidget.nvim'},               -- lsp loading indicator
+    {src = 'https://github.com/kyazdani42/nvim-web-devicons'},                   -- requires a patched font
+    {src = 'https://github.com/catppuccin/nvim'},                                -- theme
+    {src = 'https://github.com/nvim-lualine/lualine.nvim'},                      -- status bar at the bottom
+    {src = 'https://github.com/akinsho/bufferline.nvim'},                        -- text buffers as tabs
+    {src = 'https://github.com/j-hui/fidget.nvim'},                              -- lsp loading indicator
+    {src = 'https://github.com/nvim-treesitter/nvim-treesitter',version='main'}, -- launguage parser manager
 })
 local keymap = require('core.utils').keymap
 
@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- clearer diagnostic info
 vim.diagnostic.config({
     virtual_text = true,
+    -- virtual_lines = true,
     underline = true,
     update_in_insert = true,
     severity_sort = true,
@@ -46,12 +47,27 @@ vim.diagnostic.config({
     },
 })
 
--- language syntax token parsers
----@diagnostic disable-next-line: missing-fields
-require('nvim-treesitter.configs').setup({
-    auto_install = true, -- when opening new filetype
-    highlight = { enable = true, },
-    indent = { enable = true, }
+-- new after treesitter is baked into neovim
+ vim.api.nvim_create_autocmd('FileType', {
+    callback = function(args)
+      local buf, filetype = args.buf, args.match
+
+      local language = vim.treesitter.language.get_lang(filetype)
+      if not language then
+        return
+      end
+
+      -- check if parser exists and load it
+      if not vim.treesitter.language.add(language) then
+        return
+      end
+
+      -- enables syntax highlighting and other treesitter features
+      vim.treesitter.start(buf, language)
+
+      -- enables treesitter based indentation
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
 })
 
 -- bottom status bar
@@ -83,3 +99,26 @@ require('fidget').setup({
     }
 })
 
+require("vim._core.ui2").enable {
+  enable = true,
+  msg = { -- Options related to the message module.
+    ---@type 'cmd'|'msg' Default message target, either in the
+    ---cmdline or in a separate ephemeral message window.
+    ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+    ---or table mapping |ui-messages| kinds and triggers to a target.
+    targets = "cmd",
+    cmd = { -- Options related to messages in the cmdline window.
+      height = 0.5, -- Maximum height while expanded for messages beyond 'cmdheight'.
+    },
+    dialog = { -- Options related to dialog window.
+      height = 0.5, -- Maximum height.
+    },
+    msg = { -- Options related to msg window.
+      height = 0.5, -- Maximum height.
+      timeout = 5, -- Time a message is visible in the message window.
+    },
+    pager = { -- Options related to message window.
+      height = 0.5, -- Maximum height.
+    },
+  },
+}

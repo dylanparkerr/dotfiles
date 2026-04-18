@@ -15,8 +15,4 @@ require('config.completion')
 require('config.lsp')
 require('config.dap')
 require('config.misc')
-
--- LATER: check back when ghostty hits milestone 1.2 for cursor shaders
-
--- LATER: check back when neovim .12 is stable, hoping for some QoL
---       with vim.pack like lockfile, health, ways to delete
+require('config.ai')

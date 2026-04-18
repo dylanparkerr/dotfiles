@@ -14,7 +14,7 @@ ui.setup()
 -- debugger
 keymap("n", "<leader>dc", function() dap.continue() end,  'Debug - continue')
 keymap("n", '<leader>dd', function() dap.disconnect(); ui.close(); end,  'Debug detatch')
-keymap("n", '<leader>dt', function() dap.terminate(); ui.close(); end, 'Debug terminate')
+-- keymap("n", '<leader>dt', function() dap.terminate(); ui.close(); end, 'Debug terminate')
 keymap("n", '<leader>di', function() widgets.hover() end, "Debug information")
 keymap("n", "<leader>dj", function() dap.step_over() end, 'Debug - step over')
 keymap("n", "<leader>dl", function() dap.step_into() end, 'Debug - step into')

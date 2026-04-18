@@ -27,7 +27,27 @@ snacks.setup(
         indent = { enabled = false },
         input = { enabled = false },
         notifier = { enabled = false },
-        picker = { enabled = true }, -- this overrides vim.ui.select() lists
+        picker = {
+            enabled = true, -- this overrides vim.ui.select() lists
+            -- sources = {     -- dedupe items from multiple lsps
+            --     lsp_references = {
+            --         finder = function(opts, ctx)
+            --             ctx.picker.seen = {}
+            --             return require("snacks.picker.source.lsp").references(opts, ctx)
+            --         end,
+            --         transform = function(item, ctx)
+            --             -- vim.print(item)
+            --             local seen = ctx.picker.seen
+            --             local id = vim.inspect({ item.text }) -- NOTE: Change
+            --             if seen[id] then
+            --                 return false
+            --             end
+            --                 seen[id] = true
+            --             return true
+            --         end,
+            --     },
+            -- },
+        },
         quickfile = { enabled = false },
         scope = { enabled = false },
         scroll = { enabled = false },

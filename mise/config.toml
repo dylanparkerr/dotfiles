@@ -1,0 +1,15 @@
+[tools]
+# dev env
+neovim = "latest"
+lazydocker = "latest"
+lazygit = "latest"
+tmux = "latest"
+starship = "latest"
+delta = "latest"
+# "github:joshmedeski/sesh" = "latest"
+
+# cli utils
+ripgrep = "latest"
+jq = "latest"
+tlrc = "latest"
+fzf = "latest"

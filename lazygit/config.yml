@@ -1,9 +1,13 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
+# git:
+#   paging:
+#     colorArg: always
+#     pager: delta --dark --side-by-side --paging=never
 git:
   paging:
     colorArg: always
-    pager: delta --dark --side-by-side --paging=never
+    pager: delta --dark --paging=never
 gui:
   theme:
     selectedLineBgColor:
